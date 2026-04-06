@@ -1,0 +1,17 @@
+# Global Monorepo Gitignore
+
+# Ignore all environment files and secrets anywhere
+**/.env
+**/.smbcredentials
+**/*.key
+**/*.pem
+
+# Ignore local photo storage
+**/library/
+
+# Ignore database and cache volumes
+**/postgres/
+**/postgres-data/
+**/pgdata/
+**/redis-data/
+**/model-cache/
