@@ -1,3 +1,11 @@
 photos.axkirillov.com {
     reverse_proxy 127.0.0.1:2283
 }
+
+cloud.axkirillov.com {
+    reverse_proxy https://127.0.0.1:8080 {
+        transport http {
+            tls_insecure_skip_verify
+        }
+    }
+}
