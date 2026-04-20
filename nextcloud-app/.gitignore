@@ -1,0 +1,4 @@
+# Nextcloud specific ignores
+config/
+data/
+themes/
