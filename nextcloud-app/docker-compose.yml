@@ -12,3 +12,12 @@ services:
     ports:
       - 127.0.0.1:8080:443
     restart: unless-stopped
+    networks:
+      - nextcloud-net
+
+networks:
+  nextcloud-net:
+    enable_ipv6: true
+    ipam:
+      config:
+        - subnet: fd00:1:1::/64

@@ -34,6 +34,8 @@ services:
       - "127.0.0.1:2283:2283"
     healthcheck:
       disable: false
+    networks:
+      - immich-net
 
         #  immich-machine-learning:
         #    container_name: immich_machine_learning
@@ -57,6 +59,8 @@ services:
     healthcheck:
       test: redis-cli ping || exit 1
     restart: always
+    networks:
+      - immich-net
 
   database:
     container_name: immich_postgres
@@ -75,6 +79,8 @@ services:
     restart: always
     healthcheck:
       disable: false
+    networks:
+      - immich-net
 
   caddy:
     image: caddy:2
@@ -88,6 +94,13 @@ services:
       - caddy_config:/config
     depends_on:
       - immich-server
+
+networks:
+  immich-net:
+    enable_ipv6: true
+    ipam:
+      config:
+        - subnet: fd00:1:2::/64
 
 volumes:
   pgdata:
