@@ -82,19 +82,6 @@ services:
     networks:
       - immich-net
 
-  caddy:
-    image: caddy:2
-    container_name: immich_caddy
-    restart: always
-    # this is required to work through ipv6, the ports section was removed
-    network_mode: "host"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
-    depends_on:
-      - immich-server
-
 networks:
   immich-net:
     enable_ipv6: true
@@ -106,5 +93,3 @@ volumes:
   pgdata:
   tsdata:
   model-cache:
-  caddy_data:
-  caddy_config:

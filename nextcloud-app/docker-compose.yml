@@ -6,11 +6,29 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Berlin
+    dns:
+      - 2001:4860:4860::6464
+      - 2001:4860:4860::64
     volumes:
       - ./config:/config
       - /mnt/storagebox/nextcloud-data:/data
     ports:
       - 127.0.0.1:8080:443
+    restart: unless-stopped
+    networks:
+      - nextcloud-net
+
+  db:
+    image: mariadb:10.11
+    container_name: nextcloud_db
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+    environment:
+      - MYSQL_ROOT_PASSWORD=8nyUmiqo/yZTfyd5lxa4tx+ygAuxCVXN
+      - MYSQL_PASSWORD=tcdi05txjkt0dpqppy8++ixm4bbdaltk
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+    volumes:
+      - ./db_data:/var/lib/mysql
     restart: unless-stopped
     networks:
       - nextcloud-net

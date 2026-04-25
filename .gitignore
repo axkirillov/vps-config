@@ -15,3 +15,6 @@
 **/pgdata/
 **/redis-data/
 **/model-cache/
+nextcloud-app/db_data/
+caddy/data/
+caddy/config/
