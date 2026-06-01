@@ -12,7 +12,10 @@ name: immich
 services:
   immich-server:
     container_name: immich_server
-    image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
+    # Pin to specific version + digest to prevent supply-chain attacks.
+    # To upgrade: change the tag and run `docker pull ghcr.io/immich-app/immich-server:<new-tag>`,
+    # then update the digest here.
+    image: ghcr.io/immich-app/immich-server:v2@sha256:0cc1f82953d9598eb9e9dd11cbde1f50fe54f9c46c4506b089e8ad7bfc9d1f0c
     # extends:
     #   file: hwaccel.transcoding.yml
     #   service: cpu # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding

@@ -1,6 +1,6 @@
 services:
   nextcloud:
-    image: lscr.io/linuxserver/nextcloud:latest
+    image: lscr.io/linuxserver/nextcloud:latest@sha256:b06a868994d366aff8cc69851f478a6f235134971d50fd44936c60937c64a15e
     container_name: nextcloud
     environment:
       - PUID=1000
@@ -19,7 +19,7 @@ services:
       - nextcloud-net
 
   db:
-    image: mariadb:10.11
+    image: mariadb:10.11@sha256:407fccb51e710f34752c1a3ef9b936d1f55f38d4ac7fa043b3759742d266fd9a
     container_name: nextcloud_db
     command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
     environment:

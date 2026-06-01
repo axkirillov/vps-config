@@ -1,5 +1,10 @@
 name: Deploy to VPS
 
+# Supply chain hardening:
+# - No third-party actions: plain SSH avoids dependency on external action repos.
+# - SSH key scoped to a single VPS, stored as a GitHub secret.
+# - Docker images are pinned by SHA256 digest (see docker-compose files).
+
 on:
   push:
     branches: [main]
@@ -8,10 +13,14 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1
-        with:
-          host: 2a01:4f8:1c1a:fc02::1
-          username: root
-          key: ${{ secrets.VPS_SSH_KEY }}
-          script: /root/vps-config/deploy.sh
+      - name: Deploy via SSH (no third-party actions)
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh \
+            -o StrictHostKeyChecking=accept-new \
+            -o IdentitiesOnly=yes \
+            -i ~/.ssh/deploy_key \
+            root@2a01:4f8:1c1a:fc02::1 \
+            /root/vps-config/deploy.sh
