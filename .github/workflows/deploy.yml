@@ -1,0 +1,17 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: 2a01:4f8:1c1a:fc02::1
+          username: root
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: /root/vps-config/deploy.sh
