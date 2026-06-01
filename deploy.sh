@@ -43,4 +43,8 @@ echo "=== Deploying Nextcloud ==="
 docker compose -f nextcloud-app/docker-compose.yml up -d
 
 echo ""
+echo "=== Deploying Ghost ==="
+docker compose -f ghost-app/docker-compose.yml up -d
+
+echo ""
 echo "=== Deploy complete ==="

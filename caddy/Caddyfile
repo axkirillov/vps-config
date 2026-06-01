@@ -13,3 +13,7 @@ cloud.axkirillov.com {
         }
     }
 }
+
+blog.axkirillov.com {
+    reverse_proxy 127.0.0.1:2368
+}

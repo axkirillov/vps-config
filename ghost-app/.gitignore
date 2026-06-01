@@ -1,0 +1,3 @@
+# Ghost specific ignores
+content/
+db_data/
