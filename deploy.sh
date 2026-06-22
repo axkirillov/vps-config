@@ -47,4 +47,8 @@ echo "=== Deploying Ghost ==="
 docker compose -f ghost-app/docker-compose.yml up -d
 
 echo ""
+echo "=== Deploying Supabase ==="
+docker compose -f supabase-app/docker-compose.yml up -d
+
+echo ""
 echo "=== Deploy complete ==="

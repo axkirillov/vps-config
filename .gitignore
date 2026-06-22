@@ -18,3 +18,5 @@
 nextcloud-app/db_data/
 caddy/data/
 caddy/config/
+supabase-app/pgdata/
+supabase-app/.env

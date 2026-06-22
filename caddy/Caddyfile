@@ -17,3 +17,16 @@ cloud.axkirillov.com {
 blog.axkirillov.com {
     reverse_proxy 127.0.0.1:2368
 }
+
+supabase.axkirillov.com {
+    # PostgREST REST API (strip /rest/v1 prefix)
+    handle_path /rest/v1/* {
+        reverse_proxy 127.0.0.1:3001
+    }
+    # Realtime WebSocket (pass full path)
+    handle /realtime/v1/* {
+        reverse_proxy 127.0.0.1:4000
+    }
+    # Catch-all
+    respond "Supabase minimal endpoint — use /rest/v1 or /realtime/v1" 200
+}
