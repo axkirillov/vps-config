@@ -10,6 +10,7 @@ services:
       - ./init/roles.sql:/docker-entrypoint-initdb.d/init-scripts/99-roles.sql:Z
       - ./init/jwt.sql:/docker-entrypoint-initdb.d/init-scripts/99-jwt.sql:Z
       - ./init/_supabase.sql:/docker-entrypoint-initdb.d/init-scripts/98-_supabase.sql:Z
+      - ./init/auth-ownership.sql:/docker-entrypoint-initdb.d/init-scripts/99-auth-ownership.sql:Z
       - ./pgdata:/var/lib/postgresql/data:Z
       - db-config:/etc/postgresql-custom
     healthcheck:
