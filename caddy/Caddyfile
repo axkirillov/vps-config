@@ -23,6 +23,7 @@ supabase.axkirillov.com {
     header Access-Control-Allow-Origin *
     header Access-Control-Allow-Headers "Authorization, Content-Type, apikey, X-Client-Info, Prefer"
     header Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+    header Access-Control-Expose-Headers "content-profile, content-location, content-range"
 
     # Handle CORS preflight
     @options method OPTIONS
@@ -34,6 +35,7 @@ supabase.axkirillov.com {
             header_down -Access-Control-Allow-Origin
             header_down -Access-Control-Allow-Headers
             header_down -Access-Control-Allow-Methods
+            header_down -Access-Control-Expose-Headers
         }
     }
     # PostgREST REST API (strip /rest/v1 prefix)
@@ -42,6 +44,7 @@ supabase.axkirillov.com {
             header_down -Access-Control-Allow-Origin
             header_down -Access-Control-Allow-Headers
             header_down -Access-Control-Allow-Methods
+            header_down -Access-Control-Expose-Headers
         }
     }
     # Realtime WebSocket — rewrite /realtime/v1/ to /socket/
@@ -51,6 +54,7 @@ supabase.axkirillov.com {
             header_down -Access-Control-Allow-Origin
             header_down -Access-Control-Allow-Headers
             header_down -Access-Control-Allow-Methods
+            header_down -Access-Control-Expose-Headers
         }
     }
     # Catch-all
