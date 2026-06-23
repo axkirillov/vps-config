@@ -21,9 +21,9 @@ blog.axkirillov.com {
 supabase.axkirillov.com {
     # CORS
     header Access-Control-Allow-Origin *
-    header Access-Control-Allow-Headers "Authorization, Content-Type, apikey, X-Client-Info, Prefer, Content-Profile, content-profile"
+    header Access-Control-Allow-Headers "Authorization, Content-Type, apikey, X-Client-Info, Prefer, Content-Profile, content-profile, Accept-Profile, accept-profile"
     header Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
-    header Access-Control-Expose-Headers "content-profile, Content-Profile, content-location, content-range, Prefer"
+    header Access-Control-Expose-Headers "content-profile, Content-Profile, accept-profile, Accept-Profile, content-location, content-range, Prefer"
 
     # Handle CORS preflight
     @options method OPTIONS
