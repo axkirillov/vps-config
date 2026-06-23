@@ -19,12 +19,10 @@ blog.axkirillov.com {
 }
 
 supabase.axkirillov.com {
-    # CORS headers for all responses
-    header {
-        Access-Control-Allow-Origin *
-        Access-Control-Allow-Headers *
-        Access-Control-Allow-Methods *
-    }
+    # CORS
+    header Access-Control-Allow-Origin *
+    header Access-Control-Allow-Headers "Authorization, Content-Type, apikey, X-Client-Info, Prefer"
+    header Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE, OPTIONS"
 
     # Handle CORS preflight
     @options method OPTIONS
