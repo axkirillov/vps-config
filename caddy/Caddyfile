@@ -38,7 +38,12 @@ supabase.axkirillov.com {
     handle_path /rest/v1/* {
         reverse_proxy 127.0.0.1:3001
     }
-    # Realtime WebSocket (strip /realtime/v1 prefix)
+    # Realtime WebSocket — rewrite /realtime/v1/websocket to /socket/websocket
+    handle_path /realtime/v1/websocket* {
+        uri path replace / /socket/
+        reverse_proxy 127.0.0.1:4000
+    }
+    # Other Realtime API calls pass through stripped
     handle_path /realtime/v1/* {
         reverse_proxy 127.0.0.1:4000
     }
