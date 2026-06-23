@@ -101,8 +101,8 @@ services:
       db:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "postgrest", "--ready"]
-      interval: 5s
+      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+      interval: 10s
       timeout: 5s
       retries: 3
     ports:
