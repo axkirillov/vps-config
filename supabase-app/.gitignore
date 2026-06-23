@@ -1,2 +1,5 @@
 .env
 pgdata/
+
+# Local Supabase CLI artifacts
+.supabase/
