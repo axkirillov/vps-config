@@ -30,16 +30,28 @@ supabase.axkirillov.com {
 
     # Auth (GoTrue) — strip /auth/v1 prefix
     handle_path /auth/v1/* {
-        reverse_proxy 127.0.0.1:9999
+        reverse_proxy 127.0.0.1:9999 {
+            header_down -Access-Control-Allow-Origin
+            header_down -Access-Control-Allow-Headers
+            header_down -Access-Control-Allow-Methods
+        }
     }
     # PostgREST REST API (strip /rest/v1 prefix)
     handle_path /rest/v1/* {
-        reverse_proxy 127.0.0.1:3001
+        reverse_proxy 127.0.0.1:3001 {
+            header_down -Access-Control-Allow-Origin
+            header_down -Access-Control-Allow-Headers
+            header_down -Access-Control-Allow-Methods
+        }
     }
     # Realtime WebSocket — rewrite /realtime/v1/ to /socket/
     handle /realtime/v1/* {
         uri replace "/realtime/v1/" "/socket/"
-        reverse_proxy 127.0.0.1:4000
+        reverse_proxy 127.0.0.1:4000 {
+            header_down -Access-Control-Allow-Origin
+            header_down -Access-Control-Allow-Headers
+            header_down -Access-Control-Allow-Methods
+        }
     }
     # Catch-all
     respond "Supabase minimal endpoint — use /rest/v1, /auth/v1, or /realtime/v1" 200
