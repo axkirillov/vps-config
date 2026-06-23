@@ -19,6 +19,17 @@ blog.axkirillov.com {
 }
 
 supabase.axkirillov.com {
+    # CORS headers for all responses
+    header {
+        Access-Control-Allow-Origin *
+        Access-Control-Allow-Headers *
+        Access-Control-Allow-Methods *
+    }
+
+    # Handle CORS preflight
+    @options method OPTIONS
+    respond @options 204
+
     # Auth (GoTrue) — strip /auth/v1 prefix
     handle_path /auth/v1/* {
         reverse_proxy 127.0.0.1:9999
