@@ -38,8 +38,8 @@ supabase.axkirillov.com {
     handle_path /rest/v1/* {
         reverse_proxy 127.0.0.1:3001
     }
-    # Realtime WebSocket (pass full path)
-    handle /realtime/v1/* {
+    # Realtime WebSocket (strip /realtime/v1 prefix)
+    handle_path /realtime/v1/* {
         reverse_proxy 127.0.0.1:4000
     }
     # Catch-all
