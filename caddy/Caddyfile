@@ -19,8 +19,8 @@ blog.axkirillov.com {
 }
 
 supabase.axkirillov.com {
-    # Auth (GoTrue) — pass full path
-    handle /auth/v1/* {
+    # Auth (GoTrue) — strip /auth/v1 prefix
+    handle_path /auth/v1/* {
         reverse_proxy 127.0.0.1:9999
     }
     # PostgREST REST API (strip /rest/v1 prefix)
