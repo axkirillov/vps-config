@@ -8,3 +8,4 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - ./data:/data
       - ./config:/config
+      - /root/spending:/www:ro

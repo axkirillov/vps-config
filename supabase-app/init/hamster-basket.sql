@@ -64,6 +64,46 @@ CREATE POLICY "Users delete own todos" ON public.todos
     FOR DELETE
     USING (auth.uid() = user_id);
 
--- 5. Enable realtime for both tables
+-- 5. labels
+CREATE TABLE IF NOT EXISTS public.labels (
+    id SERIAL PRIMARY KEY,
+    user_id UUID NOT NULL,
+    name TEXT NOT NULL,
+    color TEXT DEFAULT '#3B82F6',
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 6. todo_labels (junction)
+CREATE TABLE IF NOT EXISTS public.todo_labels (
+    todo_id INTEGER NOT NULL REFERENCES public.todos(id) ON DELETE CASCADE,
+    label_id INTEGER NOT NULL REFERENCES public.labels(id) ON DELETE CASCADE,
+    PRIMARY KEY (todo_id, label_id)
+);
+
+-- RLS: labels
+ALTER TABLE public.labels ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Users select own labels" ON public.labels FOR SELECT USING (auth.uid() = user_id);
+CREATE POLICY "Users insert own labels" ON public.labels FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY "Users update own labels" ON public.labels FOR UPDATE USING (auth.uid() = user_id);
+CREATE POLICY "Users delete own labels" ON public.labels FOR DELETE USING (auth.uid() = user_id);
+
+-- RLS: todo_labels
+ALTER TABLE public.todo_labels ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Users select own todo_labels" ON public.todo_labels
+    FOR SELECT USING (
+        EXISTS (SELECT 1 FROM public.todos WHERE todos.id = todo_labels.todo_id AND todos.user_id = auth.uid())
+    );
+CREATE POLICY "Users insert own todo_labels" ON public.todo_labels
+    FOR INSERT WITH CHECK (
+        EXISTS (SELECT 1 FROM public.todos WHERE todos.id = todo_labels.todo_id AND todos.user_id = auth.uid())
+    );
+CREATE POLICY "Users delete own todo_labels" ON public.todo_labels
+    FOR DELETE USING (
+        EXISTS (SELECT 1 FROM public.todos WHERE todos.id = todo_labels.todo_id AND todos.user_id = auth.uid())
+    );
+
+-- 7. Enable realtime
 ALTER PUBLICATION supabase_realtime ADD TABLE public.todo_lists;
 ALTER PUBLICATION supabase_realtime ADD TABLE public.todos;
+ALTER PUBLICATION supabase_realtime ADD TABLE public.labels;
+ALTER PUBLICATION supabase_realtime ADD TABLE public.todo_labels;
