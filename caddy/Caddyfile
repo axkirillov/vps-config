@@ -7,6 +7,13 @@ photos.axkirillov.com {
 }
 
 cloud.axkirillov.com {
+    handle_path /spending/* {
+        basicauth {
+            viewer $2y$05$/LDOOnnEfTSRGRhmq3DpZOLI/r6nt18.IikzOkP0U.H0NmFWuznDy
+        }
+        root * /www
+        file_server
+    }
     reverse_proxy https://127.0.0.1:8080 {
         transport http {
             tls_insecure_skip_verify
@@ -15,13 +22,6 @@ cloud.axkirillov.com {
 }
 
 blog.axkirillov.com {
-    handle_path /spending/* {
-        basicauth {
-            viewer $2y$05$/LDOOnnEfTSRGRhmq3DpZOLI/r6nt18.IikzOkP0U.H0NmFWuznDy
-        }
-        root * /www
-        file_server
-    }
     reverse_proxy 127.0.0.1:2368
 }
 
