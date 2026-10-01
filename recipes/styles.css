@@ -121,7 +121,8 @@ ol.steps>li::before{
 }
 ol.steps h3{font-size:17px;margin:0 0 8px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 ol.steps p{margin:0 0 8px}
-ol.steps .note{
+/* note callouts work inside steps and outside them */
+.note{
   font-size:14px;color:var(--muted);background:var(--card-2);border-left:3px solid var(--line);
   padding:8px 12px;border-radius:0 10px 10px 0;margin:10px 0 0;
 }
@@ -129,6 +130,11 @@ ol.steps .note{
   font-family:var(--mono);font-size:11.5px;font-weight:600;
   background:var(--green-soft);color:var(--green);border-radius:999px;padding:3px 10px;
 }
+/* safety callout — for warnings where a mistake is dangerous, not just disappointing */
+.note.warn{background:var(--red-soft);border-left-color:var(--red);color:var(--ink)}
+.note.warn strong{color:var(--red)}
+.card.warn h2{color:var(--red)}
+.stepper.sm input{width:64px;font-size:16px;padding:9px 4px}
 .q{font-family:var(--mono);font-weight:600;color:var(--red)}
 .q-strong{font-family:var(--mono);font-weight:700;color:var(--ink)}
 

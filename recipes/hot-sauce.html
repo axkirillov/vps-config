@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Garlicky Red Chile Hot Sauce — scaled, metric</title>
+<meta name="description" content="Garlicky red chile hot sauce in metric, with the vinegar-essence dilution calculated from the percentage on your bottle. Yields scale from 240 mL up.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <a class="backlink" href="index.html">← All recipes</a>
+    <p class="kicker">Chile sauce <span class="dot">·</span> metric <span class="dot">·</span> acid calculated</p>
+    <h1>Garlicky red chile hot sauce</h1>
+    <p>Hot red chilies, red bell peppers and garlic, simmered in vinegar and blended smooth. The base recipe makes about <strong>480 mL</strong>. Set how much you want and everything follows — but the acid is the number that matters, so the vinegar dilution is <strong>calculated from the percentage on your bottle</strong> rather than assumed.</p>
+  </header>
+
+  <section class="card controls" aria-label="Batch size and vinegar strength">
+    <div class="row">
+      <div class="field">
+        <label for="vol">Sauce to make</label>
+        <div class="stepper">
+          <button type="button" id="minus" aria-label="Less sauce">−</button>
+          <input id="vol" type="number" value="480" min="60" max="4800" step="60" inputmode="numeric">
+          <button type="button" id="plus" aria-label="More sauce">+</button>
+          <span class="unit">mL</span>
+        </div>
+      </div>
+      <div class="slider">
+        <label for="range">Drag for a quick change</label>
+        <input id="range" type="range" min="120" max="2400" step="120" value="480">
+      </div>
+    </div>
+    <div class="presets" role="group" aria-label="Yield presets">
+      <button type="button" data-vol="240">240 mL</button>
+      <button type="button" data-vol="480" aria-pressed="true">480 mL — the recipe</button>
+      <button type="button" data-vol="720">720 mL</button>
+      <button type="button" data-vol="960">960 mL</button>
+      <button type="button" data-vol="1440">1.44 L</button>
+    </div>
+    <p class="hint"><span class="q-strong" data-q="multiplier"></span> the base recipe <span class="dot">·</span> fills about <span class="q-strong" data-q="jars"></span></p>
+
+    <h2 style="margin:26px 0 12px">Vinegar strength — read your label</h2>
+    <div class="presets" role="group" aria-label="Vinegar strength">
+      <button type="button" data-acid="25" aria-pressed="true">25% essence</button>
+      <button type="button" data-acid="30">30%</button>
+      <button type="button" data-acid="60">60%</button>
+      <button type="button" data-acid="80">80%</button>
+      <button type="button" data-acid="5">5% vinegar, ready to use</button>
+    </div>
+    <div class="row" style="margin-top:14px">
+      <div class="field">
+        <label for="acidPct">Or type the % acetic acid from the label</label>
+        <div class="stepper sm">
+          <input id="acidPct" type="number" value="25" min="1" max="100" step="1" inputmode="decimal">
+          <span class="unit">%</span>
+        </div>
+      </div>
+    </div>
+    <p class="hint" id="acidHint"></p>
+    <p class="note warn" id="acidNote"></p>
+  </section>
+
+  <div class="layout">
+
+    <aside class="card ingredients" aria-label="Ingredients">
+      <h2>Ingredients</h2>
+      <div id="ingredients"></div>
+      <div class="toolbar">
+        <button class="btn" type="button" id="copy">Copy list</button>
+        <button class="btn" type="button" id="print">Print</button>
+        <span class="flash" id="flash">Copied</span>
+      </div>
+    </aside>
+
+    <section class="steps" aria-label="Instructions">
+      <h2>Instructions</h2>
+      <ol class="steps">
+
+        <li>
+          <h3>Put on gloves, then chop <span class="time">10 min</span></h3>
+          <p>Wear gloves. Roughly chop <span class="q" data-q="hotChilies"></span> of hot red or orange chilies, <span class="q" data-q="bellPeppers"></span> of red bell peppers, and <span class="q" data-q="garlic"></span> of garlic.</p>
+          <p class="note warn"><strong>Gloves are not optional.</strong> Capsaicin stays on skin for hours and transfers to eyes and faces. Do not touch your face while chopping, and keep your hands away from your eyes even after washing.</p>
+          <p class="note">Buying by weight instead: <span class="q" data-q="chiliWeight"></span> of chilies, <span class="q" data-q="bellPepperWeight"></span> of red bell pepper, <span class="q" data-q="garlicWeight"></span> of garlic.</p>
+        </li>
+
+        <li>
+          <h3>Dilute the vinegar essence <span class="time">2 min</span></h3>
+          <p id="dilutionText"></p>
+          <p class="note warn"><strong>Never add water to the essence</strong> — always essence to water. The reverse can spit and boil over. Work in a ventilated spot, keep the bottle away from your face, and rinse any splash with plenty of water.</p>
+        </li>
+
+        <li>
+          <h3>Combine in a pot <span class="time">1 min</span></h3>
+          <p>Put the diluted vinegar, the chopped hot chilies, the bell peppers, the garlic and <span class="q" data-q="salt"></span> of kosher salt into a small pot. Use a non-reactive pot — stainless steel, enamel or glass, not bare aluminium or unlined copper.</p>
+        </li>
+
+        <li>
+          <h3>Simmer until tender <span class="time">7–10 min</span></h3>
+          <p>Bring to a simmer over medium-high heat. Reduce the heat to low, cover, and simmer until the peppers are tender, <strong>7–10 minutes</strong>.</p>
+          <p class="note warn"><strong>Open a window and turn on the extractor fan.</strong> Simmering chilies release capsaicin into the air. Do not lean over the pot or inhale the vapours — it burns the throat and makes eyes stream from across the room.</p>
+        </li>
+
+        <li>
+          <h3>Blend smooth <span class="time">2 min</span></h3>
+          <p>Transfer everything to a blender and purée until completely smooth. Take the small centre cap out of the blender lid and cover that opening with a folded towel so steam can escape.</p>
+          <p class="note">Hot liquid in a sealed blender builds pressure and blows the lid off. Vent it, and start on the lowest speed.</p>
+        </li>
+
+        <li>
+          <h3>Cool, then stand for 3 days <span class="time">3 days</span></h3>
+          <p>Pour into a jar and let it cool uncovered. Cover tightly and refrigerate for <strong>3 days</strong> to let the flavours meld before you judge it.</p>
+          <p class="note">Fresh sauce tastes raw and sharp on day one. The garlic and chile settle into each other over those three days — this is the step that makes it taste finished. Time in the fridge does not change with batch size.</p>
+        </li>
+
+        <li>
+          <h3>Store <span class="time">fridge</span></h3>
+          <p>Keep it in the refrigerator. It will hold for several weeks or longer.</p>
+        </li>
+
+      </ol>
+    </section>
+  </div>
+
+  <div class="extras">
+
+    <section class="card warn">
+      <h2>Vinegar essence safety</h2>
+      <ul>
+        <li><strong>Never use it undiluted.</strong> At 25% and above it will burn skin and tissue on contact.</li>
+        <li><strong>Essence into water, always this order.</strong> Water into essence can flash-boil and spray.</li>
+        <li><strong>Labelled by percentage, not volume.</strong> If your bottle says "25 ml" or the strength is not printed, stop here and read it again — the amounts below assume a percentage figure.</li>
+        <li><strong>Different strength, different split.</strong> Pick your percentage above and the essence and water amounts recalculate to the same final acidity.</li>
+        <li><strong>Glass or plastic only.</strong> Dilute in glass or plastic, not metal, and keep it away from your face and eyes.</li>
+      </ul>
+      <p>If anything is unclear on the label, use ready-made 5% vinegar instead — it is the same thing the dilution produces, and it removes every hazard above.</p>
+    </section>
+
+    <section class="card">
+      <h2>Acid, by the numbers</h2>
+      <p class="hint" style="margin:0 0 10px">Everything below makes the same <span class="q-strong" data-q="acidTotal"></span> of 5% vinegar for <span class="q-strong" data-q="yield"></span> of sauce.</p>
+      <table class="table" id="acidTable"></table>
+      <p class="hint">Vinegar at <span class="q-strong" data-q="acidTarget"></span> acetic acid is the constant; only the split changes.</p>
+    </section>
+
+    <section class="card">
+      <h2>Heat, and how to steer it</h2>
+      <ul>
+        <li><strong>All the heat comes from the hot chilies.</strong> The bell peppers add volume, colour and sweetness, and no heat at all.</li>
+        <li><strong>Hotter:</strong> leave the seeds and pith in the hot chilies, or add an extra chili beyond the amount above.</li>
+        <li><strong>Milder:</strong> core out the seeds and white pith first, or swap some hot chilies for more bell pepper.</li>
+        <li><strong>Minder:</strong> a sauce that tastes flat, not hot, usually needs more salt rather than more chili — taste it after the three days, not before.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Troubleshooting</h2>
+      <ul>
+        <li><strong>Too thick to pour:</strong> loosen with a spoonful of water or 5% vinegar — not with fresh essence.</li>
+        <li><strong>Separating in the jar:</strong> normal, especially with a lot of red bell pepper. Shake before use.</li>
+        <li><strong>Bitter or harsh:</strong> usually the garlic or the seeds. Give it the full 3 days first; if it persists, add a pinch of salt.</li>
+        <li><strong>Fizzy, mouldy, or smelling of rot:</strong> discard the jar. Fermentation fizz belongs in the pickle recipe, not here.</li>
+        <li><strong>Colour dulling:</strong> it darkens as it sits and oxidises. Harmless.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Storage</h2>
+      <ul>
+        <li><strong>This is a fridge sauce, not a shelf-stable preserve.</strong> Acid, salt and cold are what hold it; take away the cold and you take away the shelf life.</li>
+        <li>Keep it in the fridge, tightly covered, for several weeks or longer.</li>
+        <li>Use a clean spoon every time, and smell it before you use it — a sauce that has turned sharp or fizzy is done.</li>
+        <li>For gifting or long storage, a hot-water-bath process and pH testing are a different recipe, and not what this page describes.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Conversions used</h2>
+      <table class="table">
+        <tr><td>1 tsp</td><td>5 mL</td></tr>
+        <tr><td>1 tbsp</td><td>15 mL</td></tr>
+        <tr><td>1 cup</td><td>240 mL</td></tr>
+        <tr><td>1 fl oz</td><td>≈ 30 mL</td></tr>
+        <tr><td>4 hot chilies</td><td>≈ 40–60 g</td></tr>
+        <tr><td>2 red bell peppers</td><td>≈ 340 g</td></tr>
+        <tr><td>5 garlic cloves</td><td>≈ 15–20 g</td></tr>
+        <tr><td>3 g kosher salt</td><td>≈ ½ tsp</td></tr>
+        <tr><td>25% essence, 1 : 4 with water</td><td>→ 5% vinegar</td></tr>
+      </table>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>An NYT-style garlicky red chile sauce, converted to metric and made scalable, with the vinegar-essence dilution built in as arithmetic rather than a line of prose. Acid strength and the essence-to-water split follow the label you enter; the ratio of acid to vegetables stays fixed, which is the part that keeps the sauce safe. Batch size is a simple multiplier here — this is a blender-and-pot recipe, not a ferment, so there is nothing that must be topped up.</p>
+    <p class="noprint">Nothing you type leaves this page — your batch size and label strength are stored only in this browser.</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- the base recipe, per 480 mL of finished sauce ---------- */
+  var BASE_YIELD   = 480;         /* mL of finished sauce */
+  var BASE_ACID_ML = 180;         /* mL of vinegar at 5% acetic acid */
+  var TARGET_PCT   = 5;           /* % acetic acid after dilution */
+  var PER_BASE = {
+    hotChilies: 4, chiliesLoG: 40,  chiliesHiG: 60,
+    bellPeppers: 2, bellPepperG: 170,
+    garlic: 5, garlicLoG: 15, garlicHiG: 20,
+    salt: 3
+  };
+  var JAR_ML = 250;
+
+  /* ---------- number helpers ---------- */
+  function roundTo(x, step) { return Math.round(x / step) * step; }
+  function num(x) { return String(Math.round(x * 100) / 100).replace(/\.0+$/, ""); }
+  function smartRound(x) {
+    if (x >= 50) return roundTo(x, 5);
+    if (x >= 10) return roundTo(x, 1);
+    if (x >= 2)  return roundTo(x, 0.5);
+    return roundTo(x, 0.1);
+  }
+  function grams(x) {
+    var v = smartRound(x);
+    if (v >= 1000) return num(Math.round(v / 10) / 100) + " kg";
+    return num(v) + " g";
+  }
+  function gramsRange(lo, hi) {
+    if (hi >= 1000) return num(Math.round(lo / 10) / 100) + "–" + num(Math.round(hi / 10) / 100) + " kg";
+    return num(smartRound(lo)) + "–" + num(smartRound(hi)) + " g";
+  }
+  /* volumes that must add up get a finer step than 0.5 mL */
+  function millilitresFine(x) {
+    var v = roundTo(x, 0.05);
+    if (v >= 1000) return num(Math.round(v / 10) / 100) + " L";
+    return num(v) + " mL";
+  }
+  function litres(ml) {
+    if (ml >= 1000) return num(Math.round(ml / 10) / 100) + " L (" + Math.round(ml) + " mL)";
+    return num(roundTo(ml, 1)) + " mL";
+  }
+  /* a count that came out fractional is shown as the two whole numbers it sits between */
+  function count(x) {
+    var r = Math.round(x);
+    if (Math.abs(x - r) < 0.001) return String(r);
+    var lo = Math.max(1, Math.floor(x)), hi = Math.max(lo + 1, Math.ceil(x));
+    return lo + "–" + hi;
+  }
+  function pluralWord(text, word) { return text.indexOf("–") > -1 || parseFloat(text) > 1 ? word + "s" : word; }
+
+  /* ---------- the acid split: the whole point of this page ----------
+     `volume` is how much vinegar at TARGET_PCT the recipe calls for. The acid itself is
+     volume * TARGET_PCT / 100, and that is what has to be diluted up to `volume`:
+     180 mL at 5% is 9 mL of acetic acid, which is 36 mL of 25% essence + 144 mL of water. */
+  function acidSplit(volume, pct) {
+    var pureAcid = volume * (TARGET_PCT / 100);
+    var essence = pureAcid / (pct / 100);
+    var water = Math.max(0, volume - essence);   /* essence measured by volume, so the two add up */
+    return { essence: essence, water: water, total: essence + water };
+  }
+
+  function scale(vol, pct) {
+    var f = vol / BASE_YIELD;
+    var acidMl = BASE_ACID_ML * f;
+    var mix = acidSplit(acidMl, pct);   /* at pct === 5 this is the same vinegar, undiluted */
+
+    var v = {
+      yield: litres(vol),
+      multiplier: num(Math.round(f * 100) / 100) + "×",
+      jars: num(Math.round(vol / JAR_ML * 10) / 10) + " " + (Math.round(vol / JAR_ML * 10) / 10 === 1 ? "jar" : "jars") + " of 250 mL",
+
+      hotChilies: count(PER_BASE.hotChilies * f) + " " + pluralWord(count(PER_BASE.hotChilies * f), "chili"),
+      chiliWeight: gramsRange(PER_BASE.chiliesLoG * f, PER_BASE.chiliesHiG * f),
+      bellPeppers: count(PER_BASE.bellPeppers * f) + " " + pluralWord(count(PER_BASE.bellPeppers * f), "red bell pepper"),
+      bellPepperWeight: grams(PER_BASE.bellPeppers * f * PER_BASE.bellPepperG),
+      garlic: count(PER_BASE.garlic * f) + " " + pluralWord(count(PER_BASE.garlic * f), "clove"),
+      garlicWeight: gramsRange(PER_BASE.garlicLoG * f, PER_BASE.garlicHiG * f),
+      salt: grams(PER_BASE.salt * f),
+
+      acidPct: pct,
+      acidTarget: TARGET_PCT + "%",
+      acidEssence: millilitresFine(mix.essence),
+      acidWater: mix.water > 0 ? millilitresFine(mix.water) : "none",
+      acidTotal: millilitresFine(mix.total),
+      _essence: mix.essence, _water: mix.water, _total: mix.total, _acidMl: acidMl, _f: f
+    };
+    v.acidLabel = pct === TARGET_PCT ? "5% vinegar (ready to use)" : "Vinegar essence, " + num(pct) + "%";
+    return v;
+  }
+
+  /* ---------- ingredient list ---------- */
+  var GROUPS = [
+    { title: "The sauce", items: [
+      { name: "Hot red or orange chilies", sub: "roughly chopped · gloves on", q: "hotChilies" },
+      { name: "Red bell peppers", sub: "roughly chopped, seeds and all", q: "bellPeppers" },
+      { name: "Garlic", sub: "roughly chopped", q: "garlic" },
+      { name: "Kosher salt", sub: "or fine sea salt — not iodised", q: "salt" }
+    ]},
+    { title: "Acid, made safe", items: [
+      { name: "Vinegar essence", sub: "check the label before you start", q: "acidEssence", nameId: "acidName", subId: "acidSub" },
+      { name: "Water", sub: "goes in the bowl first, always", q: "acidWater" }
+    ]}
+  ];
+
+  function renderIngredients() {
+    var html = "";
+    GROUPS.forEach(function (g) {
+      html += '<div class="igroup"><h3>' + g.title + '</h3><ul class="ing">';
+      g.items.forEach(function (it) {
+        /* the name gets its own inner span when the script rewrites it — setting textContent on the
+           wrapper would delete the <small> sub-line sitting inside it */
+        var nameHtml = it.nameId ? '<span id="' + it.nameId + '">' + it.name + "</span>" : it.name;
+        html += '<li><span class="name">' + nameHtml +
+                (it.sub ? "<small" + (it.subId ? ' id="' + it.subId + '"' : "") + ">" + it.sub + "</small>" : "") +
+                '</span><span class="qty" data-q="' + it.q + '"></span></li>';
+      });
+      html += "</ul></div>";
+    });
+    document.getElementById("ingredients").innerHTML = html;
+  }
+
+  /* ---------- render ---------- */
+  var lastValues = null;
+
+  function render(vol, pct) {
+    var v = scale(vol, pct);
+    lastValues = v;
+
+    if (!document.querySelector("#ingredients .igroup")) renderIngredients();
+
+    var nodes = document.querySelectorAll("[data-q]");
+    for (var i = 0; i < nodes.length; i++) {
+      var key = nodes[i].getAttribute("data-q");
+      if (v[key] !== undefined) nodes[i].textContent = v[key];
+    }
+
+    document.getElementById("acidName").textContent = v.acidLabel;
+    document.getElementById("acidSub").textContent = pct === TARGET_PCT
+      ? "already the right strength — no dilution, no burn risk"
+      : num(pct) + "% acetic acid from the label — never use it undiluted";
+
+    /* step 2 reads differently when there is nothing to dilute */
+    document.getElementById("dilutionText").innerHTML = pct === TARGET_PCT
+      ? "Use <span class=\"q\">" + v.acidTotal + "</span> of your 5% vinegar straight from the bottle. There is nothing to dilute, so pour it into the pot with the vegetables."
+      : "In a glass or plastic bowl, measure <span class=\"q\">" + v.acidWater + "</span> of water <strong>first</strong>, then slowly pour in <span class=\"q\">" + v.acidEssence + "</span> of vinegar essence, stirring gently. You now have <span class=\"q\">" + v.acidTotal + "</span> of vinegar at about <span class=\"q\">" + v.acidTarget + "</span> acetic acid.";
+
+    /* the hint under the acid controls, and the warning that changes with strength */
+    document.getElementById("acidHint").textContent = pct === TARGET_PCT
+      ? "Your 5% vinegar is already the right strength: use " + v.acidTotal + " straight from the bottle."
+      : "Your " + num(pct) + "% vinegar needs " + v.acidEssence + " of essence and " +
+        (v._water > 0 ? v.acidWater + " of water" : "no water at all") +
+        " to give " + v.acidTotal + " of " + TARGET_PCT + "% vinegar.";
+    document.getElementById("acidNote").innerHTML = acidWarning(pct, v);
+
+    /* the acid reference table, scaled to this batch */
+    var rows = [25, 30, 60, 80, 5].map(function (p) {
+      var m = acidSplit(v._acidMl, p);
+      var label = p === TARGET_PCT ? "5% vinegar, ready to use" : p + "% essence";
+      return "<tr><td>" + label + "</td><td>" + millilitresFine(m.essence) + " + " +
+             (m.water > 0 ? millilitresFine(m.water) : "—") + " = " + millilitresFine(m.total) + "</td></tr>";
+    });
+    document.getElementById("acidTable").innerHTML = rows.join("");
+
+    var pressVol = document.querySelectorAll(".presets [data-vol]");
+    for (var j = 0; j < pressVol.length; j++) {
+      pressVol[j].setAttribute("aria-pressed", String(parseInt(pressVol[j].dataset.vol, 10) === vol));
+    }
+    var pressAcid = document.querySelectorAll(".presets [data-acid]");
+    for (var k = 0; k < pressAcid.length; k++) {
+      pressAcid[k].setAttribute("aria-pressed", String(parseFloat(pressAcid[k].dataset.acid) === pct));
+    }
+
+    try { localStorage.setItem("hotsauce.vol", String(vol)); localStorage.setItem("hotsauce.acid", String(pct)); } catch (e) {}
+  }
+
+  function acidWarning(pct, v) {
+    var diluting = " Measure " + v.acidWater + " of water into a glass or plastic bowl first, then add " + v.acidEssence +
+                   " of essence slowly, and never pour water onto the essence.";
+    if (pct === TARGET_PCT) {
+      return "<strong>No dilution needed.</strong> Your vinegar is already " + TARGET_PCT + "% acetic acid. Use " +
+             v.acidTotal + " straight from the bottle, and skip the water entirely.";
+    }
+    if (pct < TARGET_PCT) {
+      return "<strong>Weaker than the recipe's " + TARGET_PCT + "%.</strong> " + num(pct) +
+             "% vinegar cannot be concentrated at home, so use " + v.acidTotal +
+             " of it and no water. The sauce will be looser and less sharp than the original, and it will not keep as long.";
+    }
+    if (pct >= 60) {
+      return "<strong>Very strong acid — handle with care.</strong> At " + num(pct) + "% this is a hazardous liquid, and at " +
+             v.acidEssence + " you are measuring a small but dangerous amount." + diluting +
+             " Work in a ventilated spot and wear gloves and eye protection.";
+    }
+    if (pct === 25) {
+      return "<strong>This is the strength the recipe assumes.</strong>" + diluting +
+             " The original line reads 36 mL essence to 144 mL water for the same 180 mL of 5% vinegar.";
+    }
+    return "<strong>Stronger than the recipe's 25%.</strong>" + diluting +
+           " Keep the bottle away from your face, and rinse any splash with plenty of water.";
+  }
+
+  /* ---------- state + input wiring ---------- */
+  var volInput = document.getElementById("vol");
+  var rangeInput = document.getElementById("range");
+  var acidInput = document.getElementById("acidPct");
+
+  function clampVol(n) {
+    if (!isFinite(n) || n <= 0) return BASE_YIELD;
+    return Math.min(4800, Math.max(60, Math.round(n / 10) * 10));
+  }
+  function clampPct(n) {
+    if (!isFinite(n) || n <= 0) return 25;
+    return Math.min(100, Math.max(1, Math.round(n * 10) / 10));
+  }
+  function currentPct() { return clampPct(parseFloat(acidInput.value)); }
+
+  function setVol(n, from) {
+    n = clampVol(n);
+    if (from !== "number") volInput.value = String(n);
+    if (from !== "range") rangeInput.value = String(Math.min(2400, n));
+    render(n, currentPct());
+  }
+  function setPct(p, from) {
+    p = clampPct(p);
+    if (from !== "number") acidInput.value = String(p);
+    render(clampVol(parseFloat(volInput.value)), p);
+  }
+
+  volInput.addEventListener("input", function () {
+    var n = parseFloat(volInput.value);
+    if (isFinite(n)) setVol(n, "number");
+  });
+  volInput.addEventListener("blur", function () { setVol(parseFloat(volInput.value)); });
+  rangeInput.addEventListener("input", function () { setVol(parseFloat(rangeInput.value), "range"); });
+  acidInput.addEventListener("input", function () {
+    var p = parseFloat(acidInput.value);
+    if (isFinite(p)) setPct(p, "number");
+  });
+  acidInput.addEventListener("blur", function () { setPct(parseFloat(acidInput.value)); });
+
+  document.getElementById("minus").addEventListener("click", function () {
+    setVol(parseFloat(volInput.value) - 60);
+  });
+  document.getElementById("plus").addEventListener("click", function () {
+    setVol(parseFloat(volInput.value) + 60);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll(".presets [data-vol]"), function (b) {
+    b.addEventListener("click", function () { setVol(parseFloat(b.dataset.vol)); });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll(".presets [data-acid]"), function (b) {
+    b.addEventListener("click", function () { setPct(parseFloat(b.dataset.acid)); });
+  });
+
+  document.getElementById("print").addEventListener("click", function () { window.print(); });
+
+  var flash = document.getElementById("flash");
+  document.getElementById("copy").addEventListener("click", function () {
+    var v = lastValues;
+    var lines = ["Garlicky red chile hot sauce — " + v.yield + " (" + v.acidLabel + ")", ""];
+    GROUPS.forEach(function (g) {
+      lines.push(g.title.toUpperCase());
+      g.items.forEach(function (it) {
+        var name = it.nameId === "acidName" ? v.acidLabel : it.name;
+        lines.push("- " + name + ": " + v[it.q]);
+      });
+      lines.push("");
+    });
+    lines.push("Gloves on, chop everything. Water into the bowl first, then the essence: " + v.acidWater +
+               " water + " + v.acidEssence + " essence = " + v.acidTotal + " of " + v.acidTarget + " vinegar. " +
+               "Combine with the vegetables and " + v.salt + " salt, simmer covered 7-10 minutes, blend smooth with the lid vented, " +
+               "cool uncovered, then refrigerate 3 days before tasting. Keep refrigerated.");
+    copyText(lines.join("\n"), function () {
+      flash.classList.add("on");
+      setTimeout(function () { flash.classList.remove("on"); }, 1600);
+    });
+  });
+
+  function copyText(text, done) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+      return;
+    }
+    fallback();
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.cssText = "position:fixed;top:-1000px";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+      done();
+    }
+  }
+
+  /* ---------- restore saved / linked state ---------- */
+  var startVol = BASE_YIELD, startPct = 25;
+  try {
+    var savedVol = parseFloat(localStorage.getItem("hotsauce.vol"));
+    if (isFinite(savedVol)) startVol = savedVol;
+    var savedPct = parseFloat(localStorage.getItem("hotsauce.acid"));
+    if (isFinite(savedPct)) startPct = savedPct;
+  } catch (e) {}
+
+  var params = new URLSearchParams(location.search);
+  var urlVol = parseFloat(params.get("ml"));
+  if (isFinite(urlVol)) startVol = urlVol;
+  var urlPct = parseFloat(params.get("acid"));
+  if (isFinite(urlPct)) startPct = urlPct;
+
+  startVol = clampVol(startVol);
+  startPct = clampPct(startPct);
+  volInput.value = String(startVol);
+  rangeInput.value = String(Math.min(2400, startVol));
+  acidInput.value = String(startPct);
+  render(startVol, startPct);
+})();
+</script>
+</body>
+</html>
