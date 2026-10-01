@@ -9,3 +9,4 @@ services:
       - ./data:/data
       - ./config:/config
       - /root/spending:/www:ro
+      - ../recipes:/srv/recipes:ro

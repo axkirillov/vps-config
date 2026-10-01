@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Napa Cabbage Kimchi — scaled, metric</title>
+<meta name="description" content="An adapted Serious Eats–style napa cabbage kimchi recipe, fully metric, with every amount recalculated from the weight of cabbage you actually have.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <a class="backlink" href="index.html">← All recipes</a>
+    <p class="kicker">Adapted Serious Eats style <span class="dot">·</span> fully metric</p>
+    <h1>Kimchi, scaled to your cabbage</h1>
+    <p>Enter the weight of napa cabbage you actually have. Every amount below — brine, rice paste, aromatics, jar capacity — is recalculated from it. The brine stays fixed at <strong>65&nbsp;g salt per 1&nbsp;L water</strong>, because that is the part that keeps fermentation safe.</p>
+  </header>
+
+  <section class="card controls" aria-label="Batch size">
+    <div class="row">
+      <div class="field">
+        <label for="kg">Napa cabbage</label>
+        <div class="stepper">
+          <button type="button" id="minus" aria-label="Less cabbage">−</button>
+          <input id="kg" type="number" value="2" min="0.25" max="20" step="0.25" inputmode="decimal" aria-describedby="scaleHint">
+          <button type="button" id="plus" aria-label="More cabbage">+</button>
+          <span class="unit">kg</span>
+        </div>
+      </div>
+      <div class="slider">
+        <label for="range">Drag for a quick change</label>
+        <input id="range" type="range" min="0.5" max="10" step="0.25" value="2">
+      </div>
+    </div>
+    <div class="presets" role="group" aria-label="Presets">
+      <button type="button" data-kg="0.5">0.5 kg</button>
+      <button type="button" data-kg="1">1 kg</button>
+      <button type="button" data-kg="2" aria-pressed="true">2 kg</button>
+      <button type="button" data-kg="3">3 kg</button>
+      <button type="button" data-kg="5">5 kg</button>
+    </div>
+    <p class="hint" id="scaleHint"><span class="q-strong" data-q="cabbage"></span> of cabbage makes roughly <span class="q-strong" data-q="jarVolume"></span> of packed kimchi.</p>
+  </section>
+
+  <div class="layout">
+
+    <aside class="card ingredients" aria-label="Ingredients">
+      <h2>Ingredients</h2>
+      <div id="ingredients"></div>
+      <div class="toolbar">
+        <button class="btn" type="button" id="copy">Copy list</button>
+        <button class="btn" type="button" id="print">Print</button>
+        <span class="flash" id="flash">Copied</span>
+      </div>
+    </aside>
+
+    <section class="steps" aria-label="Instructions">
+      <h2>Instructions</h2>
+      <ol class="steps">
+
+        <li>
+          <h3>Brine the cabbage <span class="time">12 h</span></h3>
+          <p>Dissolve <span class="q" data-q="salt"></span> of salt in <span class="q" data-q="water"></span> of cold water. Submerge the quartered cabbage. Brine for <strong>12 hours</strong>, flipping the quarters once or twice so they salt evenly.</p>
+          <p class="note">Brine strength is fixed at 65 g salt per 1 L water. If the cabbage is not fully submerged, mix extra brine at that same ratio and pour it in.</p>
+        </li>
+
+        <li>
+          <h3>Drain and rinse <span class="time">5 min</span></h3>
+          <p>Strain and discard the brine. Rinse the cabbage <strong>2–3 times</strong> with cold water. Taste a piece — it should be pleasantly salty, not overpowering. If it is too salty, rinse once more.</p>
+        </li>
+
+        <li>
+          <h3>Squeeze and drain <span class="time">30 min</span></h3>
+          <p>Gently squeeze the cabbage to remove excess water. Place it cut-side down in a colander and drain for <strong>30 minutes</strong>. This is the key to a less watery kimchi.</p>
+        </li>
+
+        <li>
+          <h3>Make the rice paste <span class="time">800 W · 2 min</span></h3>
+          <p>Put <span class="q" data-q="rice"></span> of dry rice and <span class="q" data-q="riceWater"></span> of water in a microwave-safe bowl. Microwave at <strong>800 W for 2 minutes</strong>, then rest covered for 5 minutes. If it is still hard, add a splash of water and cook in 30-second bursts. Blend until smooth and glue-like, then cool completely.</p>
+          <p class="note" id="riceNote"></p>
+        </li>
+
+        <li>
+          <h3>Mix the paste <span class="time">5 min</span></h3>
+          <p>In a large bowl, combine the cooled rice paste with your pre-made kimchi paste — start with <span class="q" data-q="paste"></span>, which is <span class="q" data-q="pasteJar"></span>. Adjust to your package and to taste. Add <span class="q" data-q="scallions"></span> sliced into 2.5 cm pieces, <span class="q" data-q="carrot"></span>, <span class="q" data-q="garlic"></span>, and <span class="q" data-q="ginger"></span>. Mix well, then taste and adjust.</p>
+          <p class="note">Using gochujang? Add <span class="q" data-q="gochujang"></span> (about 15 mL per 2 kg) — only if you want extra depth and your paste is not already complete.</p>
+        </li>
+
+        <li>
+          <h3>Coat the cabbage <span class="time">10 min</span></h3>
+          <p>Spread the paste onto every leaf of the brined cabbage. Work it into the layers, especially near the core.</p>
+        </li>
+
+        <li>
+          <h3>Pack tightly <span class="time">10 min</span></h3>
+          <p>Pack the kimchi into clean glass jars or food-grade containers — about <span class="q" data-q="jarVolume"></span> of capacity for this batch. Press down firmly to remove air pockets and keep the cabbage submerged in its own juices.</p>
+        </li>
+
+        <li>
+          <h3>Ferment <span class="time">3 days · 18–24 °C</span></h3>
+          <p>Leave at room temperature (<strong>18–24 °C</strong>) for <strong>3 days</strong>. Press the kimchi down once daily to release gas and keep it submerged.</p>
+          <p class="note" id="fermentNote"></p>
+        </li>
+
+        <li>
+          <h3>Refrigerate <span class="time">2–3 days</span></h3>
+          <p>Move to the fridge for at least <strong>2–3 days</strong> before eating. It keeps fermenting slowly and gets more sour over time.</p>
+        </li>
+
+      </ol>
+    </section>
+  </div>
+
+  <div class="extras">
+
+    <section class="card">
+      <h2>If you already packed it without garlic or ginger</h2>
+      <p>No problem — it is not ruined.</p>
+      <ul>
+        <li>Open the jars and tip the kimchi into a bowl.</li>
+        <li>Mix in <span class="q" data-q="garlic"></span> of grated garlic and <span class="q" data-q="ginger"></span> of grated ginger.</li>
+        <li>Repack and press down firmly, then carry on fermenting as normal.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>For a less watery kimchi</h2>
+      <ul>
+        <li>Squeeze the brined cabbage well — then once more.</li>
+        <li>Squeeze the grated carrot dry, ideally in a clean towel.</li>
+        <li>Use the rice paste as a binder; it holds the paste to the leaves.</li>
+        <li>Press the kimchi down daily during room-temperature fermentation.</li>
+        <li>Do not add extra liquid unless the kimchi is not submerged.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Conversions used</h2>
+      <table class="table">
+        <tr><td>1 tbsp</td><td>15 mL</td></tr>
+        <tr><td>1 tsp</td><td>5 mL</td></tr>
+        <tr><td>1 cup</td><td>240 mL</td></tr>
+        <tr><td>1 tbsp dry rice</td><td>≈ 12 g</td></tr>
+        <tr><td>1 garlic clove</td><td>≈ 3 g</td></tr>
+        <tr><td>1 medium carrot</td><td>≈ 80 g</td></tr>
+        <tr><td>2.5 cm ginger</td><td>≈ 15 g</td></tr>
+        <tr><td>1 inch</td><td>2.5 cm</td></tr>
+        <tr><td>65–75 °F</td><td>18–24 °C</td></tr>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Salt, and why the ratio matters</h2>
+      <ul>
+        <li>Salt is the only safety-critical number here, so it never goes below <strong>65 g per 1 L water</strong>.</li>
+        <li>Do not taste-tune the brine upward on a whim: over-salted cabbage is hard to rescue, and rinsing only removes surface salt.</li>
+        <li>Taste the cabbage <em>after</em> rinsing, not before.</li>
+        <li>Fermenting jars should stay submerged and smell sour and garlicky. Fizzy is fine; fuzzy, slimy or rotten-smelling is not — discard it.</li>
+      </ul>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>Adapted from the Serious Eats–style napa cabbage kimchi method, converted to metric and made scalable. Salt, rice, aromatics and jar volume scale with the cabbage; fermentation time does not.</p>
+    <p class="noprint">Nothing you type leaves this page — your batch size is stored only in this browser.</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- ratio table: everything per 1 kg of cabbage ---------- */
+  var R = {
+    salt: 65,          // g
+    water: 1,          // L
+    rice: 12.5,        // g dry rice
+    riceWater: 30,     // mL
+    paste: 120,        // mL pre-made kimchi paste
+    scallionsLo: 2,    // count
+    scallionsHi: 3,
+    carrot: 50,        // g
+    garlicLo: 2,       // cloves
+    garlicHi: 3,
+    garlicGrams: 7.5,  // g
+    ginger: 7.5,       // g  (a 2.5 cm piece ≈ 15 g)
+    gochujang: 9,      // g  (1 tbsp ≈ 18 g)
+    jarLiters: 1       // approx L of packed kimchi per kg cabbage
+  };
+  var CARROT_G = 80;          // one medium carrot
+  var GINGER_G_PER_CM = 6;    // 2.5 cm ≈ 15 g
+  var JAR_ML = 500;
+
+  /* ---------- number helpers ---------- */
+  function roundTo(x, step) { return Math.round(x / step) * step; }
+  function num(x) { return String(Math.round(x * 100) / 100).replace(/\.0+$/, ""); }
+  function smartRound(x) {
+    if (x >= 50) return roundTo(x, 5);
+    if (x >= 10) return roundTo(x, 1);
+    if (x >= 2)  return roundTo(x, 0.5);
+    return roundTo(x, 0.1);
+  }
+  function grams(x) {
+    var v = smartRound(x);
+    if (v >= 1000) return num(Math.round(v / 10) / 100) + " kg";
+    return num(v) + " g";
+  }
+  function millilitres(x) { return num(smartRound(x)) + " mL"; }
+  function litres(l) {
+    if (l >= 1) return num(Math.round(l * 100) / 100) + " L (" + Math.round(l * 1000) + " mL)";
+    return Math.round(l * 1000) + " mL";
+  }
+  function range(lo, hi) { return lo === hi ? String(lo) : lo + "–" + hi; }
+  function halves(x) {
+    var v = Math.round(x * 2) / 2, whole = Math.floor(v), frac = v - whole;
+    if (whole === 0) return frac === 0.5 ? "½" : "0";
+    return whole + (frac === 0.5 ? "½" : "");
+  }
+  function jarFraction(ml) {
+    var f = ml / JAR_ML;
+    if (f < 0.15) return "a small spoonful of a " + JAR_ML + " mL jar";
+    var table = [
+      [0.25, "¼"], [1 / 3, "⅓"], [0.5, "½"], [2 / 3, "⅔"], [0.75, "¾"],
+      [1, "1"], [1.25, "1¼"], [1.5, "1½"], [2, "2"], [2.5, "2½"], [3, "3"]
+    ];
+    var best = null, bestD = Infinity;
+    for (var i = 0; i < table.length; i++) {
+      var d = Math.abs(f - table[i][0]);
+      if (d < bestD) { bestD = d; best = table[i][1]; }
+    }
+    var label = bestD <= Math.max(0.06, f * 0.12) ? best : num(Math.round(f * 20) / 20);
+    return f > 1
+      ? label + " × " + JAR_ML + " mL jars"
+      : label + " of a " + JAR_ML + " mL jar";
+  }
+
+  /* ---------- scale everything from the cabbage weight ---------- */
+  function scale(kg) {
+    var salt = kg * R.salt,
+        waterL = kg * R.water,
+        rice = kg * R.rice,
+        riceWater = kg * R.riceWater,
+        paste = kg * R.paste,
+        carrot = kg * R.carrot,
+        garlicG = kg * R.garlicGrams,
+        ginger = kg * R.ginger,
+        scallLo = Math.max(1, Math.round(kg * R.scallionsLo)),
+        scallHi = Math.max(scallLo + 1, Math.round(kg * R.scallionsHi)),
+        garlicLo = Math.max(1, Math.round(kg * R.garlicLo)),
+        garlicHi = Math.max(garlicLo + 1, Math.round(kg * R.garlicHi)),
+        jarL = kg * R.jarLiters,
+        carrotCount = carrot / CARROT_G,
+        gingerCm = Math.round((ginger / GINGER_G_PER_CM) * 10) / 10;
+
+    /* only quote a carrot count when it means something */
+    var carrotTxt = grams(carrot) + (carrotCount >= 0.5
+      ? " (≈ " + halves(carrotCount) + " " + (carrotCount > 1 ? "carrots" : "carrot") + ")"
+      : "");
+
+    /* same for ginger: skip the measurement below 1 cm */
+    var gingerTxt = grams(ginger) + (gingerCm >= 1 ? " (≈ " + num(gingerCm) + " cm piece)" : "");
+
+    return {
+      cabbage: num(kg) + " kg",
+      salt: grams(salt),
+      water: litres(waterL),
+      rice: grams(rice),
+      riceWater: millilitres(riceWater),
+      paste: millilitres(paste),
+      pasteJar: jarFraction(paste),
+      scallions: range(scallLo, scallHi) + " scallions",
+      carrot: carrotTxt,
+      garlic: range(garlicLo, garlicHi) + " cloves (≈ " + grams(garlicG) + ")",
+      ginger: gingerTxt,
+      gochujang: grams(kg * R.gochujang),
+      jarVolume: num(Math.round(jarL * 10) / 10) + " L",
+      _kg: kg, _rice: rice, _riceWater: riceWater
+    };
+  }
+
+  /* ---------- ingredient list ---------- */
+  var GROUPS = [
+    { title: "Cabbage & brine", items: [
+      { name: "Napa cabbage", sub: "quartered lengthwise", q: "cabbage" },
+      { name: "Coarse sea salt or Diamond Crystal kosher salt", sub: "for the brine", q: "salt" },
+      { name: "Cold water", sub: "65 g salt per 1 L — top up at the same ratio if needed", q: "water" }
+    ]},
+    { title: "Rice paste", items: [
+      { name: "Dry rice", sub: "short or medium grain is fine", q: "rice" },
+      { name: "Water", sub: "for cooking the rice", q: "riceWater" }
+    ]},
+    { title: "Paste & aromatics", items: [
+      { name: "Pre-made kimchi paste", sub: "enough to coat every leaf", q: "paste" },
+      { name: "Scallions", sub: "sliced into 2.5 cm pieces", q: "scallions" },
+      { name: "Carrot", sub: "julienned or grated, then squeezed dry", q: "carrot" },
+      { name: "Garlic", sub: "finely grated — skip if your paste already has it", q: "garlic" },
+      { name: "Ginger", sub: "peeled and finely grated — skip if your paste has it", q: "ginger" }
+    ]},
+    { title: "Optional", items: [
+      { name: 'Gochujang<span class="badge-opt">optional</span>', sub: "only for extra depth, if your paste is not already complete — about 15 mL per 2 kg", q: "gochujang" }
+    ]}
+  ];
+
+  function renderIngredients() {
+    var html = "";
+    GROUPS.forEach(function (g) {
+      html += '<div class="igroup"><h3>' + g.title + '</h3><ul class="ing">';
+      g.items.forEach(function (it) {
+        html += '<li><span class="name">' + it.name + (it.sub ? "<small>" + it.sub + "</small>" : "") +
+                '</span><span class="qty" data-q="' + it.q + '"></span></li>';
+      });
+      html += "</ul></div>";
+    });
+    document.getElementById("ingredients").innerHTML = html;
+  }
+
+  /* ---------- batch-size-dependent notes ---------- */
+  function renderNotes(v) {
+    var riceNote = document.getElementById("riceNote");
+    riceNote.textContent = v._kg < 1
+      ? "Small batch: " + grams(v._rice) + " of rice is only a spoonful. Cook a minimum of 12 g rice with 30 mL water and use just what you need — a little extra paste is harmless."
+      : "Rice paste quantity: " + grams(v._rice) + " rice to " + millilitres(v._riceWater) + " water. It is a binder rather than a flavour, so a rough measure is fine.";
+
+    var fermentNote = document.getElementById("fermentNote");
+    fermentNote.textContent = v._kg >= 4
+      ? "Large batch: at 4 kg and up, and especially at the cool end of 18–24 °C, expect up to one extra day. Start tasting on day 3."
+      : v._kg < 1
+        ? "Small batch: it can turn sour faster. Check it at the end of day 2 before it goes too far."
+        : "Timing follows room temperature, not batch size — a cold kitchen slows it down, a warm one speeds it up.";
+  }
+
+  /* ---------- render ---------- */
+  var lastValues = null;
+
+  function render(kg) {
+    var v = scale(kg);
+    lastValues = v;
+
+    if (!document.querySelector("#ingredients .igroup")) renderIngredients();
+
+    var nodes = document.querySelectorAll("[data-q]");
+    for (var i = 0; i < nodes.length; i++) {
+      var key = nodes[i].getAttribute("data-q");
+      if (v[key] !== undefined) nodes[i].textContent = v[key];
+    }
+    renderNotes(v);
+
+    var buttons = document.querySelectorAll(".presets button");
+    for (var j = 0; j < buttons.length; j++) {
+      buttons[j].setAttribute("aria-pressed", String(parseFloat(buttons[j].dataset.kg) === kg));
+    }
+
+    try { localStorage.setItem("kimchi.kg", String(kg)); } catch (e) {}
+  }
+
+  /* ---------- input wiring ---------- */
+  var numberInput = document.getElementById("kg");
+  var rangeInput = document.getElementById("range");
+
+  function clamp(kg) {
+    if (!isFinite(kg) || kg <= 0) return 2;
+    return Math.min(20, Math.max(0.25, Math.round(kg * 100) / 100));
+  }
+  function setKg(kg, from) {
+    kg = clamp(kg);
+    if (from !== "number") numberInput.value = num(kg);
+    if (from !== "range") rangeInput.value = Math.min(10, Math.max(0.5, kg));
+    render(kg);
+  }
+
+  numberInput.addEventListener("input", function () {
+    var kg = parseFloat(numberInput.value);
+    if (isFinite(kg)) setKg(kg, "number");
+  });
+  numberInput.addEventListener("blur", function () { setKg(parseFloat(numberInput.value) || 2); });
+  rangeInput.addEventListener("input", function () { setKg(parseFloat(rangeInput.value), "range"); });
+
+  var STEP = 0.25;
+  document.getElementById("minus").addEventListener("click", function () {
+    setKg(parseFloat(numberInput.value || "2") - STEP);
+  });
+  document.getElementById("plus").addEventListener("click", function () {
+    setKg(parseFloat(numberInput.value || "2") + STEP);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll(".presets button"), function (b) {
+    b.addEventListener("click", function () { setKg(parseFloat(b.dataset.kg)); });
+  });
+
+  document.getElementById("print").addEventListener("click", function () { window.print(); });
+
+  var flash = document.getElementById("flash");
+  document.getElementById("copy").addEventListener("click", function () {
+    var v = lastValues;
+    var lines = ["Kimchi — " + v.cabbage + " napa cabbage", ""];
+    GROUPS.forEach(function (g) {
+      lines.push(g.title.toUpperCase());
+      g.items.forEach(function (it) {
+        var name = it.name.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+        lines.push("- " + name + ": " + v[it.q]);
+      });
+      lines.push("");
+    });
+    lines.push("Brine 12 h, drain, rinse, squeeze 30 min, coat, pack, ferment 3 days at 18-24 °C, then fridge 2-3 days.");
+    copyText(lines.join("\n"), function () {
+      flash.classList.add("on");
+      setTimeout(function () { flash.classList.remove("on"); }, 1600);
+    });
+  });
+
+  function copyText(text, done) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+      return;
+    }
+    fallback();
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.cssText = "position:fixed;top:-1000px";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+      done();
+    }
+  }
+
+  /* ---------- restore saved / linked batch size ---------- */
+  var start = 2;
+  try {
+    var saved = parseFloat(localStorage.getItem("kimchi.kg"));
+    if (isFinite(saved)) start = saved;
+  } catch (e) {}
+  var fromUrl = parseFloat(new URLSearchParams(location.search).get("kg"));
+  if (isFinite(fromUrl)) start = fromUrl;
+  start = clamp(start);
+
+  numberInput.value = num(start);
+  rangeInput.value = Math.min(10, Math.max(0.5, start));
+  render(start);
+})();
+</script>
+</body>
+</html>

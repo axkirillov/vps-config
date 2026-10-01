@@ -22,6 +22,13 @@ cloud.axkirillov.com {
 }
 
 blog.axkirillov.com {
+    # Static recipe pages, served straight out of this repo (recipes/)
+    redir /recipes /recipes/ permanent
+    handle_path /recipes/* {
+        root * /srv/recipes
+        encode gzip
+        file_server
+    }
     reverse_proxy 127.0.0.1:2368
 }
 
@@ -67,3 +74,21 @@ supabase.axkirillov.com {
     # Catch-all
     respond "Supabase minimal endpoint — use /rest/v1, /auth/v1, or /realtime/v1" 200
 }
+
+# ---------------------------------------------------------------------------
+# Recipes currently live at https://blog.axkirillov.com/recipes/ because that
+# host already has a certificate and a public AAAA record.
+#
+# To give them their own subdomain instead:
+#   1. add an AAAA record  recipes.axkirillov.com -> 2a01:4f8:1c1a:fc02::1
+#      (Hetzner DNS; there is no wildcard record)
+#   2. replace the /recipes block above with these lines:
+#
+# recipes.axkirillov.com {
+#     root * /srv/recipes
+#     encode gzip
+#     file_server
+# }
+#
+# The files themselves never move — the container mount stays /srv/recipes.
+# ---------------------------------------------------------------------------
