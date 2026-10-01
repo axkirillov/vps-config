@@ -4,9 +4,10 @@ A tiny static recipe site. No build step, no dependencies — open `index.html` 
 
 ```
 recipes/
-  index.html    hub page — lists every recipe
-  styles.css    shared styles (light + dark, print-friendly)
-  kimchi.html   napa cabbage kimchi, scaled from the cabbage weight
+  index.html      hub page — lists every recipe
+  styles.css      shared styles (light + dark, print-friendly)
+  kimchi.html     napa cabbage kimchi, scaled from the cabbage weight
+  pickles.html    lacto-fermented pickle spears, scaled from the jar count
 ```
 
 ## Published at
@@ -38,4 +39,11 @@ cd recipes && python3 -m http.server 8000   # then open http://localhost:8000
 - change the ingredient list in `GROUPS` (each item carries its `data-q` key);
 - keep safety-critical ratios (salt, curing salt, acid) fixed and say so in the prose — those are the numbers that must not drift.
 
-Batch size is remembered in `localStorage`, and a page can be linked with a preset via `?kg=3`.
+`pickles.html` follows the same pattern with a different input (number of 1 L jars) and adds a second dimension: a **brine switch** holding two complete ratio sets (`BRINES`), so the same page covers both the strong 25 g / 475 mL brine and the milder 18 g / 532 mL one. Copy that shape when a recipe has a genuine either/or choice rather than a single multiplier.
+
+Batch size is remembered in `localStorage`, and a page can be linked with a preset:
+
+| page | link |
+|---|---|
+| kimchi | `?kg=3` |
+| pickles | `?jars=4` or `?jars=4&brine=mild` |

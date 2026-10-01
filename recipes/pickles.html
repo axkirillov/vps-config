@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lacto-Fermented Pickle Spears — scaled, metric</title>
+<meta name="description" content="Deli-style lacto-fermented cucumber pickle spears, no vinegar. Fully metric, with the brine, aromatics and jar count scaled to how many 1 L jars you are filling.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <a class="backlink" href="index.html">← All recipes</a>
+    <p class="kicker">Lacto-fermented <span class="dot">·</span> no vinegar <span class="dot">·</span> fully metric</p>
+    <h1>Pickle spears, scaled to your jars</h1>
+    <p>Deli-style cucumber spears fermented in saltwater brine and nothing else. Set how many <strong>1 L jars</strong> you are filling: the brine, the aromatics and the cucumber count all follow. Pick your brine strength below — the recipe keeps salt fixed at its stated ratio, because that is what keeps the jar safe.</p>
+  </header>
+
+  <section class="card controls" aria-label="Batch size">
+    <div class="row">
+      <div class="field">
+        <label for="jars">Jars to fill</label>
+        <div class="stepper">
+          <button type="button" id="minus" aria-label="One jar fewer">−</button>
+          <input id="jars" type="number" value="1" min="1" max="24" step="1" inputmode="numeric" aria-describedby="scaleHint">
+          <button type="button" id="plus" aria-label="One jar more">+</button>
+          <span class="unit">× 1 L</span>
+        </div>
+      </div>
+      <div class="slider">
+        <label for="range">Drag for a quick change</label>
+        <input id="range" type="range" min="1" max="12" step="1" value="1">
+      </div>
+    </div>
+    <div class="presets" role="group" aria-label="Jar presets">
+      <button type="button" data-jars="1" aria-pressed="true">1 jar</button>
+      <button type="button" data-jars="2">2 jars</button>
+      <button type="button" data-jars="3">3 jars</button>
+      <button type="button" data-jars="4">4 jars</button>
+      <button type="button" data-jars="6">6 jars</button>
+      <button type="button" data-jars="12">12 jars</button>
+    </div>
+    <p class="hint" id="scaleHint"><span class="q-strong" data-q="cucumbers"></span> needed — small Kirbys, about 80 g each, so roughly <span class="q-strong" data-q="cucumberWeight"></span> in total.</p>
+
+    <h2 style="margin:26px 0 12px">Brine strength</h2>
+    <div class="presets" role="group" aria-label="Brine strength">
+      <button type="button" data-brine="standard" aria-pressed="true">Cooking God's Way · 25 g / 475 mL</button>
+      <button type="button" data-brine="mild">Cup of Yum · 18 g / 532 mL</button>
+    </div>
+    <p class="hint" id="brineHint"></p>
+  </section>
+
+  <div class="layout">
+
+    <aside class="card ingredients" aria-label="Ingredients">
+      <h2>Ingredients</h2>
+      <div id="ingredients"></div>
+      <div class="toolbar">
+        <button class="btn" type="button" id="copy">Copy list</button>
+        <button class="btn" type="button" id="print">Print</button>
+        <span class="flash" id="flash">Copied</span>
+      </div>
+    </aside>
+
+    <section class="steps" aria-label="Instructions">
+      <h2>Instructions</h2>
+      <ol class="steps">
+
+        <li>
+          <h3>Wash and chill the cucumbers <span class="time">2 h</span></h3>
+          <p>Wash the cucumbers. If they are not freshly picked, soak them in very icy water for at least <strong>2 hours</strong>, then drain and pat dry.</p>
+          <p class="note">Small, firm pickling cucumbers — Kirby or Persian — have denser flesh and thinner skins, so they stay crisp. Avoid waxed salad cucumbers.</p>
+        </li>
+
+        <li>
+          <h3>Make the brine <span class="time">5 min</span></h3>
+          <p>Mix <span class="q" data-q="water"></span> of filtered water with <span class="q" data-q="salt"></span> of unrefined sea salt, and stir until the salt is completely dissolved. Set aside.</p>
+          <p class="note" id="brineNote"></p>
+        </li>
+
+        <li>
+          <h3>Cut the spears <span class="time">10 min</span></h3>
+          <p>Cut off the stem end of each cucumber and discard it. Slice the cucumbers lengthwise into quarters. You need <span class="q" data-q="cucumbers"></span> for this many jars.</p>
+          <p class="note">Also trim about 1.5 mm off the blossom end. Moulds and tissue-softening enzymes live in the blossom area, and this is the single cheapest way to keep spears snappy.</p>
+        </li>
+
+        <li>
+          <h3>Layer the jar <span class="time">10 min</span></h3>
+          <p>Put the spices and garlic in the bottom of each clean 1 L wide-mouth mason jar — <span class="q" data-q="garlic"></span>, <span class="q" data-q="dill"></span>, <span class="q" data-q="picklingSpice"></span> of pickling spice, and <span class="q" data-q="dillSeeds"></span> of dill seeds. Pack the spears in tightly, <strong>stem-end down</strong>. Break each bay leaf in two and tuck the halves between the spears.</p>
+          <p class="note">Packing tightly matters: it stops the spears floating once the brine goes in.</p>
+        </li>
+
+        <li>
+          <h3>Add the brine <span class="time">2.5 cm headspace</span></h3>
+          <p>Pour the brine over the cucumbers until they are completely covered, leaving <strong>2.5 cm of headspace</strong> at the top for expansion. If you need more liquid, mix another batch of brine at exactly the same ratio.</p>
+          <p class="note" id="topUpNote"></p>
+        </li>
+
+        <li>
+          <h3>Seal the jar <span class="time">2 min</span></h3>
+          <p>Screw the lid on tightly. If you are using an airlock lid, fill it with water according to its instructions.</p>
+        </li>
+
+        <li>
+          <h3>Ferment <span class="time" id="fermentBadge">2–3 days · 18–22 °C</span></h3>
+          <p>Leave at room temperature (<strong>18–22 °C</strong>) for <span class="q" data-q="fermentTime"></span>. Start tasting after day 2 — the pickles are done when they taste good to you.</p>
+          <p class="note" id="fermentNote"></p>
+        </li>
+
+        <li>
+          <h3>Store <span class="time">fridge</span></h3>
+          <p>Remove the airlock lid if you used one and replace it with a storage lid. Move the jars to cold storage — the cold stops fermentation and preserves the pickles. Expect them to keep for months in the fridge.</p>
+        </li>
+
+      </ol>
+    </section>
+  </div>
+
+  <div class="extras">
+
+    <section class="card">
+      <h2>Tips for perfectly crisp spears</h2>
+      <ul>
+        <li><strong>Trim the blossom end.</strong> About 1.5 mm off each cucumber — that is where the softening enzymes sit.</li>
+        <li><strong>Use tannin-rich leaves.</strong> A grape, horseradish or oak leaf, or a bay leaf, binds with the cucumber's pectin and keeps the spears snappy.</li>
+        <li><strong>Choose the right cucumbers.</strong> Small, firm Kirby or Persian cucumbers hold up best.</li>
+        <li><strong>Use the right salt.</strong> Pickling salt, sea salt or kosher salt — never iodised table salt, which clouds the brine and interferes with fermentation. Do not use salt with anti-caking agents.</li>
+        <li><strong>Keep them submerged.</strong> A fermentation weight, or a small zip-top bag filled with brine, holds every spear below the brine line.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Troubleshooting</h2>
+      <ul>
+        <li><strong>Cloudy brine and bubbles:</strong> normal signs of healthy fermentation. Carry on.</li>
+        <li><strong>White film (kahm yeast):</strong> harmless. Skim it off and make sure the cucumbers stay submerged.</li>
+        <li><strong>Fuzzy mould — green, black or pink:</strong> discard the entire batch. It is not safe to eat.</li>
+        <li><strong>Soft or slimy pickles:</strong> spoilage. Discard the batch.</li>
+      </ul>
+      <p><strong>When in doubt, throw it out.</strong> Fizzy and sour is good; fuzzy, slimy or rotten-smelling is not.</p>
+    </section>
+
+    <section class="card">
+      <h2>Equipment per jar</h2>
+      <ul>
+        <li>1 L wide-mouth mason jar, clean</li>
+        <li>Lid, ideally an airlock lid for the ferment</li>
+        <li>A storage lid for the fridge</li>
+        <li>A fermentation weight, or a zip-top bag of brine</li>
+      </ul>
+      <p class="hint" id="equipmentNote"></p>
+    </section>
+
+    <section class="card">
+      <h2>Conversions used</h2>
+      <table class="table">
+        <tr><td>1 tsp</td><td>5 mL</td></tr>
+        <tr><td>¼ tsp</td><td>1.25 mL</td></tr>
+        <tr><td>1 tbsp</td><td>15 mL</td></tr>
+        <tr><td>1 cup</td><td>240 mL</td></tr>
+        <tr><td>1 quart</td><td>≈ 1 L</td></tr>
+        <tr><td>1 tsp pickling spice</td><td>≈ 2 g</td></tr>
+        <tr><td>1 garlic clove</td><td>≈ 3 g</td></tr>
+        <tr><td>1 inch</td><td>2.5 cm</td></tr>
+        <tr><td>65–72 °F</td><td>18–22 °C</td></tr>
+        <tr><td>1/16 inch</td><td>≈ 1.5 mm</td></tr>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Brine strength, and why it is fixed</h2>
+      <ul>
+        <li>Salt is the safety-critical number, so it is never scaled below the ratio you selected. More jars means more brine, not weaker brine.</li>
+        <li>Percentages here are salt ÷ (salt + water) by weight. Some recipes quote salt ÷ water alone, which reads higher — that is why 18 g / 532 mL is called a 3.5% brine by its source and reads ≈ 3.3% here.</li>
+        <li>Always mix extra brine at the same ratio rather than topping up with plain water.</li>
+        <li>Larger jars, warmer rooms and softer cucumbers all ferment faster. Cold and salt are the two brakes.</li>
+      </ul>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>Spears method: <em>Cooking God's Way</em>, lacto-fermented deli-style pickle spears. Alternative brine ratio and sourness timings: <em>Cup of Yum</em>. Converted to metric and made scalable. Salt and water scale with the jar count; jar size and fermentation temperature do not change.</p>
+    <p class="noprint">Nothing you type leaves this page — your jar count is stored only in this browser.</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- the two brine ratios from the source notes ---------- */
+  var BRINES = {
+    standard: {
+      label: "Cooking God's Way",
+      waterPerJar: 475,     // mL
+      saltPerJar: 25,       // g
+      ferment: "2–3 days",
+      badge: "2–3 days · 18–22 °C",
+      hint: "25 g salt per 475 mL water — the recipe's own ratio, a hair over 5% brine. Strong and reliable for spears.",
+      note: "This brine is deliberately strong. Mix more at the same ratio if you need it.",
+      fermentNote: "Start tasting after day 2, then move the jar to the fridge the moment the flavour suits you."
+    },
+    mild: {
+      label: "Cup of Yum",
+      waterPerJar: 532,     // mL
+      saltPerJar: 18,       // g
+      ferment: "3–4 days for half-sour, 8–10 days for full-sour",
+      badge: "3–4 / 8–10 days · 18–22 °C",
+      hint: "18 g salt per 532 mL water — the milder 3.5% brine. Slower, softer-edged, more sour the longer you wait.",
+      note: "A gentler brine ferments more slowly, so give it the extra days and taste as you go.",
+      fermentNote: "Half-sour at 3–4 days, full-sour at 8–10 days. Timing is a preference, not a rule."
+    }
+  };
+
+  /* ---------- per-jar constants ---------- */
+  var PER_JAR = {
+    cucumbersLo: 3, cucumbersHi: 4,
+    garlic: 1, garlicGrams: 3,
+    dillLo: 3, dillHi: 5,
+    picklingSpiceMl: 5, picklingSpiceGrams: 2,
+    dillSeedsMl: 1.25
+  };
+  var CUCUMBER_G = 80;   // small Kirby
+  var HEADSPACE_CM = 2.5;
+
+  /* ---------- number helpers ---------- */
+  function roundTo(x, step) { return Math.round(x / step) * step; }
+  function num(x) { return String(Math.round(x * 100) / 100).replace(/\.0+$/, ""); }
+  function smartRound(x) {
+    if (x >= 50) return roundTo(x, 5);
+    if (x >= 10) return roundTo(x, 1);
+    if (x >= 2)  return roundTo(x, 0.5);
+    return roundTo(x, 0.1);
+  }
+  function grams(x) {
+    var v = smartRound(x);
+    if (v >= 1000) return num(Math.round(v / 10) / 100) + " kg";
+    return num(v) + " g";
+  }
+  /* a range shares one unit: 720–960 g, not 720 g–960 g */
+  function gramsRange(lo, hi) {
+    if (hi >= 1000) return num(Math.round(lo / 10) / 100) + "–" + num(Math.round(hi / 10) / 100) + " kg";
+    return num(smartRound(lo)) + "–" + num(smartRound(hi)) + " g";
+  }
+  function millilitres(x) { return num(smartRound(x)) + " mL"; }
+  /* quarter-teaspoon kind of amounts deserve two decimals, not 0.1 steps */
+  function millilitresFine(x) { return num(roundTo(x, 0.05)) + " mL"; }
+  function litres(ml) {
+    if (ml >= 1000) return num(Math.round(ml / 10) / 100) + " L (" + Math.round(ml) + " mL)";
+    return Math.round(ml) + " mL";
+  }
+  function range(lo, hi) { return lo === hi ? String(lo) : lo + "–" + hi; }
+  function plural(n, word) { return n === 1 ? word : word + "s"; }
+
+  /* ---------- scale everything from the jar count ---------- */
+  function scale(jars, brineKey) {
+    var B = BRINES[brineKey];
+    var water = jars * B.waterPerJar,
+        salt = jars * B.saltPerJar,
+        garlic = jars * PER_JAR.garlic,
+        cucumberLo = jars * PER_JAR.cucumbersLo,
+        cucumberHi = jars * PER_JAR.cucumbersHi;
+
+    var pct = salt / (salt + water) * 100;
+    var saltPerL = salt / (water / 1000);
+
+    return {
+      jars: jars + (jars === 1 ? " jar" : " jars") + " × 1 L",
+      water: litres(water),
+      salt: grams(salt),
+      brinePct: "≈ " + num(Math.round(pct * 10) / 10) + "% brine",
+      saltPerLitre: num(Math.round(saltPerL * 10) / 10) + " g",
+      cucumbers: range(cucumberLo, cucumberHi) + " " + plural(cucumberHi, "cucumber"),
+      cucumberWeight: gramsRange(cucumberLo * CUCUMBER_G, cucumberHi * CUCUMBER_G),
+      garlic: garlic + " " + plural(garlic, "clove") + " (≈ " + grams(jars * PER_JAR.garlicGrams) + ")",
+      dill: range(jars * PER_JAR.dillLo, jars * PER_JAR.dillHi) + " sprigs",
+      picklingSpice: millilitres(jars * PER_JAR.picklingSpiceMl) + " (≈ " + grams(jars * PER_JAR.picklingSpiceGrams) + ")",
+      dillSeeds: millilitresFine(jars * PER_JAR.dillSeedsMl),
+      bayLeaf: jars + " " + plural(jars, "leaf").replace("leafs", "leaves"),
+      fermentTime: B.ferment,
+      equipment: jars + " × 1 L jar" + (jars === 1 ? "" : "s") + ", " + jars + " airlock lid" + (jars === 1 ? "" : "s") + " and " + jars + " storage lid" + (jars === 1 ? "" : "s"),
+      _jars: jars, _brine: brineKey
+    };
+  }
+
+  /* ---------- ingredient list ---------- */
+  var GROUPS = [
+    { title: "Cucumbers & brine", items: [
+      { name: "Pickling cucumbers", sub: "Kirby or Persian, cut lengthwise into quarters", q: "cucumbers" },
+      { name: "Filtered water", sub: "for the brine", q: "water" },
+      { name: "Unrefined sea salt", sub: "pink Himalayan or Real Salt work well — never iodised", q: "salt" }
+    ]},
+    { title: "Aromatics", items: [
+      { name: "Garlic", sub: "thinly sliced crosswise · 1 clove per jar", q: "garlic" },
+      { name: "Fresh dill", sub: "sprigs, or a generous handful of fronds · 3–5 per jar", q: "dill" },
+      { name: "Pickling spice", sub: "1 tsp (5 mL) per jar", q: "picklingSpice" },
+      { name: "Dill seeds", sub: "¼ tsp (1.25 mL) per jar", q: "dillSeeds" },
+      { name: "Bay leaf", sub: "broken in half, tucked between the spears · 1 per jar", q: "bayLeaf" }
+    ]},
+    { title: "For a crisper spear", items: [
+      { name: "Tannin-rich leaf", sub: "grape, horseradish or oak — optional, one per jar", q: "tannin" }
+    ]}
+  ];
+
+  function renderIngredients() {
+    var html = "";
+    GROUPS.forEach(function (g) {
+      html += '<div class="igroup"><h3>' + g.title + '</h3><ul class="ing">';
+      g.items.forEach(function (it) {
+        html += '<li><span class="name">' + it.name + (it.sub ? "<small>" + it.sub + "</small>" : "") +
+                '</span><span class="qty" data-q="' + it.q + '"></span></li>';
+      });
+      html += "</ul></div>";
+    });
+    document.getElementById("ingredients").innerHTML = html;
+  }
+
+  /* ---------- render ---------- */
+  var lastValues = null;
+
+  function render(jars, brineKey) {
+    var v = scale(jars, brineKey);
+    v.tannin = jars + " " + plural(jars, "leaf").replace("leafs", "leaves") + " (optional)";
+    lastValues = v;
+
+    if (!document.querySelector("#ingredients .igroup")) renderIngredients();
+
+    var nodes = document.querySelectorAll("[data-q]");
+    for (var i = 0; i < nodes.length; i++) {
+      var key = nodes[i].getAttribute("data-q");
+      if (v[key] !== undefined) nodes[i].textContent = v[key];
+    }
+
+    var B = BRINES[brineKey];
+    document.getElementById("fermentBadge").textContent = B.badge;
+    document.getElementById("brineHint").textContent = B.hint;
+    document.getElementById("brineNote").textContent = B.note + " Strength: " + v.brinePct + ", i.e. " + v.saltPerLitre + " of salt per 1 L of water.";
+    document.getElementById("topUpNote").textContent = "Running short? Mix more brine at " + v.saltPerLitre + " of water, and never top up with plain water — that dilutes the salt the ferment depends on.";
+    document.getElementById("fermentNote").textContent = B.fermentNote + (jars > 4 ? " More jars do not mean more time — each jar ferments at its own pace, so taste them individually." : "");
+    document.getElementById("equipmentNote").textContent = "You need " + v.equipment + ".";
+
+    var jarsButtons = document.querySelectorAll(".presets [data-jars]");
+    for (var j = 0; j < jarsButtons.length; j++) {
+      jarsButtons[j].setAttribute("aria-pressed", String(parseInt(jarsButtons[j].dataset.jars, 10) === jars));
+    }
+    var brineButtons = document.querySelectorAll(".presets [data-brine]");
+    for (var k = 0; k < brineButtons.length; k++) {
+      brineButtons[k].setAttribute("aria-pressed", String(brineButtons[k].dataset.brine === brineKey));
+    }
+
+    try { localStorage.setItem("pickles.jars", String(jars)); localStorage.setItem("pickles.brine", brineKey); } catch (e) {}
+  }
+
+  /* ---------- state + input wiring ---------- */
+  var numberInput = document.getElementById("jars");
+  var rangeInput = document.getElementById("range");
+  var brine = "standard";
+
+  function clampJars(n) {
+    if (!isFinite(n) || n <= 0) return 1;
+    return Math.min(24, Math.max(1, Math.round(n)));
+  }
+  function setJars(n, from) {
+    n = clampJars(n);
+    if (from !== "number") numberInput.value = String(n);
+    if (from !== "range") rangeInput.value = String(Math.min(12, n));
+    render(n, brine);
+  }
+  function setBrine(key) {
+    brine = key;
+    setJars(parseInt(numberInput.value, 10));
+  }
+
+  numberInput.addEventListener("input", function () {
+    var n = parseInt(numberInput.value, 10);
+    if (isFinite(n)) setJars(n, "number");
+  });
+  numberInput.addEventListener("blur", function () { setJars(parseInt(numberInput.value, 10) || 1); });
+  rangeInput.addEventListener("input", function () { setJars(parseInt(rangeInput.value, 10), "range"); });
+
+  document.getElementById("minus").addEventListener("click", function () {
+    setJars(parseInt(numberInput.value, 10) - 1);
+  });
+  document.getElementById("plus").addEventListener("click", function () {
+    setJars(parseInt(numberInput.value, 10) + 1);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll(".presets [data-jars]"), function (b) {
+    b.addEventListener("click", function () { setJars(parseInt(b.dataset.jars, 10)); });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll(".presets [data-brine]"), function (b) {
+    b.addEventListener("click", function () { setBrine(b.dataset.brine); });
+  });
+
+  document.getElementById("print").addEventListener("click", function () { window.print(); });
+
+  var flash = document.getElementById("flash");
+  document.getElementById("copy").addEventListener("click", function () {
+    var v = lastValues;
+    var lines = ["Lacto-fermented pickle spears — " + v.jars + " (" + BRINES[v._brine].label + " brine)", ""];
+    GROUPS.forEach(function (g) {
+      lines.push(g.title.toUpperCase());
+      g.items.forEach(function (it) {
+        var name = it.name.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+        lines.push("- " + name + ": " + v[it.q]);
+      });
+      lines.push("");
+    });
+    lines.push("Chill 2 h, mix brine, cut spears (trim blossom end), layer spices and pack stem-end down, cover with brine leaving 2.5 cm headspace, seal, ferment at 18-22 °C for " + v.fermentTime + ", then refrigerate.");
+    copyText(lines.join("\n"), function () {
+      flash.classList.add("on");
+      setTimeout(function () { flash.classList.remove("on"); }, 1600);
+    });
+  });
+
+  function copyText(text, done) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+      return;
+    }
+    fallback();
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.cssText = "position:fixed;top:-1000px";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+      done();
+    }
+  }
+
+  /* ---------- restore saved / linked state ---------- */
+  var startJars = 1;
+  try {
+    var savedJars = parseInt(localStorage.getItem("pickles.jars"), 10);
+    if (isFinite(savedJars)) startJars = savedJars;
+    var savedBrine = localStorage.getItem("pickles.brine");
+    if (savedBrine && BRINES[savedBrine]) brine = savedBrine;
+  } catch (e) {}
+
+  var params = new URLSearchParams(location.search);
+  var urlJars = parseInt(params.get("jars"), 10);
+  if (isFinite(urlJars)) startJars = urlJars;
+  var urlBrine = params.get("brine");
+  if (urlBrine && BRINES[urlBrine]) brine = urlBrine;
+
+  startJars = clampJars(startJars);
+  numberInput.value = String(startJars);
+  rangeInput.value = String(Math.min(12, startJars));
+  render(startJars, brine);
+})();
+</script>
+</body>
+</html>
