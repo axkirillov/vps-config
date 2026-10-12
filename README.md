@@ -46,3 +46,31 @@ All heavy assets (photos, files, documents) are offloaded to a remote Hetzner St
 * **Domain:** `https://cloud.axkirillov.com`
 * **Storage:** Maps to `/mnt/storagebox/nextcloud-data`
 * **Optimization:** Uses the `linuxserver/nextcloud` image, specifically configured with `PUID=1000` and `PGID=1000`. This solves the "two-tenant" storage problem, allowing Nextcloud to securely write to the same mounted Storage Box as Immich without throwing permissions errors.
+
+### OpenClaw (`/openclaw-app`)
+* **Domain:** `https://claw.axkirillov.com`
+* **Function:** OpenClaw Gateway — a self-hosted AI assistant. The Gateway owns all state; the Control UI is reached through Caddy (loopback upstream on `127.0.0.1:18789`), and the bearer token from `openclaw-app/.env` is required to sign in.
+* **Image:** the official prebuilt `ghcr.io/openclaw/openclaw` image. This VPS has 4 GB RAM, and a source build needs ~6 GB, so the image is pulled rather than built.
+* **State:** `/root/.openclaw` (config, credentials, SQLite state) plus `/root/.openclaw-auth-profile-secrets`. Both live outside the repo and must be backed up — the config directory is credential material.
+* **Secrets:** `openclaw-app/.env` is untracked and holds the Gateway token plus provider keys.
+
+#### Operating OpenClaw
+
+```bash
+cd /root/vps-config
+
+# Control UI URL (token lives in openclaw-app/.env)
+docker compose -f openclaw-app/docker-compose.yml run --rm openclaw-cli dashboard --no-open
+
+# Health / logs / config
+docker compose -f openclaw-app/docker-compose.yml run --rm openclaw-cli doctor --json
+curl -fsS http://127.0.0.1:18789/healthz
+docker compose -f openclaw-app/docker-compose.yml logs --tail=100 openclaw-gateway
+
+# Add a channel, e.g. Telegram
+docker compose -f openclaw-app/docker-compose.yml run --rm openclaw-cli channels add --channel telegram --token "<token>"
+
+# Update the image
+docker compose -f openclaw-app/docker-compose.yml pull openclaw-gateway
+docker compose -f openclaw-app/docker-compose.yml up -d openclaw-gateway
+```

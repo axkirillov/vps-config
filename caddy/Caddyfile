@@ -32,6 +32,16 @@ blog.axkirillov.com {
     reverse_proxy 127.0.0.1:2368
 }
 
+# OpenClaw Gateway. Enable once the AAAA record exists:
+#   claw.axkirillov.com -> 2a01:4f8:1c1a:fc02::1  (Hetzner DNS; no wildcard record)
+# Until then, reach the Gateway over an SSH tunnel:
+#   ssh -N -L 18789:127.0.0.1:18789 root@2a01:4f8:1c1a:fc02::1
+#   open http://127.0.0.1:18789/
+#
+# claw.axkirillov.com {
+#     reverse_proxy 127.0.0.1:18789
+# }
+
 supabase.axkirillov.com {
     # CORS
     header Access-Control-Allow-Origin *
