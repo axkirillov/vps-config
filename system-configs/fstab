@@ -11,3 +11,7 @@
 /dev/disk/by-uuid/3ED7-13F3 /boot/efi vfat defaults 0 1
 
 //u571770.your-storagebox.de/backup /mnt/storagebox cifs vers=2.1,credentials=/root/.smbcredentials,uid=1000,gid=1000,file_mode=0660,dir_mode=0770,noauto,x-systemd.automount,_netdev,x-systemd.idle-timeout=60,x-systemd.mount-timeout=10 0 0
+
+# 2G swapfile, created by deploy.sh if missing. vm.swappiness lives in
+# system-configs/sysctl-swap.conf.
+/swapfile none swap sw 0 0

@@ -10,6 +10,21 @@ git pull origin main
 echo ""
 echo "=== Deploying system configs ==="
 
+# Swap — created before the fstab sync below, because /etc/fstab now carries the
+# /swapfile entry and `mount -a` would fail on a host where it does not exist yet.
+if ! swapon --show | grep -q '/swapfile'; then
+    if [ ! -f /swapfile ]; then
+        echo "→ creating 2G swapfile..."
+        fallocate -l 2G /swapfile || dd if=/dev/zero of=/swapfile bs=1M count=2048
+        chmod 600 /swapfile
+        mkswap /swapfile
+    fi
+    swapon /swapfile
+    echo "  Done."
+else
+    echo "→ swap: active"
+fi
+
 # Docker daemon
 if ! diff -q system-configs/docker-daemon.json /etc/docker/daemon.json &>/dev/null; then
     echo "→ docker-daemon.json changed. Updating and restarting docker..."
@@ -24,27 +39,21 @@ fi
 if ! diff -q system-configs/fstab /etc/fstab &>/dev/null; then
     echo "→ fstab changed. Updating and remounting..."
     cp system-configs/fstab /etc/fstab
-    mount -a
+    # Tolerate a swap entry that is already active or a stale CIFS mount.
+    mount -a || echo "  → mount -a reported an error (see above)"
     echo "  Done."
 else
     echo "→ fstab: unchanged"
 fi
 
-# Swap
-if ! swapon --show | grep -q '/swapfile'; then
-    if [ ! -f /swapfile ]; then
-        echo "→ creating 2G swapfile..."
-        fallocate -l 2G /swapfile || dd if=/dev/zero of=/swapfile bs=1M count=2048
-        chmod 600 /swapfile
-        mkswap /swapfile
-    fi
-    swapon /swapfile
-    grep -q '^/swapfile' /etc/fstab || echo '/swapfile none swap sw 0 0' >>/etc/fstab
-    grep -q '^vm.swappiness' /etc/sysctl.conf || echo 'vm.swappiness=10' >>/etc/sysctl.conf
-    sysctl -p >/dev/null
+# Swap tuning
+if ! diff -q system-configs/sysctl-swap.conf /etc/sysctl.d/99-swap.conf &>/dev/null; then
+    echo "→ sysctl-swap.conf changed. Applying..."
+    cp system-configs/sysctl-swap.conf /etc/sysctl.d/99-swap.conf
+    sysctl -p /etc/sysctl.d/99-swap.conf
     echo "  Done."
 else
-    echo "→ swap: active"
+    echo "→ sysctl-swap.conf: unchanged"
 fi
 
 echo ""
