@@ -26,12 +26,26 @@ For a dedicated `recipes.axkirillov.com`, see the note at the bottom of `caddy/C
 cd recipes && python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
+## Design
+
+The look is borrowed from NYT Cooking. The parts worth knowing before you edit a page:
+
+**Type.** NYT ships Cheltenham (display), Imperial (editorial prose), Karnak (caps labels) and Franklin (UI) as licensed webfonts. This site stays dependency-free by falling back the way NYT's own stylesheets do — Cheltenham, Imperial and Karnak all land on Georgia, Franklin lands on Arial — so the four roles survive as `--display`, `--body`, `--label` and `--ui`. The contrast between a light serif and a plain sans is the whole trick; do not collapse it.
+
+**Colour.** A warm off-white page (`#f8f8f5`) with white surfaces, near-black text (`#222`), one accent red (`#df321b`, NYT's primary action) reserved for the kicker, links on hover and the primary button, and one warm yellow (`#f8e19a`, NYT's selected-tab value) used only for selected state and live values. Dark mode reuses NYT's dark tokens (`#121212` page, `#1c1c1e` surface, `#aeaeb2` subdued).
+
+**Structure.** There are no cards. A recipe opens with the kicker, a serif title at `clamp(2.125rem,5vw,2.875rem)`, a serif dek, a `Yield` / `Total Time` row, then a **3px black rule** above the two-column body — that rule is the site's loudest single element, so nothing else needs to shout. Sections are labelled in bold uppercase Georgia (`INGREDIENTS`, `INSTRUCTIONS`), with the smaller caps treatment for ingredient groups and extras headings.
+
+**Things the CSS does for you.** `.card` is neutralised into an unstyled block (only `.controls` draws a border); ingredient amounts render **first** on the line via `order:-1` on `.qty`, the way NYT writes an ingredient, so nothing in the markup has to be reordered; `small` sub-notes and the `optional` badge become italic parentheticals through `::before`/`::after`; steps are numbered by a CSS counter printing `Step N`, so a step is just an `<li>` with an `<h3>` and paragraphs; and every `<span class="q">` live value gets a yellow highlighter that is stripped for print.
+
+**Print** is a first-class target: controls, buttons and the backlink are hidden, the body stays two columns, and sizes follow NYT's print scale (title 25pt, dek 11pt, step prose 10pt, ingredient lines 10.5pt, section labels 9pt). Check it by printing to PDF rather than by resizing the window.
+
 ## Adding a recipe
 
 1. Copy `kimchi.html` to `<recipe-name>.html` and rewrite the content.
-2. Keep the `.card`, `.layout`, `ol.steps`, `.extras` and `.table` classes so it matches the rest.
+2. Keep the structure: a `.hero` with `.backlink`, `.kicker`, `h1`, `p.dek` and a `<dl class="meta">` carrying **Total Time** and **Yield** (point the yield `dd` at a live `data-q` slot so it follows the batch), then `.controls`, then `.layout` with `.ingredients` and `ol.steps`, then `.extras` and `.table`.
 3. Add a card for it in `index.html` (the `.recipe-grid` block).
-4. Only add CSS to `styles.css` if the new page genuinely needs something new.
+4. Only add CSS to `styles.css` if the new page genuinely needs something new — and if it does, keep it inside the existing token vocabulary rather than introducing a second accent or a bordered box.
 
 ## Making amounts adjustable
 
