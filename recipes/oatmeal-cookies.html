@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Easy Oatmeal Cookies — scaled, metric</title>
+<meta name="description" content="Easy oatmeal cookies with browned or melted butter, fully metric, with every amount recalculated from how many cookies you want to bake.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <a class="backlink" href="index.html">← All recipes</a>
+    <p class="kicker">Adapted from Inspired Taste <span class="dot">·</span> fully metric</p>
+    <h1>Oatmeal cookies, scaled to your batch</h1>
+    <p>Enter how many cookies you want. Every amount below — flour, oats, butter, sugars, spices — is recalculated from it. The butter can be simply melted or browned first; browned butter tastes nuttier and costs about five extra minutes, and the amounts do not change either way.</p>
+  </header>
+
+  <section class="card controls" aria-label="Batch size">
+    <div class="row">
+      <div class="field">
+        <label for="count">Cookies</label>
+        <div class="stepper">
+          <button type="button" id="minus" aria-label="Fewer cookies">−</button>
+          <input id="count" type="number" value="18" min="3" max="72" step="1" inputmode="numeric" aria-describedby="scaleHint">
+          <button type="button" id="plus" aria-label="More cookies">+</button>
+          <span class="unit">cookies</span>
+        </div>
+      </div>
+      <div class="slider">
+        <label for="range">Drag for a quick change</label>
+        <input id="range" type="range" min="6" max="48" step="1" value="18">
+      </div>
+    </div>
+    <div class="presets" role="group" aria-label="Presets">
+      <button type="button" data-count="6">6</button>
+      <button type="button" data-count="12">12</button>
+      <button type="button" data-count="18" aria-pressed="true">18</button>
+      <button type="button" data-count="24">24</button>
+      <button type="button" data-count="36">36</button>
+    </div>
+    <p class="hint" id="scaleHint">Makes <span class="q-strong" data-q="cookies"></span> — about <span class="q-strong" data-q="dough"></span> of dough, so <span class="q-strong" data-q="ball"></span> per cookie. Scoop size is what stays constant; only the count changes.</p>
+  </section>
+
+  <div class="layout">
+
+    <aside class="card ingredients" aria-label="Ingredients">
+      <h2>Ingredients</h2>
+      <div id="ingredients"></div>
+      <div class="toolbar">
+        <button class="btn" type="button" id="copy">Copy list</button>
+        <button class="btn" type="button" id="print">Print</button>
+        <span class="flash" id="flash">Copied</span>
+      </div>
+    </aside>
+
+    <section class="steps" aria-label="Instructions">
+      <h2>Instructions</h2>
+      <ol class="steps">
+
+        <li>
+          <h3>Melt or brown the butter <span class="time">5 min</span></h3>
+          <p><strong>Melted butter:</strong> melt <span class="q" data-q="butter"></span> in the microwave or in a small pan, then let it cool until it is no longer hot to the touch.</p>
+          <p><strong>Browned butter (better):</strong> melt it in a light-coloured skillet over medium heat, swirling occasionally so it melts evenly. It foams, then the colour goes from pale yellow to golden to a light brown — a minute or two. Take it off the heat the moment it smells nutty, pour it into a heatproof bowl and cool it.</p>
+          <p class="note">Cool to the touch before it goes into the dough: hot butter will start to cook the eggs. Browned butter loses a little water, so the dough is marginally firmer — no adjustment needed.</p>
+        </li>
+
+        <li>
+          <h3>Heat the oven and whisk the dry ingredients <span class="time">160 °C · 4 min</span></h3>
+          <p>Heat the oven to <strong>160 °C</strong> (325 °F, no fan) and line a baking sheet with parchment or a silicone mat. In a medium bowl, whisk <span class="q" data-q="flour"></span> of flour with <span class="q" data-q="soda"></span> of baking soda, <span class="q" data-q="salt"></span> of fine sea salt, <span class="q" data-q="cinnamon"></span> of cinnamon and <span class="q" data-q="cardamom"></span> of cardamom. Set aside.</p>
+        </li>
+
+        <li>
+          <h3>Whisk the wet ingredients <span class="time">2 min</span></h3>
+          <p>In a large bowl, whisk <span class="q" data-q="brown"></span> of packed light brown sugar and <span class="q" data-q="sugar"></span> of granulated sugar with <span class="q" data-q="egg"></span> of beaten egg, <span class="q" data-q="yolk"></span> of yolk, <span class="q" data-q="vanilla"></span> of vanilla and the cooled butter until smooth and slightly glossy.</p>
+          <p class="note" id="eggNote"></p>
+        </li>
+
+        <li>
+          <h3>Bring the dough together <span class="time">3 min</span></h3>
+          <p>Switch to a large rubber spatula. Add the flour mixture in three parts, stirring after each until the streaks disappear. Fold in <span class="q" data-q="oats"></span> of rolled oats, then <span class="q" data-q="mixins"></span> of mix-ins. Stop as soon as everything is combined — over-mixing makes the cookies tough.</p>
+        </li>
+
+        <li>
+          <h3>Chill, if you have the time <span class="time">30 min</span></h3>
+          <p>Optional but worth it. Rest the dough in the fridge for <strong>30 minutes</strong> (or up to <strong>3 days</strong>): the oats hydrate, and the cookies bake up thicker, chewier and more flavourful. Straight from the bowl they spread a little more.</p>
+        </li>
+
+        <li>
+          <h3>Scoop and space <span class="time">10 min</span></h3>
+          <p>Roll the dough into balls of about <span class="q" data-q="ball"></span> each — <span class="q-strong" data-q="ballCount"></span> from this batch — and set them on the lined sheet, <strong>5 cm</strong> apart to leave room for spreading. Press each ball down gently with your fingers so it spreads evenly instead of doming.</p>
+          <p class="note" id="scoopNote"></p>
+        </li>
+
+        <li>
+          <h3>Bake <span class="time">9–15 min · 160 °C</span></h3>
+          <p>Bake <strong>one sheet at a time</strong>, on the middle shelf, for <strong>9 to 15 minutes</strong>, turning the sheet once halfway. They are done when the edges are light golden and the middles still look almost wet — they firm up as they cool. Bigger balls need a couple of minutes more.</p>
+        </li>
+
+        <li>
+          <h3>Cool <span class="time">5 min + rack</span></h3>
+          <p>Leave them on the sheet for <strong>5 minutes</strong> to set, then move them to a rack to cool completely. They are at their best still slightly warm, and they keep for days after that.</p>
+        </li>
+
+      </ol>
+    </section>
+  </div>
+
+  <div class="extras">
+
+    <section class="card">
+      <h2>Scoop size, and the arithmetic in the original</h2>
+      <p>The source recipe says 18 cookies from 1½ tablespoon scoops, and those two numbers do not agree: those ingredients add up to about <strong>775 g</strong> of dough, and 775 g split 18 ways is a <strong>43 g</strong> ball, closer to 2½ tablespoons.</p>
+      <ul>
+        <li>Your batch is <span class="q" data-q="dough"></span> of dough, so <span class="q" data-q="ball"></span> balls give <span class="q-strong" data-q="cookies"></span>.</li>
+        <li>Want the original's 1½ tbsp scoops instead? Roll about <strong>26 g</strong> balls and expect roughly <span class="q-strong" data-q="smallCount"></span> from the same dough, baked 9–12 minutes.</li>
+        <li>Either way the dough is identical — only the count and the baking time move.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Conversions used</h2>
+      <table class="table">
+        <tr><td>1 cup all-purpose flour</td><td>130 g</td></tr>
+        <tr><td>1 cup rolled oats</td><td>100 g</td></tr>
+        <tr><td>1 cup packed light brown sugar</td><td>200 g</td></tr>
+        <tr><td>1 cup granulated sugar</td><td>200 g</td></tr>
+        <tr><td>1 cup raisins or chocolate</td><td>130 g</td></tr>
+        <tr><td>1 tsp baking soda</td><td>4.6 g</td></tr>
+        <tr><td>1 tsp fine sea salt</td><td>6 g</td></tr>
+        <tr><td>1 tsp ground cinnamon</td><td>2.6 g</td></tr>
+        <tr><td>1 tsp ground cardamom</td><td>2 g</td></tr>
+        <tr><td>1 tsp vanilla extract</td><td>5 mL (4.2 g)</td></tr>
+        <tr><td>1 large egg</td><td>50 g, without shell</td></tr>
+        <tr><td>1 large egg yolk</td><td>17 g</td></tr>
+        <tr><td>325 °F</td><td>160 °C</td></tr>
+        <tr><td>2 in / 3 in spacing</td><td>5 cm / 7.5 cm</td></tr>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Why the egg is in grams</h2>
+      <ul>
+        <li>Scaling by cookie count does not land on whole eggs, and “1.4 eggs” is not an instruction — so eggs are weighed like everything else.</li>
+        <li>Beat a whole egg, then weigh out the amount the page asks for. Whisk in a little of the yolk for the rest.</li>
+        <li>The yolk is there for chew: it is roughly a quarter of an egg's weight and it is worth not skipping.</li>
+        <li>For a very small batch, cracking one egg and weighing ⅔ of it is the fiddly part — the payoff is a batch that fits a single sheet.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Storing, freezing, and substitutions</h2>
+      <ul>
+        <li><strong>Baked:</strong> airtight for 3 days at room temperature, or a week in the fridge.</li>
+        <li><strong>Dough:</strong> up to 3 days in the fridge, or scoop into balls, freeze until hard, bag them and keep for 3 months. Bake from frozen, adding a couple of minutes.</li>
+        <li><strong>Coconut oil:</strong> swap in the same weight, then rest the dough for 20 minutes so the oats absorb it. Unrefined for coconut flavour, refined for none.</li>
+        <li><strong>Vegan:</strong> vegan butter or coconut oil, and a flax egg in place of both egg and yolk — <span class="q" data-q="flaxSeed"></span> of flaxseed meal whisked with <span class="q" data-q="flaxWater"></span> of water, rested 5–10 minutes.</li>
+        <li><strong>Mix-ins:</strong> raisins, dried fruit, chopped nuts or chocolate, all by weight, so swap freely.</li>
+      </ul>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>Adapted from Inspired Taste's easy oatmeal cookies, converted to metric and made scalable. Flour, oats, butter, sugars, spices and mix-ins scale with the batch; the oven temperature and the 5 cm spacing do not, and the scoop size is what keeps the count honest.</p>
+    <p class="noprint">Nothing you type leaves this page — your batch size is stored only in this browser.</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- ratio table: everything per 1 cookie ----------
+     Derived from the source recipe's metric amounts for 18 cookies:
+     130 g flour, 2.3 g soda, 3 g salt, 2 g cinnamon, 0.5 g cardamom,
+     140 g butter, 100 g brown sugar, 50 g sugar, 50 g egg, 17 g yolk,
+     10 mL vanilla, 150 g oats, 130 g mix-ins.                              */
+  var BASE = 18;
+  var EGG_G = 50;       // one large egg, without shell
+  var G_PER_TSP = { soda: 4.6, salt: 6, cinnamon: 2.6, cardamom: 2, vanilla: 4.2 };
+
+  var R = {
+    flour: 130 / BASE,
+    soda: 2.3 / BASE,
+    salt: 3 / BASE,
+    cinnamon: 2 / BASE,
+    cardamom: 0.5 / BASE,
+    butter: 140 / BASE,
+    brown: 100 / BASE,
+    sugar: 50 / BASE,
+    egg: 50 / BASE,
+    yolk: 17 / BASE,
+    vanilla: 10 / BASE,     // mL
+    oats: 150 / BASE,
+    mixins: 130 / BASE,
+    flaxSeed: 11 / BASE,    // g, for the vegan swap
+    flaxWater: 65 / BASE    // mL
+  };
+
+  /* dough mass per cookie, ignoring the vanilla (a millilitre either way) */
+  var DOUGH_PER_COOKIE = R.flour + R.soda + R.salt + R.cinnamon + R.cardamom +
+    R.butter + R.brown + R.sugar + R.egg + R.yolk + R.oats + R.mixins;
+
+  /* ---------- number helpers ---------- */
+  function roundTo(x, step) { return Math.round(x / step) * step; }
+  function num(x) { return String(Math.round(x * 100) / 100).replace(/\.0+$/, ""); }
+  function smartRound(x) {
+    if (x >= 100) return roundTo(x, 5);
+    if (x >= 20)  return roundTo(x, 1);
+    if (x >= 5)   return roundTo(x, 0.5);
+    if (x >= 1)   return roundTo(x, 0.1);
+    return roundTo(x, 0.05);
+  }
+  function grams(x) {
+    var v = smartRound(x);
+    if (v >= 1000) return num(Math.round(v / 10) / 100) + " kg";
+    return num(v) + " g";
+  }
+  function millilitres(x) { return num(smartRound(x)) + " mL"; }
+  function frac(x) {
+    var whole = Math.floor(x + 1e-9), rem = Math.round((x - whole) * 1000) / 1000;
+    var eighths = { 0.125: "⅛", 0.25: "¼", 0.375: "⅜", 0.5: "½", 0.625: "⅝", 0.75: "¾", 0.875: "⅞" };
+    var f = eighths[rem];
+    if (!f) return whole ? String(whole) : num(x);
+    return whole ? whole + f : f;
+  }
+  function thirdsFrac(x) {
+    var whole = Math.floor(x + 1e-9), rem = x - whole;
+    var cands = [[0, ""], [0.25, "¼"], [1 / 3, "⅓"], [0.5, "½"], [2 / 3, "⅔"], [0.75, "¾"]];
+    var best = cands[0], bestD = Infinity;
+    for (var i = 0; i < cands.length; i++) {
+      var d = Math.abs(rem - cands[i][0]);
+      if (d < bestD) { bestD = d; best = cands[i]; }
+    }
+    if (whole === 0 && !best[1]) return "0";
+    return String(whole || "") + best[1];
+  }
+  /* a spoon hint for the small stuff, so nobody needs a 0.1 g scale */
+  function tspHint(g, gPerTsp) {
+    var t = g / gPerTsp;
+    if (t < 0.1 || t > 8) return "";
+    var eighths = Math.round(t * 8) / 8;
+    var label = Math.abs(eighths - t) <= Math.max(0.06, t * 0.05)
+      ? frac(eighths)
+      : num(Math.round(t * 10) / 10);
+    return " (≈ " + label + " tsp)";
+  }
+
+  /* "½ of a large egg" reads right, "1⅓ large eggs" reads right — pick per case */
+  function EggsHint(eggsWhole) {
+    var f = thirdsFrac(eggsWhole);
+    return eggsWhole >= 1 ? " (≈ " + f + " large eggs)" : " (≈ " + f + " of a large egg)";
+  }
+
+  /* ---------- scale everything from the cookie count ---------- */
+  function scale(n) {
+    var flour = n * R.flour,
+        soda = n * R.soda,
+        salt = n * R.salt,
+        cinnamon = n * R.cinnamon,
+        cardamom = n * R.cardamom,
+        butter = n * R.butter,
+        brown = n * R.brown,
+        sugar = n * R.sugar,
+        egg = n * R.egg,
+        yolk = n * R.yolk,
+        vanilla = n * R.vanilla,
+        oats = n * R.oats,
+        mixins = n * R.mixins,
+        dough = n * DOUGH_PER_COOKIE,
+        ball = DOUGH_PER_COOKIE,
+        eggsWhole = egg / EGG_G;
+
+    /* the egg hint only earns its place when it is not a whole egg */
+    var eggTxt = grams(egg), near = Math.round(eggsWhole);
+    if (near >= 1 && Math.abs(eggsWhole - near) <= 0.04) {
+      eggTxt += " (" + near + (near === 1 ? " large egg)" : " large eggs)");
+    } else if (eggsWhole > 0.2) {
+      eggTxt += EggsHint(eggsWhole);
+    }
+
+    return {
+      cookies: n + (n === 1 ? " cookie" : " cookies"),
+      ballCount: n + (n === 1 ? " ball" : " balls"),
+      smallCount: Math.round(dough / 26) + " cookies",
+      flour: grams(flour),
+      soda: grams(soda) + tspHint(soda, G_PER_TSP.soda),
+      salt: grams(salt) + tspHint(salt, G_PER_TSP.salt),
+      cinnamon: grams(cinnamon) + tspHint(cinnamon, G_PER_TSP.cinnamon),
+      cardamom: grams(cardamom) + tspHint(cardamom, G_PER_TSP.cardamom),
+      butter: grams(butter),
+      brown: grams(brown),
+      sugar: grams(sugar),
+      egg: eggTxt,
+      yolk: grams(yolk),
+      /* vanilla is measured by volume here, so the spoon hint is 5 mL per teaspoon,
+         not the extract's mass density */
+      vanilla: millilitres(vanilla) + tspHint(vanilla, 5),
+      oats: grams(oats),
+      mixins: grams(mixins),
+      dough: grams(dough),
+      ball: grams(ball),
+      flaxSeed: grams(n * R.flaxSeed),
+      flaxWater: millilitres(n * R.flaxWater),
+      _n: n, _egg: egg, _yolk: yolk, _ball: ball
+    };
+  }
+
+  /* ---------- ingredient list ---------- */
+  var GROUPS = [
+    { title: "Dry", items: [
+      { name: "All-purpose flour", q: "flour" },
+      { name: "Baking soda", q: "soda" },
+      { name: "Fine sea salt", q: "salt" },
+      { name: "Ground cinnamon", q: "cinnamon" },
+      { name: 'Ground cardamom<span class="badge-opt">optional</span>', q: "cardamom" }
+    ]},
+    { title: "Butter & sugars", items: [
+      { name: "Unsalted butter", sub: "melted, or browned and cooled", q: "butter" },
+      { name: "Light brown sugar", sub: "packed", q: "brown" },
+      { name: "Granulated sugar", q: "sugar" }
+    ]},
+    { title: "Eggs & flavour", items: [
+      { name: "Large egg", sub: "beaten — see the note in step 3", q: "egg" },
+      { name: "Large egg yolk", q: "yolk" },
+      { name: "Vanilla extract", q: "vanilla" }
+    ]},
+    { title: "Oats & mix-ins", items: [
+      { name: "Old-fashioned rolled oats", q: "oats" },
+      { name: 'Raisins, dried fruit, chopped nuts or chocolate<span class="badge-opt">optional</span>', q: "mixins" }
+    ]}
+  ];
+
+  function renderIngredients() {
+    var html = "";
+    GROUPS.forEach(function (g) {
+      html += '<div class="igroup"><h3>' + g.title + '</h3><ul class="ing">';
+      g.items.forEach(function (it) {
+        html += '<li><span class="name">' + it.name + (it.sub ? "<small>" + it.sub + "</small>" : "") +
+                '</span><span class="qty" data-q="' + it.q + '"></span></li>';
+      });
+      html += "</ul></div>";
+    });
+    document.getElementById("ingredients").innerHTML = html;
+  }
+
+  /* ---------- batch-size-dependent notes ---------- */
+  function renderNotes(v) {
+    var eggNote = document.getElementById("eggNote"), eggs = v._egg / EGG_G;
+    if (Math.abs(eggs - Math.round(eggs)) <= 0.04 && eggs >= 1) {
+      var yolks = Math.max(1, Math.round(v._yolk / 17));
+      eggNote.textContent = "Eggs: " + grams(v._egg) + " of whole egg plus " + grams(v._yolk) +
+        " of yolk — that is " + Math.round(eggs) + (Math.round(eggs) === 1 ? " large egg" : " large eggs") +
+        " and " + (yolks === 1 ? "1 extra yolk" : yolks + " extra yolks") + " for a batch this size.";
+    } else {
+      var need = Math.max(1, Math.ceil(eggs));
+      eggNote.textContent = "Eggs at this size: beat " + need + (need === 1 ? " large egg" : " large eggs") +
+        ", then weigh out " + grams(v._egg) + " of whole egg and " + grams(v._yolk) +
+        " of yolk from the same bowl. Weighing beats guessing — the dough is forgiving, but the spread is not.";
+    }
+
+    var scoopNote = document.getElementById("scoopNote"), b = v._ball;
+    scoopNote.textContent = b >= 38
+      ? "A " + grams(b) + " ball is a big cookie — about 2½ tablespoons of dough, and it spreads wide on the sheet. For smaller cookies scoop 26 g (1½ tablespoons) instead and expect about " +
+        Math.round(v._n * b / 26) + " cookies from this dough, baked 9–12 minutes."
+      : "A " + grams(b) + " ball is a modest scoop, close to the original's 1½ tablespoons. Space them at least 5 cm apart and bake for 9–12 minutes.";
+  }
+
+  /* ---------- render ---------- */
+  var lastValues = null;
+
+  function render(n) {
+    var v = scale(n);
+    lastValues = v;
+
+    if (!document.querySelector("#ingredients .igroup")) renderIngredients();
+
+    var nodes = document.querySelectorAll("[data-q]");
+    for (var i = 0; i < nodes.length; i++) {
+      var key = nodes[i].getAttribute("data-q");
+      if (v[key] !== undefined) nodes[i].textContent = v[key];
+    }
+    renderNotes(v);
+
+    var buttons = document.querySelectorAll(".presets button");
+    for (var j = 0; j < buttons.length; j++) {
+      buttons[j].setAttribute("aria-pressed", String(parseInt(buttons[j].dataset.count, 10) === n));
+    }
+
+    try { localStorage.setItem("cookies.count", String(n)); } catch (e) {}
+  }
+
+  /* ---------- input wiring ---------- */
+  var numberInput = document.getElementById("count");
+  var rangeInput = document.getElementById("range");
+
+  function clamp(n) {
+    if (!isFinite(n) || n <= 0) return BASE;
+    return Math.min(72, Math.max(3, Math.round(n)));
+  }
+  function setCount(n, from) {
+    n = clamp(n);
+    if (from !== "number") numberInput.value = String(n);
+    if (from !== "range") rangeInput.value = String(Math.min(48, Math.max(6, n)));
+    render(n);
+  }
+
+  numberInput.addEventListener("input", function () {
+    var n = parseInt(numberInput.value, 10);
+    if (isFinite(n)) setCount(n, "number");
+  });
+  numberInput.addEventListener("blur", function () { setCount(parseInt(numberInput.value, 10) || BASE); });
+  rangeInput.addEventListener("input", function () { setCount(parseInt(rangeInput.value, 10), "range"); });
+
+  document.getElementById("minus").addEventListener("click", function () {
+    setCount((parseInt(numberInput.value, 10) || BASE) - 6);
+  });
+  document.getElementById("plus").addEventListener("click", function () {
+    setCount((parseInt(numberInput.value, 10) || BASE) + 6);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll(".presets button"), function (b) {
+    b.addEventListener("click", function () { setCount(parseInt(b.dataset.count, 10)); });
+  });
+
+  document.getElementById("print").addEventListener("click", function () { window.print(); });
+
+  var flash = document.getElementById("flash");
+  document.getElementById("copy").addEventListener("click", function () {
+    var v = lastValues;
+    var lines = ["Oatmeal cookies — " + v.cookies, ""];
+    GROUPS.forEach(function (g) {
+      lines.push(g.title.toUpperCase());
+      g.items.forEach(function (it) {
+        var name = it.name.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+        lines.push("- " + name + ": " + v[it.q]);
+      });
+      lines.push("");
+    });
+    lines.push("Dough: " + v.dough + " total, " + v.ball + " per ball.");
+    lines.push("160 °C, one sheet at a time, 9-15 min, turning once. Cool 5 min on the sheet.");
+    copyText(lines.join("\n"), function () {
+      flash.classList.add("on");
+      setTimeout(function () { flash.classList.remove("on"); }, 1600);
+    });
+  });
+
+  function copyText(text, done) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+      return;
+    }
+    fallback();
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.cssText = "position:fixed;top:-1000px";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+      done();
+    }
+  }
+
+  /* ---------- restore saved / linked batch size ---------- */
+  var start = BASE;
+  try {
+    var saved = parseInt(localStorage.getItem("cookies.count"), 10);
+    if (isFinite(saved)) start = saved;
+  } catch (e) {}
+  var fromUrl = parseInt(new URLSearchParams(location.search).get("cookies"), 10);
+  if (isFinite(fromUrl)) start = fromUrl;
+  start = clamp(start);
+
+  numberInput.value = String(start);
+  rangeInput.value = String(Math.min(48, Math.max(6, start)));
+  render(start);
+})();
+</script>
+</body>
+</html>

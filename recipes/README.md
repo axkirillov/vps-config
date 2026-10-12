@@ -9,6 +9,7 @@ recipes/
   kimchi.html     napa cabbage kimchi, scaled from the cabbage weight
   pickles.html    lacto-fermented pickle spears, scaled from the jar count
   hot-sauce.html  garlicky red chile hot sauce, scaled from the target volume
+  oatmeal-cookies.html  oatmeal cookies, scaled from the cookie count
 ```
 
 ## Published at
@@ -44,6 +45,10 @@ cd recipes && python3 -m http.server 8000   # then open http://localhost:8000
 
 `hot-sauce.html` scales from a target volume and adds a **derived safety number**: the recipe's 36 mL of 25% essence + 144 mL water is not stored as prose but computed by `acidSplit()`, which takes the pure acetic acid the recipe needs (9 mL) and divides it by whatever strength the label says. Enter 80% and the page gives 22.5 mL in 337.5 mL of water — the same 5% vinegar, no arithmetic by hand. Use that shape whenever a recipe's stated amount depends on a property of an ingredient you have to read off a label.
 
+`oatmeal-cookies.html` scales from the cookie count, which is the one dimension that is **not continuous**: 18 cookies needs 50 g of whole egg plus 17 g of yolk, and 12 cookies needs two thirds of an egg. Rather than pretend otherwise, the page weighs the egg like everything else and spells out what that means for the batch in hand — the ingredient line carries the fraction ("33 g (≈ ⅔ of a large egg)") and a note under step 3 says which eggs to beat. Spices stay genuinely useful at any size because each one also carries a spoon hint, derived from its density, so a small batch does not need a 0.1 g scale.
+
+The page also keeps the source recipe honest about its own yield: 18 cookies from 1½ tablespoon scoops does not agree with a dough that weighs 775 g, so the "scoop size" card states both readings and lets the batch size decide the count. When a source's yield and its scoop size disagree, say so on the page instead of quietly picking one.
+
 Batch size is remembered in `localStorage`, and a page can be linked with a preset:
 
 | page | link |
@@ -51,6 +56,7 @@ Batch size is remembered in `localStorage`, and a page can be linked with a pres
 | kimchi | `?kg=3` |
 | pickles | `?jars=4` or `?jars=4&brine=mild` |
 | hot sauce | `?ml=960&acid=80` |
+| oatmeal cookies | `?cookies=24` |
 
 ## Checking a page still renders
 
