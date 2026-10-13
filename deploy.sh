@@ -87,16 +87,18 @@ fi
 
 echo ""
 echo "=== Swapfile size ==="
-# Deliberately last: resizing means swapping off the old file, and everything
-# above (notably the Gateway restart) frees the pages it had paged out. Guarded
-# on free RAM, because swapoff pulls every swapped page back into memory first.
+# A live swapfile is immutable: rename returns EPERM, fallocate returns ETXTBSY,
+# and swapon on the same path returns EBUSY. The only way to resize is to swap it
+# off first, and swapoff pulls every swapped page back into RAM before it does
+# anything. So this runs last (the Gateway restart above frees its pages) and
+# only proceeds when at least 1G of RAM would survive the migration.
 SWAP_TARGET_MB=4096
 if [ -f /swapfile ]; then
     current_mb=$(( $(stat -c %s /swapfile) / 1048576 ))
     if [ "$current_mb" -lt "$SWAP_TARGET_MB" ]; then
         swap_used_mb=$(free -m | awk '/^Swap:/ {print $3}')
         avail_mb=$(free -m | awk '/^Mem:/  {print $7}')
-        if [ "$avail_mb" -gt $(( swap_used_mb + 512 )) ]; then
+        if [ $(( avail_mb - swap_used_mb )) -ge 1024 ]; then
             echo "→ growing swapfile ${current_mb}M -> ${SWAP_TARGET_MB}M (swap used ${swap_used_mb}M, RAM available ${avail_mb}M)"
             swapoff /swapfile
             fallocate -l ${SWAP_TARGET_MB}M /swapfile || dd if=/dev/zero of=/swapfile bs=1M count=$SWAP_TARGET_MB
@@ -105,7 +107,7 @@ if [ -f /swapfile ]; then
             swapon /swapfile
             echo "  Done."
         else
-            echo "→ resize deferred: ${swap_used_mb}M swapped, only ${avail_mb}M RAM available — rerun when the host is quieter"
+            echo "→ resize deferred: ${swap_used_mb}M swapped, ${avail_mb}M RAM available — draining it would leave under 1G free; rerun when the host is quieter"
         fi
     else
         echo "→ swapfile: ${current_mb}M"
