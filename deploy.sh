@@ -56,9 +56,25 @@ else
     echo "→ sysctl-swap.conf: unchanged"
 fi
 
+# Resolvers — note this must run BEFORE anything that needs DNS (git pull is
+# already done above, so a broken resolv.conf is why a run can fail at the top).
+if ! diff -q system-configs/resolv.conf /etc/resolv.conf &>/dev/null; then
+    echo "→ resolv.conf changed. Updating..."
+    cp system-configs/resolv.conf /etc/resolv.conf
+    chmod 644 /etc/resolv.conf
+    echo "  Done."
+else
+    echo "→ resolv.conf: unchanged"
+fi
+
 echo ""
 echo "=== Deploying Caddy ==="
 docker compose -f caddy/docker-compose.yml up -d
+# Re-read the config: git replaces the Caddyfile by rename, which breaks Caddy's
+# inotify watch, so an edit otherwise needs a manual reload to take effect.
+if docker ps --format '{{.Names}}' | grep -qx caddy; then
+    docker exec caddy caddy reload --config /etc/caddy/Caddyfile || echo "  → reload failed; config left untouched"
+fi
 
 echo ""
 echo "=== Deploying Immich ==="

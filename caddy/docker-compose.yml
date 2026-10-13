@@ -5,7 +5,10 @@ services:
     restart: unless-stopped
     network_mode: "host"
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      # The directory, not the file: a single-file bind mount is pinned to the
+      # inode that existed when the container started, so `git pull` replacing
+      # the Caddyfile left the running container serving the old config forever.
+      - ./:/etc/caddy:ro
       - ./data:/data
       - ./config:/config
       - /root/spending:/www:ro
