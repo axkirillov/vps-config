@@ -29,6 +29,10 @@ services:
       OPENCLAW_GATEWAY_TOKEN: ${OPENCLAW_GATEWAY_TOKEN:?OPENCLAW_GATEWAY_TOKEN is required — see openclaw-app/.env.example}
       # No mDNS on a VPS.
       OPENCLAW_DISABLE_BONJOUR: "1"
+      # The Gateway is the largest process on a 4 GB host (~1.2 GB resident).
+      # Without a ceiling V8 sizes its heap off total system memory and grows
+      # into the swapfile; this keeps it to a predictable 1 GB.
+      NODE_OPTIONS: ${OPENCLAW_NODE_OPTIONS:---max-old-space-size=1024}
       TZ: ${OPENCLAW_TZ:-UTC}
     volumes:
       - ${OPENCLAW_CONFIG_DIR:-/root/.openclaw}:/home/node/.openclaw

@@ -53,22 +53,31 @@ All heavy assets (photos, files, documents) are offloaded to a remote Hetzner St
 * **Image:** the official prebuilt `ghcr.io/openclaw/openclaw` image. This VPS has 4 GB RAM, and a source build needs ~6 GB, so the image is pulled rather than built.
 * **State:** `/root/.openclaw` (config, credentials, SQLite state) plus `/root/.openclaw-auth-profile-secrets`. Both live outside the repo and must be backed up — the config directory is credential material.
 * **Secrets:** `openclaw-app/.env` is untracked and holds the Gateway token plus provider keys.
+* **Footprint:** the Gateway is the largest process on this 4 GB host (~1.2 GB resident), so its V8 heap is capped at 1 GB (`OPENCLAW_NODE_OPTIONS` in the compose file) and the host carries a 4 GB swapfile sized by `deploy.sh` with `vm.swappiness=10` (`system-configs/sysctl-swap.conf`). Memory search is off (`memory.search.enabled=false`): it defaults to an OpenAI embedding provider and no key is configured.
+* **Provider keys:** the Gateway runs without one, but the agent answers nothing until `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` / `GEMINI_API_KEY` / `OPENROUTER_API_KEY` is set in `openclaw-app/.env` and the Gateway restarted.
 
 #### Operating OpenClaw
+
+The CLI refuses to touch state from a second PID namespace while the Gateway is running (`GatewayLockNamespaceError`), and the `openclaw-cli` service cannot start its own network namespace while the Gateway is stopped. So: **read** with `docker exec`, **write** as a one-off container with the Gateway stopped.
 
 ```bash
 cd /root/vps-config
 
-# Control UI URL (token lives in openclaw-app/.env)
-docker compose -f openclaw-app/docker-compose.yml run --rm openclaw-cli dashboard --no-open
-
-# Health / logs / config
-docker compose -f openclaw-app/docker-compose.yml run --rm openclaw-cli doctor --json
+# Read-only: doctor, config, status — safe while the Gateway is up.
+docker exec openclaw-gateway node dist/index.js doctor --json
+docker exec openclaw-gateway node dist/index.js config get gateway
 curl -fsS http://127.0.0.1:18789/healthz
-docker compose -f openclaw-app/docker-compose.yml logs --tail=100 openclaw-gateway
 
-# Add a channel, e.g. Telegram
-docker compose -f openclaw-app/docker-compose.yml run --rm openclaw-cli channels add --channel telegram --token "<token>"
+# Config writes: stop the Gateway, wait out its heartbeat lock, then run the CLI
+# as a one-off container on the Gateway's own network definition.
+docker compose -f openclaw-app/docker-compose.yml stop openclaw-gateway
+sleep 90
+docker compose -f openclaw-app/docker-compose.yml run --rm --no-deps \
+  --entrypoint node openclaw-gateway dist/index.js config set memory.search.enabled false
+docker compose -f openclaw-app/docker-compose.yml up -d openclaw-gateway
+
+# Logs
+docker compose -f openclaw-app/docker-compose.yml logs --tail=100 openclaw-gateway
 
 # Update the image
 docker compose -f openclaw-app/docker-compose.yml pull openclaw-gateway

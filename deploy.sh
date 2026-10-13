@@ -14,8 +14,8 @@ echo "=== Deploying system configs ==="
 # /swapfile entry and `mount -a` would fail on a host where it does not exist yet.
 if ! swapon --show | grep -q '/swapfile'; then
     if [ ! -f /swapfile ]; then
-        echo "→ creating 2G swapfile..."
-        fallocate -l 2G /swapfile || dd if=/dev/zero of=/swapfile bs=1M count=2048
+        echo "→ creating 4G swapfile..."
+        fallocate -l 4G /swapfile || dd if=/dev/zero of=/swapfile bs=1M count=4096
         chmod 600 /swapfile
         mkswap /swapfile
     fi
@@ -83,6 +83,33 @@ if [ -f openclaw-app/.env ]; then
     docker compose -f openclaw-app/docker-compose.yml up -d openclaw-gateway
 else
     echo "→ skipped: openclaw-app/.env missing (copy .env.example and set OPENCLAW_GATEWAY_TOKEN)"
+fi
+
+echo ""
+echo "=== Swapfile size ==="
+# Deliberately last: resizing means swapping off the old file, and everything
+# above (notably the Gateway restart) frees the pages it had paged out. Guarded
+# on free RAM, because swapoff pulls every swapped page back into memory first.
+SWAP_TARGET_MB=4096
+if [ -f /swapfile ]; then
+    current_mb=$(( $(stat -c %s /swapfile) / 1048576 ))
+    if [ "$current_mb" -lt "$SWAP_TARGET_MB" ]; then
+        swap_used_mb=$(free -m | awk '/^Swap:/ {print $3}')
+        avail_mb=$(free -m | awk '/^Mem:/  {print $7}')
+        if [ "$avail_mb" -gt $(( swap_used_mb + 512 )) ]; then
+            echo "→ growing swapfile ${current_mb}M -> ${SWAP_TARGET_MB}M (swap used ${swap_used_mb}M, RAM available ${avail_mb}M)"
+            swapoff /swapfile
+            fallocate -l ${SWAP_TARGET_MB}M /swapfile || dd if=/dev/zero of=/swapfile bs=1M count=$SWAP_TARGET_MB
+            chmod 600 /swapfile
+            mkswap /swapfile
+            swapon /swapfile
+            echo "  Done."
+        else
+            echo "→ resize deferred: ${swap_used_mb}M swapped, only ${avail_mb}M RAM available — rerun when the host is quieter"
+        fi
+    else
+        echo "→ swapfile: ${current_mb}M"
+    fi
 fi
 
 echo ""
