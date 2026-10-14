@@ -45,9 +45,12 @@ blog.axkirillov.com {
 #   open http://127.0.0.1:18789/
 claw.axkirillov.com {
     reverse_proxy 127.0.0.1:18789 {
-        # Overwrite rather than append: Caddy's default keeps a client-supplied
-        # X-Forwarded-For, which would let any caller choose its own attributed
-        # client IP on the trusted-proxy hop.
+        # Not a live fix: with no global trusted_proxies configured, this Caddy
+        # already discards a client-supplied X-Forwarded-For and sets the header
+        # to the immediate peer (verified against this same image, with and
+        # without these lines). They pin that behavior explicitly, since Caddy's
+        # default depends on trust configuration and image version, and they add
+        # the X-Real-IP that the default omits.
         header_up X-Forwarded-For {remote_host}
         header_up X-Real-IP {remote_host}
     }
