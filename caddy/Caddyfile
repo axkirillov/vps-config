@@ -37,11 +37,20 @@ blog.axkirillov.com {
 # the single public entry point. Sign-in needs the bearer token from
 # openclaw-app/.env.
 # DNS: claw.axkirillov.com A/AAAA -> this host (Hetzner DNS).
+# The Gateway attributes forwarded client headers, so its `gateway.trustedProxies`
+# must list the hop this proxy arrives from: Docker rewrites the loopback source
+# to the compose network's gateway (172.24.0.1). See openclaw-app/docker-compose.yml.
 # Fallback when DNS or TLS is broken:
 #   ssh -N -L 18789:127.0.0.1:18789 root@116.203.206.66
 #   open http://127.0.0.1:18789/
 claw.axkirillov.com {
-    reverse_proxy 127.0.0.1:18789
+    reverse_proxy 127.0.0.1:18789 {
+        # Overwrite rather than append: Caddy's default keeps a client-supplied
+        # X-Forwarded-For, which would let any caller choose its own attributed
+        # client IP on the trusted-proxy hop.
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Real-IP {remote_host}
+    }
 }
 
 supabase.axkirillov.com {

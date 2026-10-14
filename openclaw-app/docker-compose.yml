@@ -39,6 +39,12 @@ services:
       - ${OPENCLAW_WORKSPACE_DIR:-/root/.openclaw/workspace}:/home/node/.openclaw/workspace
       - ${OPENCLAW_AUTH_PROFILE_SECRET_DIR:-/root/.openclaw-auth-profile-secrets}:/home/node/.config/openclaw
     ports:
+      # Loopback only; Caddy (host net) is the single public entry point. Note the
+      # gateway publishes through Docker's NAT, so the Gateway sees Caddy's hop as
+      # the compose network's gateway IP, not 127.0.0.1 — that address must be in
+      # `gateway.trustedProxies` or the Control UI 403s with
+      # proxy_attribution_required. If this network is ever recreated with a
+      # different subnet, re-patch trustedProxies to the new gateway IP.
       - "127.0.0.1:18789:18789"
     cap_drop:
       - NET_RAW
