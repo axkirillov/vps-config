@@ -17,7 +17,7 @@
   header .sub{color:var(--muted);font-size:14px;margin-bottom:22px}
   .callout{background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);
            padding:16px 18px;border-radius:6px;margin:22px 0 30px}
-  .callout b{display:block;margin-bottom:6px}
+  .callout > b:first-child{display:block;margin-bottom:6px}
   h2{font-size:20px;margin:46px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line)}
   h3{font-size:16px;margin:26px 0 8px}
   p{margin:10px 0}
@@ -44,6 +44,25 @@
   .scroll{overflow-x:auto}
   .win{background:#f2f8f3}
   .diff{background:#fffdf5}
+  
+  nav.toc{position:sticky;top:0;z-index:10;display:flex;gap:2px;flex-wrap:wrap;
+          background:rgba(247,247,245,.94);backdrop-filter:blur(6px);
+          border-bottom:1px solid var(--line);margin:0 -22px 8px;padding:8px 22px}
+  nav.toc a{font-size:12.5px;text-decoration:none;color:#33475b;padding:4px 9px;border-radius:20px}
+  nav.toc a:hover{background:#e9edf1;color:var(--accent)}
+  table.matrix td,table.matrix th{text-align:center}
+  table.matrix th.rowhead{text-align:left;font-weight:600;font-size:12.5px;min-width:210px;white-space:normal}
+  table.matrix td.v{font-variant-numeric:tabular-nums;font-size:12.5px}
+  table.matrix td.v.lo{background:#e8f5ec;color:#14603a;font-weight:600}
+  table.matrix td.v.hi{background:#fdf1f0;color:#8c2b25}
+  table.matrix td.nodata{color:#33475b;font-weight:600}
+  table.matrix td.off{color:#cfcec8;font-weight:400}
+  details{background:#fff;border:1px solid var(--line);border-radius:6px;margin:10px 0;padding:0 14px}
+  details[open]{padding-bottom:10px}
+  details summary{cursor:pointer;padding:11px 0;font-weight:600;font-size:14px}
+  details summary::marker{color:var(--muted)}
+  table.prog td.note{font-size:12px;color:var(--muted)}
+  table.prog td.v{text-align:right;font-variant-numeric:tabular-nums}
   footer{margin-top:50px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
   a{color:var(--accent)}
 </style>
@@ -59,13 +78,26 @@
   </div>
 </header>
 
+<nav class="toc">
+  <a href="#results">Test results</a>
+  <a href="#programmes">All programmes</a>
+  <a href="#prices">Prices</a>
+  <a href="#measurement">Measuring programme</a>
+  <a href="#changes">What changed</a>
+  <a href="#others">Runners-up</a>
+  <a href="#manuals">Manuals</a>
+  <a href="#tests">Test issues</a>
+  <a href="#method">Method</a>
+</nav>
+
+
 <div class="callout">
   <b>Five machines clear both hurdles — and the cheapest one to buy is not the cheapest to own</b>
   <b style="display:inline;font-weight:600">Beko B3T4224SD</b> (gut 2,0, 499 €) wins on ten-year cost; <b style="display:inline;font-weight:600">Beko B3T41230</b> (gut 2,2, 499 €) costs 1 327 € over ten years because it burns 1,44 kWh per full cotton cycle — the thirstiest figure printed in the 9/2024 test.
   The energy label is measured in the <b>cotton cupboard-dry programme at full and half load</b>, which since the 2025 ecodesign rules <i>is</i> the machine’s <b>Eco</b> programme — Stiftung Warentest now writes it as “Baumwolle schranktrocken (Eco-Programm)”.
 </div>
 
-<h2>1 · Test results (verbatim from the test issues)</h2>
+<h2 id="results">1 · Test results (verbatim from the test issues)</h2>
 <p class="note">Sub-grades are the foundation’s own: Trocknen 45 %, Handhabung 30 %, Umwelteigenschaften 20 %, Sicherheit und Verarbeitung 5 %. Consumption and duration are <i>measured</i> values for cotton cupboard-dry at full load, then iron-dry, then easy-care — from the test tables, not from the label.</p>
 
 <div class="scroll">
@@ -123,7 +155,248 @@
   <li><b>Gorenje DHNE83</b> — good drying (2,2) and very good environmental marks, but at maximum load <b>the door sprang open</b> during the cycle (the test docked half a grade for it), and handling is only “befriedigend” (3,3): rest-run display “ausreichend”, loading “ausreichend”.</li>
 </ul>
 
-<h2>2 · Real prices and shipping (20 Oct 2026)</h2>
+
+<h2 id="programmes">2 · All programmes, all dryers</h2>
+
+<p>Same question for every machine: <b>what does one kilogram of laundry cost in each cycle?</b> The manuals print energy and duration per programme; dividing by the load turns four different table formats into one comparable number. Lower is better.</p>
+
+<div class="scroll">
+<table class="matrix">
+  <thead><tr><th>Programme family</th><th>B3T4224SD</th><th>B3T42249S</th><th>B3T42240S</th><th>B3T41230</th><th>Gorenje DHNE83</th><th>LG RT80V9C</th></tr></thead>
+  <tbody>
+      <tr><th class="rowhead">Cotton, cupboard-dry — <b>the label/Eco cycle</b></th><td class="v lo" title="Öko, 8 kg, 135 min, 1,20 kWh">0,150</td><td class="v lo" title="Öko, 8 kg, 135 min, 1,20 kWh">0,150</td><td class="v" title="Öko, 8 kg, 135 min, 1,25 kWh">0,156</td><td class="v" title="Öko, 7 kg, 140 min, 1,45 kWh">0,207</td><td class="v hi" title="Eco, 9 kg sister model, 3:58, 2,25 kWh — SW measured 1,32 kWh/175 min on the 8 kg DHNE83 → 0,165">0,250</td><td class="v" title="Baumwolle + 8 kg, 2:38, 1,25 kWh">0,156</td></tr>
+      <tr><th class="rowhead">Cotton, cupboard-dry — the <i>normal</i> (non-eco) setting</th><td class="v" title="8 kg, 170 min, 1,65 kWh">0,206</td><td class="v" title="8 kg, 170 min, 1,65 kWh">0,206</td><td class="v lo" title="8 kg, 150 min, 1,49 kWh">0,186</td><td class="v hi" title="7 kg, 184 min, 1,95 kWh">0,279</td><td class="v" title="Cotton Schranktr., 9 kg, 3:13, 1,86 kWh">0,207</td><td class="nodata" title="programme offered, no consumption published">•</td></tr>
+      <tr><th class="rowhead">Cotton, iron-dry</th><td class="v" title="8 kg, 105 min, 0,90 kWh">0,113</td><td class="v" title="8 kg, 105 min, 0,90 kWh">0,113</td><td class="v lo" title="8 kg, 105 min, 0,89 kWh">0,111</td><td class="v" title="7 kg, 105 min, 1,05 kWh">0,150</td><td class="v" title="9 kg, 1:56, 1,38 kWh">0,153</td><td class="v hi" title="4 kg, 1:56, 0,90 kWh">0,225</td></tr>
+      <tr><th class="rowhead">Cotton, extra-dry</th><td class="nodata" title="programme offered, no consumption published">•</td><td class="nodata" title="programme offered, no consumption published">•</td><td class="nodata" title="programme offered, no consumption published">•</td><td class="nodata" title="programme offered, no consumption published">•</td><td class="v" title="9 kg, 3:28, 1,91 kWh">0,212</td><td class="nodata" title="programme offered, no consumption published">•</td></tr>
+      <tr><th class="rowhead">Easy-care / synthetics, cupboard-dry</th><td class="v" title="4 kg, 65 min, 0,55 kWh">0,138</td><td class="v" title="4 kg, 65 min, 0,55 kWh">0,138</td><td class="v lo" title="4 kg, 65 min, 0,50 kWh">0,125</td><td class="v" title="4 kg, 69 min, 0,70 kWh">0,175</td><td class="v" title="4 kg, 1:01, 0,53 kWh">0,133</td><td class="v hi" title="2 kg, 1:02, 0,55 kWh">0,275</td></tr>
+      <tr><th class="rowhead">Mix</th><td class="v" title="4 kg, 115 min, 1,05 kWh">0,263</td><td class="v" title="4 kg, 115 min, 1,05 kWh">0,263</td><td class="v lo" title="4 kg, 115 min, 0,85 kWh">0,213</td><td class="v hi" title="4 kg, 115 min, 1,15 kWh">0,288</td><td class="v" title="4 kg, 1:35, 0,88 kWh">0,220</td><td class="nodata" title="programme offered, no consumption published">•</td></tr>
+      <tr><th class="rowhead">Wool</th><td class="v lo" title="1,5 kg, 148 min, 0,90 kWh">0,600</td><td class="v lo" title="1,5 kg, 148 min, 0,90 kWh">0,600</td><td class="v hi" title="1,5 kg, 148 min, 1,55 kWh">1,033</td><td class="off">–</td><td class="nodata" title="programme offered, no consumption published">•</td><td class="nodata" title="programme offered, no consumption published">•</td></tr>
+      <tr><th class="rowhead">Delicates / sensitive</th><td class="v lo" title="2 kg, 50 min, 0,35 kWh">0,175</td><td class="v lo" title="2 kg, 50 min, 0,35 kWh">0,175</td><td class="v" title="1,5 kg, 50 min, 0,35 kWh">0,233</td><td class="v" title="2 kg, 45 min, 0,40 kWh">0,200</td><td class="v hi" title="1 kg, 0:45, 0,38 kWh">0,380</td><td class="nodata" title="programme offered, no consumption published">•</td></tr>
+      <tr><th class="rowhead">Bedding / duvets</th><td class="v hi" title="2,5 kg, 165 min, 1,60 kWh">0,640</td><td class="v hi" title="2,5 kg, 165 min, 1,60 kWh">0,640</td><td class="v lo" title="2,5 kg, 165 min, 1,40 kWh">0,560</td><td class="v hi" title="2,5 kg, 165 min, 1,60 kWh">0,640</td><td class="nodata" title="programme offered, no consumption published">•</td><td class="nodata" title="programme offered, no consumption published">•</td></tr>
+      <tr><th class="rowhead">Jeans</th><td class="v hi" title="4 kg, 125 min, 1,15 kWh">0,288</td><td class="v hi" title="4 kg, 125 min, 1,15 kWh">0,288</td><td class="v lo" title="4 kg, 119 min, 0,95 kWh">0,238</td><td class="v hi" title="4 kg, 125 min, 1,15 kWh">0,288</td><td class="nodata" title="programme offered, no consumption published">•</td><td class="off">–</td></tr>
+      <tr><th class="rowhead">Outdoor / sports</th><td class="v hi" title="2 kg, 135 min, 1,20 kWh">0,600</td><td class="v hi" title="2 kg, 135 min, 1,20 kWh">0,600</td><td class="v lo" title="2 kg, 135 min, 0,99 kWh">0,495</td><td class="v hi" title="2 kg, 135 min, 1,20 kWh">0,600</td><td class="nodata" title="programme offered, no consumption published">•</td><td class="nodata" title="programme offered, no consumption published">•</td></tr>
+      <tr><th class="rowhead">Shirts</th><td class="v" title="1,5 kg, 50 min, 0,49 kWh">0,327</td><td class="v" title="1,5 kg, 50 min, 0,49 kWh">0,327</td><td class="off">–</td><td class="v" title="1,5 kg, 50 min, 0,49 kWh">0,327</td><td class="nodata" title="programme offered, no consumption published">•</td><td class="off">–</td></tr>
+      <tr><th class="rowhead">Towels</th><td class="off">–</td><td class="off">–</td><td class="off">–</td><td class="v" title="5 kg, 195 min, 1,95 kWh">0,390</td><td class="nodata" title="programme offered, no consumption published">•</td><td class="nodata" title="programme offered, no consumption published">•</td></tr>
+      <tr><th class="rowhead">Baby</th><td class="off">–</td><td class="off">–</td><td class="off">–</td><td class="off">–</td><td class="nodata" title="programme offered, no consumption published">•</td><td class="off">–</td></tr>
+      <tr><th class="rowhead">Hygiene (heated dry)</th><td class="v hi" title="5 kg, 200 min, 1,90 kWh">0,380</td><td class="v hi" title="5 kg, 200 min, 1,90 kWh">0,380</td><td class="v lo" title="5 kg, 200 min, 1,55 kWh">0,310</td><td class="v hi" title="5 kg, 200 min, 1,90 kWh">0,380</td><td class="off">–</td><td class="off">–</td></tr>
+      <tr><th class="rowhead">Refresh (dry laundry, no real drying)</th><td class="v hi" title="1,2 kg, 120 min, 1,40 kWh">1,167</td><td class="v hi" title="1,2 kg, 120 min, 1,40 kWh">1,167</td><td class="v lo" title="1,2 kg, 120 min, 0,95 kWh">0,792</td><td class="v hi" title="1,2 kg, 120 min, 1,40 kWh">1,167</td><td class="nodata" title="programme offered, no consumption published">•</td><td class="nodata" title="programme offered, no consumption published">•</td></tr>
+      <tr><th class="rowhead">Express / short</th><td class="v hi" title="0,4 kg, 30 min, 0,30 kWh">0,750</td><td class="v hi" title="0,4 kg, 30 min, 0,30 kWh">0,750</td><td class="v lo" title="0,4 kg, 30 min, 0,25 kWh">0,625</td><td class="v hi" title="0,4 kg, 30 min, 0,30 kWh">0,750</td><td class="off">–</td><td class="nodata" title="programme offered, no consumption published">•</td></tr>
+      <tr><th class="rowhead">Silent / low noise</th><td class="v hi" title="8 kg, 240 min, 2,05 kWh">0,256</td><td class="v hi" title="8 kg, 240 min, 2,05 kWh">0,256</td><td class="v lo" title="8 kg, 240 min, 1,95 kWh">0,244</td><td class="off">–</td><td class="off">–</td><td class="off">–</td></tr>
+      <tr><th class="rowhead">Allergy</th><td class="off">–</td><td class="off">–</td><td class="off">–</td><td class="off">–</td><td class="nodata" title="programme offered, no consumption published">•</td><td class="nodata" title="programme offered, no consumption published">•</td></tr>
+      <tr><th class="rowhead">Pillow / cushions</th><td class="off">–</td><td class="off">–</td><td class="off">–</td><td class="off">–</td><td class="nodata" title="programme offered, no consumption published">•</td><td class="off">–</td></tr>
+      <tr><th class="rowhead">Jackets / coats</th><td class="off">–</td><td class="off">–</td><td class="off">–</td><td class="off">–</td><td class="nodata" title="programme offered, no consumption published">•</td><td class="off">–</td></tr>
+      <tr><th class="rowhead">Rack / basket drying</th><td class="off">–</td><td class="off">–</td><td class="off">–</td><td class="off">–</td><td class="off">–</td><td class="nodata" title="programme offered, no consumption published">•</td></tr>
+      <tr><th class="rowhead">Downloadable programme</th><td class="off">–</td><td class="off">–</td><td class="off">–</td><td class="off">–</td><td class="off">–</td><td class="nodata" title="programme offered, no consumption published">•</td></tr>
+      <tr><th class="rowhead">Timed programme (any temperature/duration)</th><td class="nodata" title="programme offered, no consumption published">•</td><td class="nodata" title="programme offered, no consumption published">•</td><td class="nodata" title="programme offered, no consumption published">•</td><td class="nodata" title="programme offered, no consumption published">•</td><td class="nodata" title="programme offered, no consumption published">•</td><td class="nodata" title="programme offered, no consumption published">•</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">
+  Numbers are <b>kWh per kg of dry laundry</b> in that programme, computed from each manual’s own consumption table. Hover a value for the underlying kWh, minutes and load — the condition column in the tables below then shows why two rows for the “same” programme differ: spin speed and residual moisture move consumption by 10–20 %, more than the choice between neighbouring programmes does.
+  <span class="pill">•</span> = programme exists but the manufacturer publishes no consumption for it &nbsp;·&nbsp; <span class="pill b">·</span> = not offered.
+  Within each row the cheapest machine is shaded green and the dearest red (only when at least two machines publish a figure).
+</p>
+
+<h3>What the matrix says</h3>
+<ul>
+  <li><b>Cheapest cycle on every Beko: cotton <i>Bügeltrocken</i> (iron-dry), 0,11–0,15 kWh/kg.</b> You pay for the last few percent of dryness. Stopping at iron-dry and hanging the washing for ten minutes is the single biggest saving available, and no machine’s Eco programme beats it.</li>
+  <li><b>The Eco/label cycle sits in the middle (0,15–0,21), the normal cotton cupboard-dry above it (0,19–0,28).</b> On the 8 kg Bekos that gap is 27 %: 1,20 vs 1,65 kWh for the same 8 kg.</li>
+  <li><b>Small programmes are the expensive ones.</b> Express costs 0,63–0,75 kWh/kg — four to five times the eco cycle — because a 0,4 kg load still heats the whole drum. Refresh is the worst of all (0,79–1,17), which makes sense: it is a de-wrinkling function, not a drying function.</li>
+  <li><b>Wool is the exception that punishes you twice:</b> 1,55 kWh for 1,5 kg on the B3T42240S is over 1 kWh/kg — ten times the iron-dry cotton ratio.</li>
+  <li><b>The 7 kg B3T41230 is dearer per kilo in every single programme</b>, which is the same story its class-E label tells.</li>
+  <li><b>Gorenje and LG hide their numbers.</b> LG publishes cotton and easy-care only; Gorenje’s manual prints a 9 kg table for a shared manual, so its per-kilo figures cannot be read across to the tested 8 kg unit.</li>
+</ul>
+
+<h3>Every programme, machine by machine</h3>
+<p class="note">Straight from the manuals, including the duplicate rows that exist only because spin speed and residual moisture differ — they matter more than the programme choice does.</p>
+<details>
+  <summary>Beko B3T4224SD <span class="note">— 8 kg, gut 2,0 · manual p. 32</span></summary>
+  <div class="scroll">
+    <table class="prog">
+      <thead><tr><th>Programme</th><th>kg</th><th>min</th><th>kWh</th><th>kWh/kg</th><th>Condition</th></tr></thead>
+      <tbody>
+        <tr><td>Koch-/Buntwäsche · Bügeltrocken</td><td class='v'>8</td><td class='v'>105</td><td class="v">0,90</td><td class="v">0,113</td><td class='note'>1400 rpm / 50 %</td></tr>
+        <tr><td>Koch-/Buntwäsche · Bügeltrocken</td><td class='v'>8</td><td class='v'>125</td><td class="v">1,15</td><td class="v">0,144</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Koch-/Buntwäsche · Schranktrocken</td><td class='v'>8</td><td class='v'>170</td><td class="v">1,65</td><td class="v">0,206</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Koch-/Buntwäsche Öko</td><td class='v'>8</td><td class='v'>135</td><td class="v">1,20</td><td class="v">0,150</td><td class='note'>1400 rpm / 50 %</td></tr>
+        <tr><td>Koch-/Buntwäsche Öko</td><td class='v'>4</td><td class='v'>85</td><td class="v">0,73</td><td class="v">0,182</td><td class='note'>1400 rpm / 50 %</td></tr>
+        <tr><td>Koch-/Buntwäsche Öko</td><td class='v'>8</td><td class='v'>160</td><td class="v">1,44</td><td class="v">0,180</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Koch-/Buntwäsche Öko</td><td class='v'>4</td><td class='v'>100</td><td class="v">0,81</td><td class="v">0,203</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Pflegeleicht · Bügeltrocken</td><td class='v'>4</td><td class='v'>50</td><td class="v">0,50</td><td class="v">0,125</td><td class='note'>1200 rpm / 40 %</td></tr>
+        <tr><td>Pflegeleicht · Schranktrocken</td><td class='v'>4</td><td class='v'>65</td><td class="v">0,55</td><td class="v">0,138</td><td class='note'>1200 rpm / 40 %</td></tr>
+        <tr><td>Mix</td><td class='v'>4</td><td class='v'>115</td><td class="v">1,05</td><td class="v">0,263</td><td class='note'>1000 rpm / 50 %</td></tr>
+        <tr><td>Wolle</td><td class='v'>1,5</td><td class='v'>148</td><td class="v">0,90</td><td class="v">0,600</td><td class='note'>800 rpm / 40 %</td></tr>
+        <tr><td>Leise</td><td class='v'>8</td><td class='v'>240</td><td class="v">2,05</td><td class="v">0,256</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Feinwäsche</td><td class='v'>2</td><td class='v'>50</td><td class="v">0,35</td><td class="v">0,175</td><td class='note'>1200 rpm / 40 %</td></tr>
+        <tr><td>Jeans</td><td class='v'>4</td><td class='v'>125</td><td class="v">1,15</td><td class="v">0,287</td><td class='note'>1000 rpm / 50 %</td></tr>
+        <tr><td>Outdoor / Sports</td><td class='v'>2</td><td class='v'>135</td><td class="v">1,20</td><td class="v">0,600</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Bettdecken / Daunen</td><td class='v'>2,5</td><td class='v'>165</td><td class="v">1,60</td><td class="v">0,640</td><td class='note'>800 rpm / 40 %</td></tr>
+        <tr><td>Hemden</td><td class='v'>1,5</td><td class='v'>50</td><td class="v">0,49</td><td class="v">0,327</td><td class='note'>800 rpm / 50 %</td></tr>
+        <tr><td>Express</td><td class='v'>0,4</td><td class='v'>30</td><td class="v">0,30</td><td class="v">0,750</td><td class='note'>1200 rpm / 60 %</td></tr>
+        <tr><td>Hygiene Trocknen</td><td class='v'>5</td><td class='v'>200</td><td class="v">1,90</td><td class="v">0,380</td><td class='note'>800 rpm / 60 %</td></tr>
+        <tr><td>Hygiene Auffrischen</td><td class='v'>1,2</td><td class='v'>120</td><td class="v">1,40</td><td class="v">1,167</td><td class='note'>—</td></tr>
+        <tr><td>Zeitprogramme</td><td class='v'>—</td><td class='v'>10–160</td><td class="v"></td><td class="off">—</td><td class='note'>frei wählbar</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">The Öko row is the standard programme the label refers to; the manual says so in the text under the table. Times are the manufacturer's, not the test's.</p>
+</details>
+<details>
+  <summary>Beko B3T42249S <span class="note">— 8 kg, gut 2,5 · manual p. 30</span></summary>
+  <div class="scroll">
+    <table class="prog">
+      <thead><tr><th>Programme</th><th>kg</th><th>min</th><th>kWh</th><th>kWh/kg</th><th>Condition</th></tr></thead>
+      <tbody>
+        <tr><td>Koch-/Buntwäsche · Bügeltrocken</td><td class='v'>8</td><td class='v'>105</td><td class="v">0,90</td><td class="v">0,113</td><td class='note'>1400 rpm / 50 %</td></tr>
+        <tr><td>Koch-/Buntwäsche · Bügeltrocken</td><td class='v'>8</td><td class='v'>125</td><td class="v">1,15</td><td class="v">0,144</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Koch-/Buntwäsche · Schranktrocken</td><td class='v'>8</td><td class='v'>170</td><td class="v">1,65</td><td class="v">0,206</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Koch-/Buntwäsche Öko</td><td class='v'>8</td><td class='v'>135</td><td class="v">1,20</td><td class="v">0,150</td><td class='note'>1400 rpm / 50 %</td></tr>
+        <tr><td>Koch-/Buntwäsche Öko</td><td class='v'>4</td><td class='v'>85</td><td class="v">0,73</td><td class="v">0,182</td><td class='note'>1400 rpm / 50 %</td></tr>
+        <tr><td>Koch-/Buntwäsche Öko</td><td class='v'>8</td><td class='v'>160</td><td class="v">1,44</td><td class="v">0,180</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Koch-/Buntwäsche Öko</td><td class='v'>4</td><td class='v'>100</td><td class="v">0,81</td><td class="v">0,203</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Pflegeleicht · Bügeltrocken</td><td class='v'>4</td><td class='v'>50</td><td class="v">0,50</td><td class="v">0,125</td><td class='note'>1200 rpm / 40 %</td></tr>
+        <tr><td>Pflegeleicht · Schranktrocken</td><td class='v'>4</td><td class='v'>65</td><td class="v">0,55</td><td class="v">0,138</td><td class='note'>1200 rpm / 40 %</td></tr>
+        <tr><td>Mix</td><td class='v'>4</td><td class='v'>115</td><td class="v">1,05</td><td class="v">0,263</td><td class='note'>1000 rpm / 50 %</td></tr>
+        <tr><td>Wolle</td><td class='v'>1,5</td><td class='v'>148</td><td class="v">0,90</td><td class="v">0,600</td><td class='note'>800 rpm / 40 %</td></tr>
+        <tr><td>Leise</td><td class='v'>8</td><td class='v'>240</td><td class="v">2,05</td><td class="v">0,256</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Feinwäsche</td><td class='v'>2</td><td class='v'>50</td><td class="v">0,35</td><td class="v">0,175</td><td class='note'>1200 rpm / 40 %</td></tr>
+        <tr><td>Jeans</td><td class='v'>4</td><td class='v'>125</td><td class="v">1,15</td><td class="v">0,287</td><td class='note'>1000 rpm / 50 %</td></tr>
+        <tr><td>Outdoor / Sports</td><td class='v'>2</td><td class='v'>135</td><td class="v">1,20</td><td class="v">0,600</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Bettdecken / Daunen</td><td class='v'>2,5</td><td class='v'>165</td><td class="v">1,60</td><td class="v">0,640</td><td class='note'>800 rpm / 40 %</td></tr>
+        <tr><td>Hemden</td><td class='v'>1,5</td><td class='v'>50</td><td class="v">0,49</td><td class="v">0,327</td><td class='note'>800 rpm / 50 %</td></tr>
+        <tr><td>Express</td><td class='v'>0,4</td><td class='v'>30</td><td class="v">0,30</td><td class="v">0,750</td><td class='note'>1200 rpm / 60 %</td></tr>
+        <tr><td>Hygiene Trocknen</td><td class='v'>5</td><td class='v'>200</td><td class="v">1,90</td><td class="v">0,380</td><td class='note'>800 rpm / 60 %</td></tr>
+        <tr><td>Hygiene Auffrischen</td><td class='v'>1,2</td><td class='v'>120</td><td class="v">1,40</td><td class="v">1,167</td><td class='note'>—</td></tr>
+        <tr><td>Zeitprogramme</td><td class='v'>—</td><td class='v'>10–160</td><td class="v"></td><td class="off">—</td><td class='note'>frei wählbar</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Identical table to the B3T4224SD — same 8 kg platform. The test still rates it a grade lower, because drying quality is measured, not tabulated.</p>
+</details>
+<details>
+  <summary>Beko B3T42240S <span class="note">— 8 kg, gut 2,2 · manual p. 32</span></summary>
+  <div class="scroll">
+    <table class="prog">
+      <thead><tr><th>Programme</th><th>kg</th><th>min</th><th>kWh</th><th>kWh/kg</th><th>Condition</th></tr></thead>
+      <tbody>
+        <tr><td>Koch-/Buntwäsche · Bügeltrocken</td><td class='v'>8</td><td class='v'>105</td><td class="v">0,89</td><td class="v">0,111</td><td class='note'>1400 rpm / 50 %</td></tr>
+        <tr><td>Koch-/Buntwäsche · Bügeltrocken</td><td class='v'>8</td><td class='v'>139</td><td class="v">1,10</td><td class="v">0,138</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Koch-/Buntwäsche · Schranktrocken</td><td class='v'>8</td><td class='v'>150</td><td class="v">1,49</td><td class="v">0,186</td><td class='note'>1400 rpm / 50 %</td></tr>
+        <tr><td>Koch-/Buntwäsche · Schranktrocken</td><td class='v'>8</td><td class='v'>184</td><td class="v">1,52</td><td class="v">0,190</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Koch-/Buntwäsche Öko</td><td class='v'>8</td><td class='v'>135</td><td class="v">1,25</td><td class="v">0,156</td><td class='note'>1400 rpm / 50 %</td></tr>
+        <tr><td>Koch-/Buntwäsche Öko</td><td class='v'>4</td><td class='v'>85</td><td class="v">0,72</td><td class="v">0,180</td><td class='note'>1400 rpm / 50 %</td></tr>
+        <tr><td>Koch-/Buntwäsche Öko</td><td class='v'>8</td><td class='v'>174</td><td class="v">1,44</td><td class="v">0,180</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Koch-/Buntwäsche Öko</td><td class='v'>4</td><td class='v'>108</td><td class="v">0,81</td><td class="v">0,203</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Pflegeleicht · Bügeltrocken</td><td class='v'>4</td><td class='v'>50</td><td class="v">0,33</td><td class="v">0,083</td><td class='note'>1200 rpm / 40 %</td></tr>
+        <tr><td>Pflegeleicht · Schranktrocken</td><td class='v'>4</td><td class='v'>65</td><td class="v">0,50</td><td class="v">0,125</td><td class='note'>1200 rpm / 40 %</td></tr>
+        <tr><td>Mix</td><td class='v'>4</td><td class='v'>115</td><td class="v">0,85</td><td class="v">0,212</td><td class='note'>1000 rpm / 50 %</td></tr>
+        <tr><td>Leise</td><td class='v'>8</td><td class='v'>240</td><td class="v">1,95</td><td class="v">0,244</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Wolle</td><td class='v'>1,5</td><td class='v'>148</td><td class="v">1,55</td><td class="v">1,033</td><td class='note'>800 rpm / 50 %</td></tr>
+        <tr><td>Outdoor / Sports</td><td class='v'>2</td><td class='v'>135</td><td class="v">0,99</td><td class="v">0,495</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Bettdecken / Daunen</td><td class='v'>2,5</td><td class='v'>165</td><td class="v">1,40</td><td class="v">0,560</td><td class='note'>800 rpm / 40 %</td></tr>
+        <tr><td>Jeans</td><td class='v'>4</td><td class='v'>119</td><td class="v">0,95</td><td class="v">0,237</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Feinwäsche</td><td class='v'>1,5</td><td class='v'>50</td><td class="v">0,35</td><td class="v">0,233</td><td class='note'>800 rpm / 40 %</td></tr>
+        <tr><td>Express</td><td class='v'>0,4</td><td class='v'>30</td><td class="v">0,25</td><td class="v">0,625</td><td class='note'>1200 rpm / 60 %</td></tr>
+        <tr><td>Hygiene Trocknen</td><td class='v'>5</td><td class='v'>200</td><td class="v">1,55</td><td class="v">0,310</td><td class='note'>800 rpm / 60 %</td></tr>
+        <tr><td>Hygiene Auffrischen</td><td class='v'>1,2</td><td class='v'>120</td><td class="v">0,95</td><td class="v">0,792</td><td class='note'>—</td></tr>
+        <tr><td>Zeitprogramme</td><td class='v'>—</td><td class='v'>10–160</td><td class="v"></td><td class="off">—</td><td class='note'>frei wählbar</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">The 2021 edition: no Öko footnote, but the same programme logic. Note the Wolle cycle — 1,55 kWh for 1,5 kg is the single worst ratio in any Beko table.</p>
+</details>
+<details>
+  <summary>Beko B3T41230 <span class="note">— 7 kg, gut 2,2 · manual p. 32</span></summary>
+  <div class="scroll">
+    <table class="prog">
+      <thead><tr><th>Programme</th><th>kg</th><th>min</th><th>kWh</th><th>kWh/kg</th><th>Condition</th></tr></thead>
+      <tbody>
+        <tr><td>Koch-/Buntwäsche · Bügeltrocken</td><td class='v'>7</td><td class='v'>105</td><td class="v">1,05</td><td class="v">0,150</td><td class='note'>1400 rpm / 50 %</td></tr>
+        <tr><td>Koch-/Buntwäsche · Bügeltrocken</td><td class='v'>7</td><td class='v'>130</td><td class="v">1,35</td><td class="v">0,193</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Koch-/Buntwäsche · Schranktrocken</td><td class='v'>7</td><td class='v'>184</td><td class="v">1,95</td><td class="v">0,279</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Koch-/Buntwäsche Öko</td><td class='v'>7</td><td class='v'>140</td><td class="v">1,45</td><td class="v">0,207</td><td class='note'>1400 rpm / 50 %</td></tr>
+        <tr><td>Koch-/Buntwäsche Öko</td><td class='v'>3,5</td><td class='v'>90</td><td class="v">0,88</td><td class="v">0,251</td><td class='note'>1400 rpm / 50 %</td></tr>
+        <tr><td>Koch-/Buntwäsche Öko</td><td class='v'>7</td><td class='v'>174</td><td class="v">1,71</td><td class="v">0,244</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Koch-/Buntwäsche Öko</td><td class='v'>3,5</td><td class='v'>107</td><td class="v">0,98</td><td class="v">0,280</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Pflegeleicht · Bügeltrocken</td><td class='v'>4</td><td class='v'>55</td><td class="v">0,50</td><td class="v">0,125</td><td class='note'>1200 rpm / 40 %</td></tr>
+        <tr><td>Pflegeleicht · Schranktrocken</td><td class='v'>4</td><td class='v'>69</td><td class="v">0,70</td><td class="v">0,175</td><td class='note'>1200 rpm / 40 %</td></tr>
+        <tr><td>Mix</td><td class='v'>4</td><td class='v'>115</td><td class="v">1,15</td><td class="v">0,287</td><td class='note'>1000 rpm / 50 %</td></tr>
+        <tr><td>Handtücher</td><td class='v'>5</td><td class='v'>195</td><td class="v">1,95</td><td class="v">0,390</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Feinwäsche</td><td class='v'>2</td><td class='v'>45</td><td class="v">0,40</td><td class="v">0,200</td><td class='note'>800 rpm / 40 %</td></tr>
+        <tr><td>Mini</td><td class='v'>4</td><td class='v'>110</td><td class="v">1,10</td><td class="v">0,275</td><td class='note'>800 rpm / 50 %</td></tr>
+        <tr><td>Jeans</td><td class='v'>4</td><td class='v'>125</td><td class="v">1,15</td><td class="v">0,287</td><td class='note'>1000 rpm / 50 %</td></tr>
+        <tr><td>Outdoor / Sports</td><td class='v'>2</td><td class='v'>135</td><td class="v">1,20</td><td class="v">0,600</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Bettdecken / Daunen</td><td class='v'>2,5</td><td class='v'>165</td><td class="v">1,60</td><td class="v">0,640</td><td class='note'>800 rpm / 40 %</td></tr>
+        <tr><td>Hemden</td><td class='v'>1,5</td><td class='v'>50</td><td class="v">0,49</td><td class="v">0,327</td><td class='note'>800 rpm / 50 %</td></tr>
+        <tr><td>Express</td><td class='v'>0,4</td><td class='v'>30</td><td class="v">0,30</td><td class="v">0,750</td><td class='note'>1200 rpm / 60 %</td></tr>
+        <tr><td>Hygiene Trocknen</td><td class='v'>5</td><td class='v'>200</td><td class="v">1,90</td><td class="v">0,380</td><td class='note'>800 rpm / 60 %</td></tr>
+        <tr><td>Hygiene Auffrischen</td><td class='v'>1,2</td><td class='v'>120</td><td class="v">1,40</td><td class="v">1,167</td><td class='note'>—</td></tr>
+        <tr><td>Zeitprogramme</td><td class='v'>—</td><td class='v'>10–160</td><td class="v"></td><td class="off">—</td><td class='note'>frei wählbar</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">A 7 kg drum, so every per-kilo figure is worse than its 8 kg siblings despite similar absolute consumption. Has towels, mini and no wool cycle.</p>
+</details>
+<details>
+  <summary>Gorenje DHNE83 <span class="note">— 8 kg, gut 2,5 — quoted from the 9 kg sister model · manual p. 78</span></summary>
+  <div class="scroll">
+    <table class="prog">
+      <thead><tr><th>Programme</th><th>kg</th><th>min</th><th>kWh</th><th>kWh/kg</th><th>Condition</th></tr></thead>
+      <tbody>
+        <tr><td>Eco *</td><td class='v'>9</td><td class='v'>3:58</td><td class="v">2,25</td><td class="v">0,250</td><td class='note'>Standard-Trockengrad, 0 ± 3 %</td></tr>
+        <tr><td>Eco *</td><td class='v'>4,5</td><td class='v'>1:47</td><td class="v">0,98</td><td class="v">0,218</td><td class='note'>0 ± 3 %</td></tr>
+        <tr><td>Cotton · Extra trocken</td><td class='v'>9</td><td class='v'>3:28</td><td class="v">1,91</td><td class="v">0,212</td><td class='note'>—</td></tr>
+        <tr><td>Cotton · Extra trocken</td><td class='v'>6,3</td><td class='v'>2:16</td><td class="v">1,26</td><td class="v">0,200</td><td class='note'>− 3 %</td></tr>
+        <tr><td>Cotton · Extra trocken</td><td class='v'>4,5</td><td class='v'>1:45</td><td class="v">0,95</td><td class="v">0,211</td><td class='note'>− 3 %</td></tr>
+        <tr><td>Cotton · Schranktr.</td><td class='v'>9</td><td class='v'>3:13</td><td class="v">1,86</td><td class="v">0,207</td><td class='note'>12 ± 4 %</td></tr>
+        <tr><td>Cotton · Schranktr.</td><td class='v'>6,3</td><td class='v'>1:58</td><td class="v">1,17</td><td class="v">0,186</td><td class='note'>− 1 %</td></tr>
+        <tr><td>Cotton · Schranktr.</td><td class='v'>4,5</td><td class='v'>1:37</td><td class="v">0,94</td><td class="v">0,209</td><td class='note'>− 1 %</td></tr>
+        <tr><td>Cotton · Bügeltr.</td><td class='v'>9</td><td class='v'>1:56</td><td class="v">1,38</td><td class="v">0,153</td><td class='note'>12 ± 4 %</td></tr>
+        <tr><td>Cotton · Bügeltr.</td><td class='v'>4,5</td><td class='v'>1:22</td><td class="v">0,80</td><td class="v">0,178</td><td class='note'>12 ± 4 %</td></tr>
+        <tr><td>Easy care / Pflegeleicht</td><td class='v'>4</td><td class='v'>1:01</td><td class="v">0,53</td><td class="v">0,133</td><td class='note'>2 ± 3 %</td></tr>
+        <tr><td>Sensitive / Empfindlich</td><td class='v'>1</td><td class='v'>0:45</td><td class="v">0,38</td><td class="v">0,380</td><td class='note'>0 %</td></tr>
+        <tr><td>Mix · Extra trocken</td><td class='v'>—</td><td class='v'>1:57</td><td class="v">1,10</td><td class="off">—</td><td class='note'>− 2 %</td></tr>
+        <tr><td>Mix · Schranktr.</td><td class='v'>4</td><td class='v'>1:35</td><td class="v">0,88</td><td class="v">0,220</td><td class='note'>0 %</td></tr>
+        <tr><td>Mix · Bügeltr.</td><td class='v'>—</td><td class='v'>1:22</td><td class="v">0,76</td><td class="off">—</td><td class='note'>2 %</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">The manual is shared across the series and prints 9 kg figures; the tested 8 kg DHNE83 was measured by Stiftung Warentest at 1,32 kWh / 175 min for cotton cupboard-dry (0,165 kWh/kg). Treat the per-kilo column here as indicative only.</p>
+</details>
+<details>
+  <summary>LG RT80V9C <span class="note">— 8 kg, gut 2,1 — annex · manual p. 63</span></summary>
+  <div class="scroll">
+    <table class="prog">
+      <thead><tr><th>Programme</th><th>kg</th><th>min</th><th>kWh</th><th>kWh/kg</th><th>Condition</th></tr></thead>
+      <tbody>
+        <tr><td>Baumwolle +</td><td class='v'>8</td><td class='v'>2:38</td><td class="v">1,25</td><td class="v">0,156</td><td class='note'>1400 rpm / 50 %</td></tr>
+        <tr><td>Baumwolle +</td><td class='v'>8</td><td class='v'>3:03</td><td class="v">1,46</td><td class="v">0,182</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Baumwolle +</td><td class='v'>4</td><td class='v'>1:34</td><td class="v">0,70</td><td class="v">0,175</td><td class='note'>1400 rpm / 50 %</td></tr>
+        <tr><td>Baumwolle +</td><td class='v'>4</td><td class='v'>1:52</td><td class="v">0,81</td><td class="v">0,203</td><td class='note'>1000 rpm / 60 %</td></tr>
+        <tr><td>Baumwolle + · Bügeltrocken</td><td class='v'>4</td><td class='v'>1:56</td><td class="v">0,90</td><td class="v">0,225</td><td class='note'>1400 rpm / 50 %</td></tr>
+        <tr><td>Pflegeleicht · Schranktrocken</td><td class='v'>2</td><td class='v'>1:02</td><td class="v">0,55</td><td class="v">0,275</td><td class='note'>1200 rpm / 40 %</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">LG publishes values only for the cotton and easy-care cycles. The label programme is Baumwolle + with the EcoHybrid function set to <i>Energie</i>; the sibling setting <i>Zeit</i> shortens the cycle at higher consumption.</p>
+</details>
+
+<h3>Is the Standard-Trockenprogramm the same thing everywhere?</h3>
+<div class="scroll">
+<table>
+  <thead><tr><th>Manual</th><th>Programme the label refers to</th><th>Wording used in the manual</th></tr></thead>
+  <tbody>
+    <tr><td>Beko B3T4224SD / 2249S / 41230</td><td><b>Koch-/Buntwäsche Öko</b></td><td>“ist das Standardtrocknungsprogramm, auf den sich die Information auf dem Etikett … beziehen” (footnote 3)</td></tr>
+    <tr><td>Beko B3T42240S</td><td><b>Koch-/Buntwäsche Öko</b></td><td>consumption table rows “Buntwäsche Öko / Schranktrocken”</td></tr>
+    <tr><td>Hanseatic HWT8A2GT <span class="pill b">annex</span></td><td><b>Baumwolle Schranktrocken</b></td><td>“Das Programm Baumwolle Schranktrocken ist das Standardtrocknungsprogramm …” (p. 31, 1,94 kWh full / 1,07 kWh half)</td></tr>
+    <tr><td>Gorenje DHNE83</td><td><b>Eco</b></td><td>“wird verwendet, um die Einhaltung der EU-Gesetzgebung für Ökodesign zu prüfen 2023/2533”</td></tr>
+    <tr><td>LG RT80V9C</td><td><b>Baumwolle +</b> with EcoHybrid → <i>Energie</i></td><td>“Prüfprogramm gemäß Verordnung 392/2012/EU” (p. 33)</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">Only the Hanseatic manual uses the phrase “Baumwolle Schranktrocken” literally — which is why a full-text search for “Baumwoll-Schranktrockenprogramm” in a Beko or LG manual comes up empty outside the one footnote.</p>
+
+<h2 id="prices">3 · Real prices and shipping (20 Oct 2026)</h2>
 
 <div class="scroll">
 <table>
@@ -162,7 +435,7 @@
   The five cheapest “gut” dryers are all older designs with consumption above 1,05 kWh per cycle. The 9/2026 test has a machine that is 6 € over the limit — <b>Beko B3TSW48C9ZW, gut (2,1), 505 €, 543 € of power over ten years</b> — which makes it the cheapest “gut” dryer in ten-year terms (<b>1 048 €</b>), roughly 280 € ahead of the B3T41230. Paying 6 € more today saves about 26 € a year.
 </div>
 
-<h2>3 · Which setting is used to measure energy efficiency?</h2>
+<h2 id="measurement">4 · Which setting is used to measure energy efficiency?</h2>
 
 <p>One answer, in three layers.</p>
 
@@ -240,7 +513,7 @@
 
 <p>Practical reading: <b>use Eco/Öko for full cotton loads (the default, and the cheapest per kg), Pflegeleicht for synthetics, and reach for Schranktrocken+/Extratrocken or Express only when the laundry actually demands it.</b> What you should not do is compare two dryers by their label class and then run neither of them in that programme — the label ranks machines, it does not predict your bill.</p>
 
-<h2>4 · What the four test issues changed in the first version of this report</h2>
+<h2 id="changes">5 · What the four test issues changed in the first version of this report</h2>
 <div class="scroll">
 <table>
   <thead><tr><th>Item</th><th>First pass (secondary sources)</th><th>Now (test issues)</th></tr></thead>
@@ -256,7 +529,7 @@
 </div>
 <p class="note">The one thing that did <i>not</i> change: the set of five machines. The secondary sources had the right models and the right overall verdicts, but the wrong idea of which of them is actually good at drying.</p>
 
-<h2>5 · Everything else that is “gut” and near the budget</h2>
+<h2 id="others">6 · Everything else that is “gut” and near the budget</h2>
 <div class="scroll">
 <table>
   <thead><tr><th>Model</th><th>Overall</th><th>Trocknen</th><th>Mean price in test</th><th>Class</th><th>Why it is not in the table</th></tr></thead>
@@ -276,7 +549,7 @@
 </div>
 <p class="note">Above the budget but “gut”: Constructa CWQ3R401 (2,3, 682 €), Hanseatic HWT8BGT (2,3, 550 €), Bosch WTH85VH4 (2,4, 620 €), WTH85V94 (2,4, 640 €), WTH85V14 (2,4, 699 €), Siemens WT45HV94 (2,4, 649 €), Bauknecht BTSW 86B WB (2,1, 679 €), LG RT80B3C (2,1, 599 €), Miele TWC 640 WP (2,0, 1 034 €), AEG TR9X75889 (1,8, 1 028 €).</p>
 
-<h2>6 · Downloaded manuals</h2>
+<h2 id="manuals">7 · Downloaded manuals</h2>
 <div class="scroll">
 <table>
   <thead><tr><th>Model</th><th>File</th><th class="num">Pages</th><th class="num">Size</th><th>Where it comes from</th></tr></thead>
@@ -292,7 +565,7 @@
 </table>
 </div>
 
-<h2>7 · The test issues themselves</h2>
+<h2 id="tests">8 · The test issues themselves</h2>
 <p class="note">Cited, not reproduced: Stiftung Warentest marks its PDFs “Nur zur persönlichen Nutzung. Keine Weitergabe.” — so the four booklets stay in the local folder and only the verifiable figures appear here. The manuals below are the manufacturers’ own public PDFs and are hosted as-is.</p>
 <ul>
   <li><b>test 9/2023 — “Eins, zwei, dry”</b> (11 dryers, AEG TR8T70680 wins; Beko B3T41230 &amp; B3T42240S both gut 2,2)</li>
@@ -301,7 +574,7 @@
   <li><b>test 9/2026 — “Schön trocken ab 500 Flocken”</b> (14 dryers; AEG TR9X75889 1,8 wins, Beko B3TSW48C9ZW Preistipp at 505 €)</li>
 </ul>
 
-<h2>8 · Method and caveats</h2>
+<h2 id="method">9 · Method and caveats</h2>
 <ul>
   <li><b>Grades, sub-grades, consumption, durations, classes:</b> read directly from the four test booklets. Where a model was re-tested, both verdicts are given.</li>
   <li><b>Prices:</b> live retailer listings and the Geizhals/heise offer feed on 20 Oct 2026, plus the “mittlerer Preis” printed in each test for comparison. Large-appliance prices move weekly; the timestamps are the only thing that makes them meaningful.</li>
