@@ -29,6 +29,17 @@ blog.axkirillov.com {
         encode gzip
         file_server
     }
+
+    # Tumble-dryer report (trockner/): one self-contained HTML page plus the
+    # manufacturers' instruction PDFs. Same pattern as recipes — nothing is
+    # copied to the server, publishing is git pull + compose up in deploy.sh.
+    redir /trockner /trockner/ permanent
+    handle_path /trockner/* {
+        root * /srv/trockner
+        encode gzip
+        file_server
+    }
+
     reverse_proxy 127.0.0.1:2368
 }
 

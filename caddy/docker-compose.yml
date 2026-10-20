@@ -13,3 +13,4 @@ services:
       - ./config:/config
       - /root/spending:/www:ro
       - ../recipes:/srv/recipes:ro
+      - ../trockner:/srv/trockner:ro
