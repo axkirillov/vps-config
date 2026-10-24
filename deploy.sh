@@ -93,20 +93,11 @@ echo "=== Deploying Supabase ==="
 docker compose -f supabase-app/docker-compose.yml up -d
 
 echo ""
-echo "=== Deploying OpenClaw ==="
-if [ -f openclaw-app/.env ]; then
-    # Only the gateway: openclaw-cli is a one-shot admin container.
-    docker compose -f openclaw-app/docker-compose.yml up -d openclaw-gateway
-else
-    echo "→ skipped: openclaw-app/.env missing (copy .env.example and set OPENCLAW_GATEWAY_TOKEN)"
-fi
-
-echo ""
 echo "=== Swapfile size ==="
 # A live swapfile is immutable: rename returns EPERM, fallocate returns ETXTBSY,
 # and swapon on the same path returns EBUSY. The only way to resize is to swap it
 # off first, and swapoff pulls every swapped page back into RAM before it does
-# anything. So this runs last (the Gateway restart above frees its pages) and
+# anything. So this runs last, after the compose stacks above have settled, and
 # only proceeds when at least 1G of RAM would survive the migration.
 SWAP_TARGET_MB=4096
 if [ -f /swapfile ]; then
