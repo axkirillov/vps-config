@@ -14,14 +14,14 @@
     <a class="backlink" href="index.html">← All recipes</a>
     <p class="kicker">Adapted Serious Eats style <span class="dot">·</span> fully metric</p>
     <h1>Kimchi, scaled to your cabbage</h1>
-    <p class="dek">Enter the weight of napa cabbage you actually have. Every amount below — brine, rice paste, aromatics, jar capacity — is recalculated from it. The brine stays fixed at <strong>65&nbsp;g salt per 1&nbsp;L water</strong>, because that is the part that keeps fermentation safe.</p>
+    <p class="dek">Enter the weight of napa cabbage you actually have, and the diameter of the pot you will brine it in. Every amount below — brine, rice paste, aromatics, jar capacity — is recalculated from those two. The brine is what fills the gaps between the quarters plus <strong>2&nbsp;cm of cover</strong> over your pot's area, always at <strong>65&nbsp;g salt per 1&nbsp;L water</strong>, because that is the part that keeps fermentation safe.</p>
     <dl class="meta">
       <div class="stat"><dt>Total Time</dt><dd>3 days, plus a 12-hour brine</dd></div>
       <div class="stat"><dt>Yield</dt><dd><span class="q-strong" data-q="cabbage"></span> of kimchi</dd></div>
     </dl>
   </header>
 
-  <section class="card controls" aria-label="Batch size">
+  <section class="card controls" aria-label="Batch size and brine pot">
     <div class="row">
       <div class="field">
         <label for="kg">Napa cabbage</label>
@@ -45,6 +45,27 @@
       <button type="button" data-kg="5">5 kg</button>
     </div>
     <p class="hint" id="scaleHint"><span class="q-strong" data-q="cabbage"></span> of cabbage makes roughly <span class="q-strong" data-q="jarVolume"></span> of packed kimchi.</p>
+
+    <h2>Your brine pot</h2>
+    <div class="presets" role="group" aria-label="Pot diameter">
+      <button type="button" data-pot="20">20 cm</button>
+      <button type="button" data-pot="24">24 cm</button>
+      <button type="button" data-pot="28" aria-pressed="true">28 cm</button>
+      <button type="button" data-pot="32">32 cm</button>
+      <button type="button" data-pot="36">36 cm</button>
+    </div>
+    <div class="row" style="margin-top:14px">
+      <div class="field">
+        <label for="pot">Or type your pot's inside diameter</label>
+        <div class="stepper sm">
+          <button type="button" id="potMinus" aria-label="Smaller pot">−</button>
+          <input id="pot" type="number" value="28" min="14" max="60" step="1" inputmode="numeric" aria-describedby="potHint">
+          <button type="button" id="potPlus" aria-label="Bigger pot">+</button>
+          <span class="unit">cm</span>
+        </div>
+      </div>
+    </div>
+    <p class="hint" id="potHint"></p>
   </section>
 
   <div class="layout">
@@ -66,7 +87,7 @@
         <li>
           <h3>Brine the cabbage <span class="time">12 h</span></h3>
           <p>Dissolve <span class="q" data-q="salt"></span> of salt in <span class="q" data-q="water"></span> of cold water. Submerge the quartered cabbage. Brine for <strong>12 hours</strong>, flipping the quarters once or twice so they salt evenly.</p>
-          <p class="note">Brine strength is fixed at 65 g salt per 1 L water. If the cabbage is not fully submerged, mix extra brine at that same ratio and pour it in.</p>
+          <p class="note" id="brineNote"></p>
         </li>
 
         <li>
@@ -158,6 +179,7 @@
       <h2>Salt, and why the ratio matters</h2>
       <ul>
         <li>Salt is the only safety-critical number here, so it never goes below <strong>65 g per 1 L water</strong>.</li>
+        <li>Brine volume is <strong>≈ 1.45 L per 1 kg of cabbage</strong> — enough to fill the gaps between the quarters — plus <strong>2 cm of cover</strong> over the pot's area. That cover is why the pot diameter matters: 2 kg is 4.15 L in a 28 cm pot but 3.8 L in a 24 cm, because every centimetre of a wide pot holds more liquid.</li>
         <li>Do not taste-tune the brine upward on a whim: over-salted cabbage is hard to rescue, and rinsing only removes surface salt.</li>
         <li>Taste the cabbage <em>after</em> rinsing, not before.</li>
         <li>Fermenting jars should stay submerged and smell sour and garlicky. Fizzy is fine; fuzzy, slimy or rotten-smelling is not — discard it.</li>
@@ -176,10 +198,14 @@
 (function () {
   "use strict";
 
-  /* ---------- ratio table: everything per 1 kg of cabbage ---------- */
+  /* ---------- the brine model: gaps between the cabbage + cover over the pot ---------- */
+  var BRINE_G_PER_L = 65;           // never change this: it is the safety number
+  var CABBAGE_BULK_L_PER_KG = 2.5;  // volume 1 kg of quartered cabbage occupies, gaps included
+  var CABBAGE_DENSITY = 0.95;       // kg/L of the cabbage itself, not of the pack
+  var COVER_CM = 2;                 // brine standing above the top of the cabbage
+
+  /* ---------- ratio table: everything else, per 1 kg of cabbage ---------- */
   var R = {
-    salt: 65,          // g
-    water: 1,          // L
     rice: 12.5,        // g dry rice
     riceWater: 30,     // mL
     paste: 120,        // mL pre-made kimchi paste
@@ -212,9 +238,14 @@
     return num(v) + " g";
   }
   function millilitres(x) { return num(smartRound(x)) + " mL"; }
-  function litres(l) {
-    if (l >= 1) return num(Math.round(l * 100) / 100) + " L (" + Math.round(l * 1000) + " mL)";
-    return Math.round(l * 1000) + " mL";
+  /* salt is the safety number, so never round it down to a nicer figure */
+  function saltAmount(g) {
+    if (g >= 1000) return num(Math.ceil(g / 10) / 100) + " kg";
+    return Math.round(g) + " g";
+  }
+  /* brine gets measured in a jug, so round it to whole 50 mL and show both units */
+  function mlText(ml) {
+    return ml >= 1000 ? num(Math.round(ml / 10) / 100) + " L (" + ml + " mL)" : ml + " mL";
   }
   function range(lo, hi) { return lo === hi ? String(lo) : lo + "–" + hi; }
   function halves(x) {
@@ -240,10 +271,17 @@
       : label + " of a " + JAR_ML + " mL jar";
   }
 
-  /* ---------- scale everything from the cabbage weight ---------- */
-  function scale(kg) {
-    var salt = kg * R.salt,
-        waterL = kg * R.water,
+  /* ---------- scale everything from the cabbage weight and the pot ---------- */
+  function scale(kg, potCm) {
+    /* brine = the gaps between the quarters, plus 2 cm of cover over the pot's area */
+    var area = Math.PI * Math.pow(potCm / 2, 2),      // cm² of the pot's mouth
+        perCm = area / 1000,                          // L held by 1 cm of depth
+        coverL = perCm * COVER_CM,
+        voidsPerKg = CABBAGE_BULK_L_PER_KG - 1 / CABBAGE_DENSITY,
+        waterL = kg * voidsPerKg + coverL,
+        waterMl = Math.ceil(waterL * 20) * 50,        // measured in 50 mL steps
+        salt = Math.ceil(waterMl * BRINE_G_PER_L / 1000),   // never rounded down
+        fillCm = (kg * CABBAGE_BULK_L_PER_KG * 1000 + area * COVER_CM) / area,
         rice = kg * R.rice,
         riceWater = kg * R.riceWater,
         paste = kg * R.paste,
@@ -268,8 +306,8 @@
 
     return {
       cabbage: num(kg) + " kg",
-      salt: grams(salt),
-      water: litres(waterL),
+      salt: saltAmount(salt),
+      water: mlText(waterMl),
       rice: grams(rice),
       riceWater: millilitres(riceWater),
       paste: millilitres(paste),
@@ -280,7 +318,9 @@
       ginger: gingerTxt,
       gochujang: grams(kg * R.gochujang),
       jarVolume: num(Math.round(jarL * 10) / 10) + " L",
-      _kg: kg, _rice: rice, _riceWater: riceWater
+      _kg: kg, _rice: rice, _riceWater: riceWater,
+      _pot: potCm, _perCm: perCm, _coverL: coverL, _voids: voidsPerKg,
+      _waterL: waterMl / 1000, _fillCm: fillCm
     };
   }
 
@@ -289,7 +329,7 @@
     { title: "Cabbage & brine", items: [
       { name: "Napa cabbage", sub: "quartered lengthwise", q: "cabbage" },
       { name: "Coarse sea salt or Diamond Crystal kosher salt", sub: "for the brine", q: "salt" },
-      { name: "Cold water", sub: "65 g salt per 1 L — top up at the same ratio if needed", q: "water" }
+      { name: "Cold water", sub: "at 65 g salt per 1 L — top up at the same ratio if needed", subId: "waterSub", q: "water" }
     ]},
     { title: "Rice paste", items: [
       { name: "Dry rice", sub: "short or medium grain is fine", q: "rice" },
@@ -312,7 +352,8 @@
     GROUPS.forEach(function (g) {
       html += '<div class="igroup"><h3>' + g.title + '</h3><ul class="ing">';
       g.items.forEach(function (it) {
-        html += '<li><span class="name">' + it.name + (it.sub ? "<small>" + it.sub + "</small>" : "") +
+        html += '<li><span class="name">' + it.name +
+                (it.sub ? "<small" + (it.subId ? ' id="' + it.subId + '"' : "") + ">" + it.sub + "</small>" : "") +
                 '</span><span class="qty" data-q="' + it.q + '"></span></li>';
       });
       html += "</ul></div>";
@@ -322,6 +363,12 @@
 
   /* ---------- batch-size-dependent notes ---------- */
   function renderNotes(v) {
+    var brineNote = document.getElementById("brineNote");
+    brineNote.textContent = "The brine is two things: " + num(v._voids) + " L per kg of cabbage to fill the gaps " +
+      "between the quarters, plus " + num(v._coverL) + " L to stand " + COVER_CM + " cm of brine over them in a " +
+      num(v._pot) + " cm pot. Salt always follows the water at 65 g per 1 L — never add salt on its own. " +
+      "If the cabbage still floats above the surface, mix extra brine at that same ratio and pour it in.";
+
     var riceNote = document.getElementById("riceNote");
     riceNote.textContent = v._kg < 1
       ? "Small batch: " + grams(v._rice) + " of rice is only a spoonful. Cook a minimum of 12 g rice with 30 mL water and use just what you need — a little extra paste is harmless."
@@ -335,11 +382,29 @@
         : "Timing follows room temperature, not batch size — a cold kitchen slows it down, a warm one speeds it up.";
   }
 
+  /* ---------- the pot's geometry, in words ---------- */
+  function potHint(v) {
+    var h = Math.round(v._fillCm * 10) / 10;
+    if (h > 20) {
+      var dNeeded = 2 * Math.sqrt((2500 * v._kg) / (10 * Math.PI));   // diameter for a 12 cm fill
+      var where = dNeeded > 60
+        ? "a food-grade bucket — no domestic pot is wide enough"
+        : "a " + num(Math.ceil(dNeeded / 2) * 2) + " cm pot, which brings it down to about 12 cm";
+      return (h > 60
+        ? "This batch will not fit in a " + num(v._pot) + " cm pot at all"
+        : "This batch sits " + num(h) + " cm deep in a " + num(v._pot) + " cm pot, deeper than most pots hold") +
+        ". Use " + where + ", and mix the brine at the same 65 g/L.";
+    }
+    return "A " + num(v._pot) + " cm pot holds " + num(v._perCm) + " L per cm of depth, so this batch sits " +
+           "about " + num(h) + " cm deep: use a pot at least " + Math.ceil(h + 2) +
+           " cm deep, with room left to press the cabbage down.";
+  }
+
   /* ---------- render ---------- */
   var lastValues = null;
 
-  function render(kg) {
-    var v = scale(kg);
+  function render(kg, potCm) {
+    var v = scale(kg, potCm);
     lastValues = v;
 
     if (!document.querySelector("#ingredients .igroup")) renderIngredients();
@@ -351,27 +416,45 @@
     }
     renderNotes(v);
 
-    var buttons = document.querySelectorAll(".presets button");
-    for (var j = 0; j < buttons.length; j++) {
-      buttons[j].setAttribute("aria-pressed", String(parseFloat(buttons[j].dataset.kg) === kg));
+    document.getElementById("waterSub").textContent =
+      "covers the cabbage by " + COVER_CM + " cm in a " + num(potCm) + " cm pot";
+    document.getElementById("potHint").textContent = potHint(v);
+
+    var kgButtons = document.querySelectorAll(".presets [data-kg]");
+    for (var j = 0; j < kgButtons.length; j++) {
+      kgButtons[j].setAttribute("aria-pressed", String(parseFloat(kgButtons[j].dataset.kg) === kg));
+    }
+    var potButtons = document.querySelectorAll(".presets [data-pot]");
+    for (var k = 0; k < potButtons.length; k++) {
+      potButtons[k].setAttribute("aria-pressed", String(parseFloat(potButtons[k].dataset.pot) === potCm));
     }
 
-    try { localStorage.setItem("kimchi.kg", String(kg)); } catch (e) {}
+    try {
+      localStorage.setItem("kimchi.kg", String(kg));
+      localStorage.setItem("kimchi.pot", String(potCm));
+    } catch (e) {}
   }
 
   /* ---------- input wiring ---------- */
   var numberInput = document.getElementById("kg");
   var rangeInput = document.getElementById("range");
+  var potInput = document.getElementById("pot");
 
   function clamp(kg) {
     if (!isFinite(kg) || kg <= 0) return 2;
     return Math.min(20, Math.max(0.25, Math.round(kg * 100) / 100));
   }
+  function clampPot(cm) {
+    if (!isFinite(cm) || cm <= 0) return 28;
+    return Math.min(60, Math.max(14, Math.round(cm)));
+  }
+  function currentKg() { return clamp(parseFloat(numberInput.value) || 2); }
+  function currentPot() { return clampPot(parseFloat(potInput.value) || 28); }
   function setKg(kg, from) {
     kg = clamp(kg);
     if (from !== "number") numberInput.value = num(kg);
     if (from !== "range") rangeInput.value = Math.min(10, Math.max(0.5, kg));
-    render(kg);
+    render(kg, currentPot());
   }
 
   numberInput.addEventListener("input", function () {
@@ -389,8 +472,31 @@
     setKg(parseFloat(numberInput.value || "2") + STEP);
   });
 
-  Array.prototype.forEach.call(document.querySelectorAll(".presets button"), function (b) {
+  Array.prototype.forEach.call(document.querySelectorAll(".presets [data-kg]"), function (b) {
     b.addEventListener("click", function () { setKg(parseFloat(b.dataset.kg)); });
+  });
+
+  /* the pot is a second dimension: it changes the brine, not the rest of the batch */
+  function setPot(cm, from) {
+    cm = clampPot(cm);
+    if (from !== "number") potInput.value = String(cm);
+    render(currentKg(), cm);
+  }
+  potInput.addEventListener("input", function () {
+    var cm = parseFloat(potInput.value);
+    if (isFinite(cm)) setPot(cm, "number");
+  });
+  potInput.addEventListener("blur", function () { setPot(parseFloat(potInput.value) || 28); });
+
+  var POT_STEP = 2;
+  document.getElementById("potMinus").addEventListener("click", function () {
+    setPot(currentPot() - POT_STEP);
+  });
+  document.getElementById("potPlus").addEventListener("click", function () {
+    setPot(currentPot() + POT_STEP);
+  });
+  Array.prototype.forEach.call(document.querySelectorAll(".presets [data-pot]"), function (b) {
+    b.addEventListener("click", function () { setPot(parseFloat(b.dataset.pot)); });
   });
 
   document.getElementById("print").addEventListener("click", function () { window.print(); });
@@ -407,7 +513,8 @@
       });
       lines.push("");
     });
-    lines.push("Brine 12 h, drain, rinse, squeeze 30 min, coat, pack, ferment 3 days at 18-24 °C, then fridge 2-3 days.");
+    lines.push("Brine 12 h in a " + v._pot + " cm pot (fills to about " + Math.round(v._fillCm) +
+               " cm), drain, rinse, squeeze 30 min, coat, pack, ferment 3 days at 18-24 °C, then fridge 2-3 days.");
     copyText(lines.join("\n"), function () {
       flash.classList.add("on");
       setTimeout(function () { flash.classList.remove("on"); }, 1600);
@@ -433,19 +540,26 @@
     }
   }
 
-  /* ---------- restore saved / linked batch size ---------- */
-  var start = 2;
+  /* ---------- restore saved / linked batch size and pot ---------- */
+  var start = 2, startPot = 28;
   try {
     var saved = parseFloat(localStorage.getItem("kimchi.kg"));
     if (isFinite(saved)) start = saved;
+    var savedPot = parseFloat(localStorage.getItem("kimchi.pot"));
+    if (isFinite(savedPot)) startPot = savedPot;
   } catch (e) {}
-  var fromUrl = parseFloat(new URLSearchParams(location.search).get("kg"));
+  var params = new URLSearchParams(location.search);
+  var fromUrl = parseFloat(params.get("kg"));
   if (isFinite(fromUrl)) start = fromUrl;
+  var potFromUrl = parseFloat(params.get("pot"));
+  if (isFinite(potFromUrl)) startPot = potFromUrl;
   start = clamp(start);
+  startPot = clampPot(startPot);
 
   numberInput.value = num(start);
   rangeInput.value = Math.min(10, Math.max(0.5, start));
-  render(start);
+  potInput.value = String(startPot);
+  render(start, startPot);
 })();
 </script>
 </body>

@@ -6,7 +6,7 @@ A tiny static recipe site. No build step, no dependencies — open `index.html` 
 recipes/
   index.html      hub page — lists every recipe
   styles.css      shared styles (light + dark, print-friendly)
-  kimchi.html     napa cabbage kimchi, scaled from the cabbage weight
+  kimchi.html     napa cabbage kimchi, scaled from the cabbage weight and the brining pot
   pickles.html    lacto-fermented pickle spears, scaled from the jar count
   hot-sauce.html  garlicky red chile hot sauce, scaled from the target volume
   oatmeal-cookies.html  oatmeal cookies, scaled from the cookie count
@@ -57,6 +57,8 @@ The look is borrowed from NYT Cooking. The parts worth knowing before you edit a
 
 `pickles.html` follows the same pattern with a different input (number of 1 L jars) and adds a second dimension: a **brine switch** holding two complete ratio sets (`BRINES`), so the same page covers both the strong 25 g / 475 mL brine and the milder 18 g / 532 mL one. Copy that shape when a recipe has a genuine either/or choice rather than a single multiplier.
 
+`kimchi.html` carries a second input that is **not** a multiplier: the diameter of the brining pot (`?kg=2&pot=28`). Its brine is modelled rather than scaled — `kg × 1.45 L` fills the gaps between the cabbage quarters, plus `πr² × 2 cm` of cover, which is derived from the pot's mouth and not from the batch. That is why 1 kg in a 28 cm pot takes more than half of what 2 kg takes: the cover term does not shrink with the batch. Anything derived from a vessel's geometry belongs in a term like this, not in the per-kg ratio table, and the page should say out loud that the pot changes the amount (`potHint`, `brineNote`). The salt is computed from the rounded brine volume, never from the cabbage, so the 65 g/L floor holds at every pot size.
+
 `hot-sauce.html` scales from a target volume and adds a **derived safety number**: the recipe's 36 mL of 25% essence + 144 mL water is not stored as prose but computed by `acidSplit()`, which takes the pure acetic acid the recipe needs (9 mL) and divides it by whatever strength the label says. Enter 80% and the page gives 22.5 mL in 337.5 mL of water — the same 5% vinegar, no arithmetic by hand. Use that shape whenever a recipe's stated amount depends on a property of an ingredient you have to read off a label.
 
 `oatmeal-cookies.html` scales from the cookie count, which is the one dimension that is **not continuous**: 18 cookies needs 50 g of whole egg plus 17 g of yolk, and 12 cookies needs two thirds of an egg. Rather than pretend otherwise, the page weighs the egg like everything else and spells out what that means for the batch in hand — the ingredient line carries the fraction ("33 g (≈ ⅔ of a large egg)") and a note under step 3 says which eggs to beat. Spices stay genuinely useful at any size because each one also carries a spoon hint, derived from its density, so a small batch does not need a 0.1 g scale.
@@ -67,7 +69,7 @@ Batch size is remembered in `localStorage`, and a page can be linked with a pres
 
 | page | link |
 |---|---|
-| kimchi | `?kg=3` |
+| kimchi | `?kg=3` or `?kg=2&pot=28` |
 | pickles | `?jars=4` or `?jars=4&brine=mild` |
 | hot sauce | `?ml=960&acid=80` |
 | oatmeal cookies | `?cookies=24` |
